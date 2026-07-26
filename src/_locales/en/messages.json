@@ -1,0 +1,298 @@
+{
+  "extensionName": {
+    "message": "History Keyword Cleaner"
+  },
+  "extensionDescription": {
+    "message": "Automatically removes Firefox history entries whose URL or page title contains one of your private, locally stored keywords."
+  },
+  "actionTitle": {
+    "message": "Clean history by keyword"
+  },
+  "enabledLabel": {
+    "message": "Automatic cleaning"
+  },
+  "quickAddTitle": {
+    "message": "Add a keyword"
+  },
+  "localOnlyShort": {
+    "message": "Local only"
+  },
+  "keywordPlaceholder": {
+    "message": "e.g. example.com or project name"
+  },
+  "addButton": {
+    "message": "Add"
+  },
+  "quickAddHint": {
+    "message": "New matches in URLs or page titles are removed automatically."
+  },
+  "wipeNow": {
+    "message": "Wipe now"
+  },
+  "wipeDialogTitle": {
+    "message": "Wipe matching history now?"
+  },
+  "wipeDialogDescription": {
+    "message": "Every existing entry matching your current keywords will be permanently deleted. Other history entries remain untouched."
+  },
+  "cancelButton": {
+    "message": "Cancel"
+  },
+  "wipeConfirmButton": {
+    "message": "Wipe matching entries"
+  },
+  "settingsButton": {
+    "message": "Settings"
+  },
+  "keywordCount": {
+    "message": "$COUNT$ keyword(s) configured",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "lastCleanup": {
+    "message": "$COUNT$ deleted · $DATE$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "readyStatus": {
+    "message": "Ready. Nothing leaves this browser."
+  },
+  "workingStatus": {
+    "message": "Checking browser history…"
+  },
+  "savedStatus": {
+    "message": "Settings saved."
+  },
+  "cleanupResult": {
+    "message": "Deleted $DELETED$ matches after checking $CHECKED$ history entries.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "optionsSubtitle": {
+    "message": "Private, automatic history cleanup"
+  },
+  "localOnlyTitle": {
+    "message": "100% local"
+  },
+  "localOnlyDescription": {
+    "message": "No telemetry, accounts, or network requests"
+  },
+  "sectionAutomation": {
+    "message": "Automation"
+  },
+  "automaticCleaning": {
+    "message": "Automatic cleaning"
+  },
+  "automaticCleaningDescription": {
+    "message": "Matching visits are removed as soon as Firefox records their URL or title."
+  },
+  "cleanOnStartup": {
+    "message": "Clean when Firefox starts"
+  },
+  "cleanOnStartupDescription": {
+    "message": "Catches visits missed while the add-on was inactive."
+  },
+  "cleanOnChange": {
+    "message": "Clean after saving keywords"
+  },
+  "cleanOnChangeDescription": {
+    "message": "Applies new rules to the complete existing history."
+  },
+  "sectionRules": {
+    "message": "Rules"
+  },
+  "keywordListTitle": {
+    "message": "Keyword list"
+  },
+  "keywordListDescription": {
+    "message": "Enter one literal keyword per line. Regular expressions are intentionally not used."
+  },
+  "keywordsLabel": {
+    "message": "Keywords"
+  },
+  "keywordsPlaceholder": {
+    "message": "example.com\nconfidential project\n/private/"
+  },
+  "matchIn": {
+    "message": "Match in:"
+  },
+  "urlsLabel": {
+    "message": "URLs"
+  },
+  "titlesLabel": {
+    "message": "Page titles"
+  },
+  "caseSensitive": {
+    "message": "Case-sensitive"
+  },
+  "saveButton": {
+    "message": "Save rules"
+  },
+  "previewButton": {
+    "message": "Preview matches"
+  },
+  "sectionMaintenance": {
+    "message": "Maintenance"
+  },
+  "existingHistory": {
+    "message": "Existing history"
+  },
+  "irreversibleTitle": {
+    "message": "Deletion cannot be undone"
+  },
+  "irreversibleDescription": {
+    "message": "Preview first if you are unsure about a rule."
+  },
+  "exportButton": {
+    "message": "Export settings"
+  },
+  "importButton": {
+    "message": "Import settings"
+  },
+  "sectionStatus": {
+    "message": "Status"
+  },
+  "activityTitle": {
+    "message": "Cleaning activity"
+  },
+  "lastRunLabel": {
+    "message": "Last run"
+  },
+  "lastDeletedLabel": {
+    "message": "Last deleted"
+  },
+  "totalDeletedLabel": {
+    "message": "Total deleted"
+  },
+  "matchFieldRequired": {
+    "message": "Select URLs, page titles, or both."
+  },
+  "tooManyKeywords": {
+    "message": "The list is limited to 500 keywords."
+  },
+  "previewResult": {
+    "message": "$MATCHED$ matches in $CHECKED$ history entries (showing up to 25).",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "matchedBy": {
+    "message": "matched “$KEYWORD$”",
+    "placeholders": {
+      "keyword": {
+        "content": "$1"
+      }
+    }
+  },
+  "previewComplete": {
+    "message": "Preview complete. Nothing was deleted."
+  },
+  "exportedStatus": {
+    "message": "Settings exported."
+  },
+  "importedStatus": {
+    "message": "Settings imported and saved."
+  },
+  "invalidImport": {
+    "message": "This file is not valid JSON."
+  },
+  "phaseStarting": {
+    "message": "Preparing history operation"
+  },
+  "phaseScanning": {
+    "message": "Scanning Firefox history"
+  },
+  "phaseMatching": {
+    "message": "Checking keyword matches"
+  },
+  "phaseDeleting": {
+    "message": "Deleting matching entries"
+  },
+  "phaseComplete": {
+    "message": "Operation complete"
+  },
+  "phaseError": {
+    "message": "Operation failed"
+  },
+  "operationFailed": {
+    "message": "Firefox could not complete this history operation."
+  },
+  "operationScanningDetail": {
+    "message": "$COUNT$ unique history entries found so far.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "operationMatchingDetail": {
+    "message": "$CHECKED$ of $TOTAL$ checked · $MATCHED$ matches",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "matched": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationDeletingDetail": {
+    "message": "$CHECKED$ of $TOTAL$ processed · $DELETED$ deleted",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "deleted": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationPreviewDone": {
+    "message": "Preview found $MATCHED$ matches in $CHECKED$ entries. Nothing was deleted.",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "operationWipeDone": {
+    "message": "$DELETED$ matching entries deleted after checking $CHECKED$ entries.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  }
+}

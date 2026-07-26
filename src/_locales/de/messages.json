@@ -1,0 +1,298 @@
+{
+  "extensionName": {
+    "message": "History Keyword Cleaner"
+  },
+  "extensionDescription": {
+    "message": "Entfernt automatisch Firefox-Chronikeinträge, deren URL oder Seitentitel eines deiner ausschließlich lokal gespeicherten Keywords enthält."
+  },
+  "actionTitle": {
+    "message": "Chronik anhand von Keywords bereinigen"
+  },
+  "enabledLabel": {
+    "message": "Automatische Bereinigung"
+  },
+  "quickAddTitle": {
+    "message": "Keyword hinzufügen"
+  },
+  "localOnlyShort": {
+    "message": "Nur lokal"
+  },
+  "keywordPlaceholder": {
+    "message": "z. B. example.com oder Projektname"
+  },
+  "addButton": {
+    "message": "Hinzufügen"
+  },
+  "quickAddHint": {
+    "message": "Neue Treffer in URLs oder Seitentiteln werden automatisch entfernt."
+  },
+  "wipeNow": {
+    "message": "Jetzt löschen"
+  },
+  "wipeDialogTitle": {
+    "message": "Passende Chronik jetzt löschen?"
+  },
+  "wipeDialogDescription": {
+    "message": "Alle bestehenden Einträge, die zu deinen aktuellen Keywords passen, werden endgültig gelöscht. Andere Chronikeinträge bleiben erhalten."
+  },
+  "cancelButton": {
+    "message": "Abbrechen"
+  },
+  "wipeConfirmButton": {
+    "message": "Passende Einträge löschen"
+  },
+  "settingsButton": {
+    "message": "Einstellungen"
+  },
+  "keywordCount": {
+    "message": "$COUNT$ Keyword(s) konfiguriert",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "lastCleanup": {
+    "message": "$COUNT$ gelöscht · $DATE$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "readyStatus": {
+    "message": "Bereit. Nichts verlässt diesen Browser."
+  },
+  "workingStatus": {
+    "message": "Browser-Chronik wird geprüft…"
+  },
+  "savedStatus": {
+    "message": "Einstellungen gespeichert."
+  },
+  "cleanupResult": {
+    "message": "$DELETED$ Treffer gelöscht; $CHECKED$ Chronikeinträge wurden geprüft.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "optionsSubtitle": {
+    "message": "Private, automatische Chronikbereinigung"
+  },
+  "localOnlyTitle": {
+    "message": "100 % lokal"
+  },
+  "localOnlyDescription": {
+    "message": "Keine Telemetrie, Konten oder Netzwerkanfragen"
+  },
+  "sectionAutomation": {
+    "message": "Automatisierung"
+  },
+  "automaticCleaning": {
+    "message": "Automatische Bereinigung"
+  },
+  "automaticCleaningDescription": {
+    "message": "Passende Besuche werden entfernt, sobald Firefox ihre URL oder ihren Titel speichert."
+  },
+  "cleanOnStartup": {
+    "message": "Beim Firefox-Start bereinigen"
+  },
+  "cleanOnStartupDescription": {
+    "message": "Erfasst Besuche, die bei inaktivem Add-on übersehen wurden."
+  },
+  "cleanOnChange": {
+    "message": "Nach dem Speichern bereinigen"
+  },
+  "cleanOnChangeDescription": {
+    "message": "Wendet neue Regeln auf die gesamte vorhandene Chronik an."
+  },
+  "sectionRules": {
+    "message": "Regeln"
+  },
+  "keywordListTitle": {
+    "message": "Keyword-Liste"
+  },
+  "keywordListDescription": {
+    "message": "Trage pro Zeile ein wörtliches Keyword ein. Reguläre Ausdrücke werden bewusst nicht verwendet."
+  },
+  "keywordsLabel": {
+    "message": "Keywords"
+  },
+  "keywordsPlaceholder": {
+    "message": "example.com\nvertrauliches Projekt\n/privat/"
+  },
+  "matchIn": {
+    "message": "Suchen in:"
+  },
+  "urlsLabel": {
+    "message": "URLs"
+  },
+  "titlesLabel": {
+    "message": "Seitentiteln"
+  },
+  "caseSensitive": {
+    "message": "Groß-/Kleinschreibung beachten"
+  },
+  "saveButton": {
+    "message": "Regeln speichern"
+  },
+  "previewButton": {
+    "message": "Treffer vorschauen"
+  },
+  "sectionMaintenance": {
+    "message": "Wartung"
+  },
+  "existingHistory": {
+    "message": "Bestehende Chronik"
+  },
+  "irreversibleTitle": {
+    "message": "Löschen kann nicht rückgängig gemacht werden"
+  },
+  "irreversibleDescription": {
+    "message": "Nutze zuerst die Vorschau, wenn du bei einer Regel unsicher bist."
+  },
+  "exportButton": {
+    "message": "Einstellungen exportieren"
+  },
+  "importButton": {
+    "message": "Einstellungen importieren"
+  },
+  "sectionStatus": {
+    "message": "Status"
+  },
+  "activityTitle": {
+    "message": "Bereinigungsaktivität"
+  },
+  "lastRunLabel": {
+    "message": "Letzter Lauf"
+  },
+  "lastDeletedLabel": {
+    "message": "Zuletzt gelöscht"
+  },
+  "totalDeletedLabel": {
+    "message": "Insgesamt gelöscht"
+  },
+  "matchFieldRequired": {
+    "message": "Wähle URLs, Seitentitel oder beides aus."
+  },
+  "tooManyKeywords": {
+    "message": "Die Liste ist auf 500 Keywords begrenzt."
+  },
+  "previewResult": {
+    "message": "$MATCHED$ Treffer in $CHECKED$ Chronikeinträgen (maximal 25 werden angezeigt).",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "matchedBy": {
+    "message": "Treffer durch „$KEYWORD$“",
+    "placeholders": {
+      "keyword": {
+        "content": "$1"
+      }
+    }
+  },
+  "previewComplete": {
+    "message": "Vorschau abgeschlossen. Es wurde nichts gelöscht."
+  },
+  "exportedStatus": {
+    "message": "Einstellungen exportiert."
+  },
+  "importedStatus": {
+    "message": "Einstellungen importiert und gespeichert."
+  },
+  "invalidImport": {
+    "message": "Diese Datei enthält kein gültiges JSON."
+  },
+  "phaseStarting": {
+    "message": "Chronikvorgang wird vorbereitet"
+  },
+  "phaseScanning": {
+    "message": "Firefox-Chronik wird durchsucht"
+  },
+  "phaseMatching": {
+    "message": "Keyword-Treffer werden geprüft"
+  },
+  "phaseDeleting": {
+    "message": "Passende Einträge werden gelöscht"
+  },
+  "phaseComplete": {
+    "message": "Vorgang abgeschlossen"
+  },
+  "phaseError": {
+    "message": "Vorgang fehlgeschlagen"
+  },
+  "operationFailed": {
+    "message": "Firefox konnte diesen Chronikvorgang nicht abschließen."
+  },
+  "operationScanningDetail": {
+    "message": "Bisher $COUNT$ eindeutige Chronikeinträge gefunden.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "operationMatchingDetail": {
+    "message": "$CHECKED$ von $TOTAL$ geprüft · $MATCHED$ Treffer",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "matched": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationDeletingDetail": {
+    "message": "$CHECKED$ von $TOTAL$ verarbeitet · $DELETED$ gelöscht",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "deleted": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationPreviewDone": {
+    "message": "Die Vorschau fand $MATCHED$ Treffer in $CHECKED$ Einträgen. Es wurde nichts gelöscht.",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "operationWipeDone": {
+    "message": "$DELETED$ passende Einträge gelöscht; $CHECKED$ Einträge wurden geprüft.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  }
+}

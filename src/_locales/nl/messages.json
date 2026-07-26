@@ -1,0 +1,298 @@
+{
+  "extensionName": {
+    "message": "History Keyword Cleaner"
+  },
+  "extensionDescription": {
+    "message": "Verwijdert automatisch Firefox-geschiedenisitems waarvan de URL of paginatitel een van je privé, lokaal opgeslagen trefwoorden bevat."
+  },
+  "actionTitle": {
+    "message": "Geschiedenis opschonen op trefwoord"
+  },
+  "enabledLabel": {
+    "message": "Automatisch opschonen"
+  },
+  "quickAddTitle": {
+    "message": "Trefwoord toevoegen"
+  },
+  "localOnlyShort": {
+    "message": "Alleen lokaal"
+  },
+  "keywordPlaceholder": {
+    "message": "bijv. example.com of projectnaam"
+  },
+  "addButton": {
+    "message": "Toevoegen"
+  },
+  "quickAddHint": {
+    "message": "Nieuwe overeenkomsten in URL’s of paginatitels worden automatisch verwijderd."
+  },
+  "wipeNow": {
+    "message": "Nu wissen"
+  },
+  "wipeDialogTitle": {
+    "message": "Overeenkomende geschiedenis nu wissen?"
+  },
+  "wipeDialogDescription": {
+    "message": "Alle bestaande items die overeenkomen met je huidige trefwoorden worden permanent verwijderd. Andere geschiedenisitems blijven behouden."
+  },
+  "cancelButton": {
+    "message": "Annuleren"
+  },
+  "wipeConfirmButton": {
+    "message": "Overeenkomende items wissen"
+  },
+  "settingsButton": {
+    "message": "Instellingen"
+  },
+  "keywordCount": {
+    "message": "$COUNT$ trefwoord(en) ingesteld",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "lastCleanup": {
+    "message": "$COUNT$ verwijderd · $DATE$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "readyStatus": {
+    "message": "Gereed. Niets verlaat deze browser."
+  },
+  "workingStatus": {
+    "message": "Browsergeschiedenis wordt gecontroleerd…"
+  },
+  "savedStatus": {
+    "message": "Instellingen opgeslagen."
+  },
+  "cleanupResult": {
+    "message": "$DELETED$ overeenkomst(en) verwijderd na controle van $CHECKED$ geschiedenisitems.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "optionsSubtitle": {
+    "message": "Privé en automatisch geschiedenis opschonen"
+  },
+  "localOnlyTitle": {
+    "message": "100% lokaal"
+  },
+  "localOnlyDescription": {
+    "message": "Geen telemetrie, accounts of netwerkverzoeken"
+  },
+  "sectionAutomation": {
+    "message": "Automatisering"
+  },
+  "automaticCleaning": {
+    "message": "Automatisch opschonen"
+  },
+  "automaticCleaningDescription": {
+    "message": "Overeenkomende bezoeken worden verwijderd zodra Firefox de URL of titel opslaat."
+  },
+  "cleanOnStartup": {
+    "message": "Opschonen wanneer Firefox start"
+  },
+  "cleanOnStartupDescription": {
+    "message": "Verwerkt bezoeken die zijn gemist terwijl de add-on inactief was."
+  },
+  "cleanOnChange": {
+    "message": "Opschonen na opslaan"
+  },
+  "cleanOnChangeDescription": {
+    "message": "Past nieuwe regels toe op de volledige bestaande geschiedenis."
+  },
+  "sectionRules": {
+    "message": "Regels"
+  },
+  "keywordListTitle": {
+    "message": "Trefwoordenlijst"
+  },
+  "keywordListDescription": {
+    "message": "Voer één letterlijk trefwoord per regel in. Reguliere expressies worden bewust niet gebruikt."
+  },
+  "keywordsLabel": {
+    "message": "Trefwoorden"
+  },
+  "keywordsPlaceholder": {
+    "message": "example.com\nvertrouwelijk project\n/privé/"
+  },
+  "matchIn": {
+    "message": "Zoeken in:"
+  },
+  "urlsLabel": {
+    "message": "URL’s"
+  },
+  "titlesLabel": {
+    "message": "Paginatitels"
+  },
+  "caseSensitive": {
+    "message": "Hoofdlettergevoelig"
+  },
+  "saveButton": {
+    "message": "Regels opslaan"
+  },
+  "previewButton": {
+    "message": "Overeenkomsten bekijken"
+  },
+  "sectionMaintenance": {
+    "message": "Onderhoud"
+  },
+  "existingHistory": {
+    "message": "Bestaande geschiedenis"
+  },
+  "irreversibleTitle": {
+    "message": "Verwijderen kan niet ongedaan worden gemaakt"
+  },
+  "irreversibleDescription": {
+    "message": "Bekijk eerst een voorbeeld als je twijfelt over een regel."
+  },
+  "exportButton": {
+    "message": "Instellingen exporteren"
+  },
+  "importButton": {
+    "message": "Instellingen importeren"
+  },
+  "sectionStatus": {
+    "message": "Status"
+  },
+  "activityTitle": {
+    "message": "Opschoonactiviteit"
+  },
+  "lastRunLabel": {
+    "message": "Laatste uitvoering"
+  },
+  "lastDeletedLabel": {
+    "message": "Laatst verwijderd"
+  },
+  "totalDeletedLabel": {
+    "message": "Totaal verwijderd"
+  },
+  "matchFieldRequired": {
+    "message": "Selecteer URL’s, paginatitels of beide."
+  },
+  "tooManyKeywords": {
+    "message": "De lijst is beperkt tot 500 trefwoorden."
+  },
+  "previewResult": {
+    "message": "$MATCHED$ overeenkomst(en) in $CHECKED$ geschiedenisitems (maximaal 25 worden getoond).",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "matchedBy": {
+    "message": "komt overeen met ‘$KEYWORD$’",
+    "placeholders": {
+      "keyword": {
+        "content": "$1"
+      }
+    }
+  },
+  "previewComplete": {
+    "message": "Voorbeeld voltooid. Er is niets verwijderd."
+  },
+  "exportedStatus": {
+    "message": "Instellingen geëxporteerd."
+  },
+  "importedStatus": {
+    "message": "Instellingen geïmporteerd en opgeslagen."
+  },
+  "invalidImport": {
+    "message": "Dit bestand bevat geen geldige JSON."
+  },
+  "phaseStarting": {
+    "message": "Geschiedenisbewerking voorbereiden"
+  },
+  "phaseScanning": {
+    "message": "Firefox-geschiedenis doorzoeken"
+  },
+  "phaseMatching": {
+    "message": "Trefwoordovereenkomsten controleren"
+  },
+  "phaseDeleting": {
+    "message": "Overeenkomende items verwijderen"
+  },
+  "phaseComplete": {
+    "message": "Bewerking voltooid"
+  },
+  "phaseError": {
+    "message": "Bewerking mislukt"
+  },
+  "operationFailed": {
+    "message": "Firefox kon deze geschiedenisbewerking niet voltooien."
+  },
+  "operationScanningDetail": {
+    "message": "Tot nu toe $COUNT$ unieke geschiedenisitems gevonden.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "operationMatchingDetail": {
+    "message": "$CHECKED$ van $TOTAL$ gecontroleerd · $MATCHED$ overeenkomst(en)",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "matched": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationDeletingDetail": {
+    "message": "$CHECKED$ van $TOTAL$ verwerkt · $DELETED$ verwijderd",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "deleted": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationPreviewDone": {
+    "message": "Het voorbeeld vond $MATCHED$ overeenkomst(en) in $CHECKED$ items. Er is niets verwijderd.",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "operationWipeDone": {
+    "message": "$DELETED$ overeenkomende items verwijderd na controle van $CHECKED$ items.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  }
+}

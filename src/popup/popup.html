@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>History Keyword Cleaner</title>
+    <link rel="stylesheet" href="../ui/base.css">
+    <link rel="stylesheet" href="popup.css">
+    <script type="module" src="popup.js"></script>
+  </head>
+  <body>
+    <main class="popup-shell">
+      <header class="topbar">
+        <div class="brand">
+          <img src="../icons/icon.svg" alt="">
+          <div class="brand-copy">
+            <h1 data-i18n="extensionName">History Keyword Cleaner</h1>
+            <p id="summary">Loading…</p>
+          </div>
+        </div>
+        <label class="switch">
+          <span class="sr-only" data-i18n="enabledLabel">Automatic cleaning</span>
+          <input id="enabled" type="checkbox">
+          <span aria-hidden="true"></span>
+        </label>
+      </header>
+
+      <section class="quick-add" aria-labelledby="quick-add-title">
+        <div class="section-heading">
+          <h2 id="quick-add-title" data-i18n="quickAddTitle">Add a keyword</h2>
+          <span class="privacy-dot" data-i18n="localOnlyShort">Local only</span>
+        </div>
+        <form id="add-form">
+          <input
+            id="keyword"
+            class="field"
+            type="text"
+            maxlength="256"
+            autocomplete="off"
+            data-i18n-placeholder="keywordPlaceholder"
+            placeholder="e.g. example.com or project name"
+            required
+          >
+          <button class="button" type="submit" data-operation-control data-i18n="addButton">Add</button>
+        </form>
+        <p class="hint" data-i18n="quickAddHint">
+          New matches in URLs or page titles are removed automatically.
+        </p>
+      </section>
+
+      <section id="operation-panel" class="operation-panel" aria-live="polite" hidden>
+        <div class="operation-head">
+          <span id="operation-spinner" class="spinner" aria-hidden="true"></span>
+          <span id="operation-icon" class="operation-icon" aria-hidden="true" hidden></span>
+          <strong id="operation-label">Starting…</strong>
+        </div>
+        <p id="operation-detail" class="operation-detail"></p>
+        <progress id="operation-progress"></progress>
+      </section>
+
+      <section class="actions">
+        <button id="clean-now" class="button danger" type="button" data-operation-control data-i18n="wipeNow">
+          Wipe now
+        </button>
+        <button id="open-options" class="button secondary" type="button" data-operation-control data-i18n="settingsButton">
+          Settings
+        </button>
+      </section>
+
+      <footer>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </footer>
+    </main>
+
+    <dialog id="wipe-dialog" class="confirm-dialog" aria-labelledby="wipe-dialog-title">
+      <div class="dialog-content">
+        <h2 id="wipe-dialog-title" data-i18n="wipeDialogTitle">Wipe matching history now?</h2>
+        <p data-i18n="wipeDialogDescription">
+          Every existing entry matching your current keywords will be permanently deleted.
+        </p>
+        <div class="dialog-actions">
+          <button id="wipe-cancel" class="button secondary" type="button" data-i18n="cancelButton">Cancel</button>
+          <button id="wipe-confirm" class="button danger" type="button" data-i18n="wipeConfirmButton">Wipe now</button>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>

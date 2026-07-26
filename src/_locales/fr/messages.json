@@ -1,0 +1,298 @@
+{
+  "extensionName": {
+    "message": "History Keyword Cleaner"
+  },
+  "extensionDescription": {
+    "message": "Supprime automatiquement les entrées de l’historique Firefox dont l’URL ou le titre contient l’un de vos mots-clés privés stockés localement."
+  },
+  "actionTitle": {
+    "message": "Nettoyer l’historique par mot-clé"
+  },
+  "enabledLabel": {
+    "message": "Nettoyage automatique"
+  },
+  "quickAddTitle": {
+    "message": "Ajouter un mot-clé"
+  },
+  "localOnlyShort": {
+    "message": "Local uniquement"
+  },
+  "keywordPlaceholder": {
+    "message": "ex. example.com ou nom du projet"
+  },
+  "addButton": {
+    "message": "Ajouter"
+  },
+  "quickAddHint": {
+    "message": "Les nouvelles correspondances dans les URL ou les titres sont supprimées automatiquement."
+  },
+  "wipeNow": {
+    "message": "Effacer maintenant"
+  },
+  "wipeDialogTitle": {
+    "message": "Effacer maintenant l’historique correspondant ?"
+  },
+  "wipeDialogDescription": {
+    "message": "Toutes les entrées existantes correspondant à vos mots-clés actuels seront définitivement supprimées. Les autres entrées resteront intactes."
+  },
+  "cancelButton": {
+    "message": "Annuler"
+  },
+  "wipeConfirmButton": {
+    "message": "Effacer les entrées correspondantes"
+  },
+  "settingsButton": {
+    "message": "Paramètres"
+  },
+  "keywordCount": {
+    "message": "$COUNT$ mot(s)-clé(s) configuré(s)",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "lastCleanup": {
+    "message": "$COUNT$ supprimée(s) · $DATE$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "readyStatus": {
+    "message": "Prêt. Rien ne quitte ce navigateur."
+  },
+  "workingStatus": {
+    "message": "Analyse de l’historique du navigateur…"
+  },
+  "savedStatus": {
+    "message": "Paramètres enregistrés."
+  },
+  "cleanupResult": {
+    "message": "$DELETED$ correspondance(s) supprimée(s) après l’analyse de $CHECKED$ entrées.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "optionsSubtitle": {
+    "message": "Nettoyage privé et automatique de l’historique"
+  },
+  "localOnlyTitle": {
+    "message": "100 % local"
+  },
+  "localOnlyDescription": {
+    "message": "Aucune télémétrie, aucun compte ni aucune requête réseau"
+  },
+  "sectionAutomation": {
+    "message": "Automatisation"
+  },
+  "automaticCleaning": {
+    "message": "Nettoyage automatique"
+  },
+  "automaticCleaningDescription": {
+    "message": "Les visites correspondantes sont supprimées dès que Firefox enregistre leur URL ou leur titre."
+  },
+  "cleanOnStartup": {
+    "message": "Nettoyer au démarrage de Firefox"
+  },
+  "cleanOnStartupDescription": {
+    "message": "Récupère les visites manquées lorsque le module était inactif."
+  },
+  "cleanOnChange": {
+    "message": "Nettoyer après l’enregistrement"
+  },
+  "cleanOnChangeDescription": {
+    "message": "Applique les nouvelles règles à tout l’historique existant."
+  },
+  "sectionRules": {
+    "message": "Règles"
+  },
+  "keywordListTitle": {
+    "message": "Liste des mots-clés"
+  },
+  "keywordListDescription": {
+    "message": "Saisissez un mot-clé littéral par ligne. Les expressions régulières ne sont volontairement pas utilisées."
+  },
+  "keywordsLabel": {
+    "message": "Mots-clés"
+  },
+  "keywordsPlaceholder": {
+    "message": "example.com\nprojet confidentiel\n/prive/"
+  },
+  "matchIn": {
+    "message": "Rechercher dans :"
+  },
+  "urlsLabel": {
+    "message": "URL"
+  },
+  "titlesLabel": {
+    "message": "Titres des pages"
+  },
+  "caseSensitive": {
+    "message": "Respecter la casse"
+  },
+  "saveButton": {
+    "message": "Enregistrer les règles"
+  },
+  "previewButton": {
+    "message": "Prévisualiser"
+  },
+  "sectionMaintenance": {
+    "message": "Maintenance"
+  },
+  "existingHistory": {
+    "message": "Historique existant"
+  },
+  "irreversibleTitle": {
+    "message": "La suppression est irréversible"
+  },
+  "irreversibleDescription": {
+    "message": "Commencez par la prévisualisation si vous avez un doute sur une règle."
+  },
+  "exportButton": {
+    "message": "Exporter les paramètres"
+  },
+  "importButton": {
+    "message": "Importer les paramètres"
+  },
+  "sectionStatus": {
+    "message": "État"
+  },
+  "activityTitle": {
+    "message": "Activité de nettoyage"
+  },
+  "lastRunLabel": {
+    "message": "Dernière exécution"
+  },
+  "lastDeletedLabel": {
+    "message": "Dernière suppression"
+  },
+  "totalDeletedLabel": {
+    "message": "Total supprimé"
+  },
+  "matchFieldRequired": {
+    "message": "Sélectionnez les URL, les titres des pages ou les deux."
+  },
+  "tooManyKeywords": {
+    "message": "La liste est limitée à 500 mots-clés."
+  },
+  "previewResult": {
+    "message": "$MATCHED$ correspondance(s) dans $CHECKED$ entrées (25 au maximum sont affichées).",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "matchedBy": {
+    "message": "correspond à « $KEYWORD$ »",
+    "placeholders": {
+      "keyword": {
+        "content": "$1"
+      }
+    }
+  },
+  "previewComplete": {
+    "message": "Prévisualisation terminée. Rien n’a été supprimé."
+  },
+  "exportedStatus": {
+    "message": "Paramètres exportés."
+  },
+  "importedStatus": {
+    "message": "Paramètres importés et enregistrés."
+  },
+  "invalidImport": {
+    "message": "Ce fichier ne contient pas de JSON valide."
+  },
+  "phaseStarting": {
+    "message": "Préparation de l’opération"
+  },
+  "phaseScanning": {
+    "message": "Analyse de l’historique Firefox"
+  },
+  "phaseMatching": {
+    "message": "Vérification des mots-clés"
+  },
+  "phaseDeleting": {
+    "message": "Suppression des entrées correspondantes"
+  },
+  "phaseComplete": {
+    "message": "Opération terminée"
+  },
+  "phaseError": {
+    "message": "Échec de l’opération"
+  },
+  "operationFailed": {
+    "message": "Firefox n’a pas pu terminer cette opération sur l’historique."
+  },
+  "operationScanningDetail": {
+    "message": "$COUNT$ entrée(s) unique(s) trouvée(s) jusqu’à présent.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "operationMatchingDetail": {
+    "message": "$CHECKED$ sur $TOTAL$ vérifiée(s) · $MATCHED$ correspondance(s)",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "matched": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationDeletingDetail": {
+    "message": "$CHECKED$ sur $TOTAL$ traitée(s) · $DELETED$ supprimée(s)",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "deleted": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationPreviewDone": {
+    "message": "La prévisualisation a trouvé $MATCHED$ correspondance(s) dans $CHECKED$ entrées. Rien n’a été supprimé.",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "operationWipeDone": {
+    "message": "$DELETED$ entrée(s) correspondante(s) supprimée(s) après l’analyse de $CHECKED$ entrées.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  }
+}

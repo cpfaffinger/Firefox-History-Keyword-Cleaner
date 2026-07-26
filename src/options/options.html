@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>History Keyword Cleaner</title>
+    <link rel="stylesheet" href="../ui/base.css">
+    <link rel="stylesheet" href="options.css">
+    <script type="module" src="options.js"></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div class="brand">
+          <img src="../icons/icon.svg" alt="">
+          <div class="brand-copy">
+            <h1 data-i18n="extensionName">History Keyword Cleaner</h1>
+            <p data-i18n="optionsSubtitle">Private, automatic history cleanup</p>
+          </div>
+        </div>
+        <div class="local-badge">
+          <strong data-i18n="localOnlyTitle">100% local</strong>
+          <span data-i18n="localOnlyDescription">No telemetry, accounts, or network requests</span>
+        </div>
+      </header>
+
+      <div class="layout">
+        <section class="main-column">
+          <article class="card">
+            <div class="card-heading">
+              <div>
+                <p class="eyebrow" data-i18n="sectionAutomation">Automation</p>
+                <h2 data-i18n="automaticCleaning">Automatic cleaning</h2>
+              </div>
+              <label class="switch">
+                <span class="sr-only" data-i18n="enabledLabel">Automatic cleaning</span>
+                <input id="enabled" type="checkbox">
+                <span aria-hidden="true"></span>
+              </label>
+            </div>
+            <p class="explanation" data-i18n="automaticCleaningDescription">
+              Matching visits are removed as soon as Firefox records their URL or title.
+            </p>
+            <div class="check-grid">
+              <label class="check-row">
+                <input id="clean-on-startup" type="checkbox">
+                <span>
+                  <strong data-i18n="cleanOnStartup">Clean when Firefox starts</strong>
+                  <small data-i18n="cleanOnStartupDescription">Catches visits missed while the add-on was inactive.</small>
+                </span>
+              </label>
+              <label class="check-row">
+                <input id="clean-on-change" type="checkbox">
+                <span>
+                  <strong data-i18n="cleanOnChange">Clean after saving keywords</strong>
+                  <small data-i18n="cleanOnChangeDescription">Applies new rules to the complete existing history.</small>
+                </span>
+              </label>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-heading">
+              <div>
+                <p class="eyebrow" data-i18n="sectionRules">Rules</p>
+                <h2 data-i18n="keywordListTitle">Keyword list</h2>
+              </div>
+              <span id="keyword-count" class="count-pill">0 / 500</span>
+            </div>
+            <p class="explanation" data-i18n="keywordListDescription">
+              Enter one literal keyword per line. Regular expressions are intentionally not used.
+            </p>
+            <label class="field-label" for="keywords" data-i18n="keywordsLabel">Keywords</label>
+            <textarea
+              id="keywords"
+              class="field keyword-area"
+              maxlength="128500"
+              spellcheck="false"
+              data-i18n-placeholder="keywordsPlaceholder"
+              placeholder="example.com&#10;confidential project&#10;/private/"
+            ></textarea>
+            <div class="match-options">
+              <span data-i18n="matchIn">Match in:</span>
+              <label><input id="match-url" type="checkbox"> <span data-i18n="urlsLabel">URLs</span></label>
+              <label><input id="match-title" type="checkbox"> <span data-i18n="titlesLabel">Page titles</span></label>
+              <label><input id="case-sensitive" type="checkbox"> <span data-i18n="caseSensitive">Case-sensitive</span></label>
+            </div>
+            <div class="button-row">
+              <button id="save" class="button" type="button" data-operation-control data-i18n="saveButton">Save rules</button>
+              <button id="preview" class="button secondary" type="button" data-operation-control data-i18n="previewButton">Preview matches</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-heading">
+              <div>
+                <p class="eyebrow" data-i18n="sectionMaintenance">Maintenance</p>
+                <h2 data-i18n="existingHistory">Existing history</h2>
+              </div>
+            </div>
+            <div class="warning">
+              <strong data-i18n="irreversibleTitle">Deletion cannot be undone</strong>
+              <span data-i18n="irreversibleDescription">Preview first if you are unsure about a rule.</span>
+            </div>
+            <div class="button-row">
+              <button id="clean-now" class="button danger" type="button" data-operation-control data-i18n="wipeNow">Wipe now</button>
+              <button id="export" class="button secondary" type="button" data-operation-control data-i18n="exportButton">Export settings</button>
+              <button id="import" class="button secondary" type="button" data-operation-control data-i18n="importButton">Import settings</button>
+              <input id="import-file" type="file" accept="application/json,.json" hidden>
+            </div>
+            <div id="preview-results" class="preview-results" hidden></div>
+          </article>
+        </section>
+
+        <aside class="side-column">
+          <article class="card sticky">
+            <p class="eyebrow" data-i18n="sectionStatus">Status</p>
+            <h2 data-i18n="activityTitle">Cleaning activity</h2>
+            <section id="operation-panel" class="operation-panel side-operation" aria-live="polite" hidden>
+              <div class="operation-head">
+                <span id="operation-spinner" class="spinner" aria-hidden="true"></span>
+                <span id="operation-icon" class="operation-icon" aria-hidden="true" hidden></span>
+                <strong id="operation-label">Starting…</strong>
+              </div>
+              <p id="operation-detail" class="operation-detail"></p>
+              <progress id="operation-progress"></progress>
+            </section>
+            <dl class="stats">
+              <div>
+                <dt data-i18n="lastRunLabel">Last run</dt>
+                <dd id="last-run">—</dd>
+              </div>
+              <div>
+                <dt data-i18n="lastDeletedLabel">Last deleted</dt>
+                <dd id="last-deleted">0</dd>
+              </div>
+              <div>
+                <dt data-i18n="totalDeletedLabel">Total deleted</dt>
+                <dd id="total-deleted">0</dd>
+              </div>
+            </dl>
+            <p id="status" class="status" role="status" aria-live="polite"></p>
+            <p class="version">v<span id="version">0.1.0</span></p>
+          </article>
+        </aside>
+      </div>
+    </main>
+
+    <dialog id="wipe-dialog" class="confirm-dialog" aria-labelledby="wipe-dialog-title">
+      <div class="dialog-content">
+        <h2 id="wipe-dialog-title" data-i18n="wipeDialogTitle">Wipe matching history now?</h2>
+        <p data-i18n="wipeDialogDescription">
+          Every existing entry matching your current keywords will be permanently deleted.
+        </p>
+        <div class="dialog-actions">
+          <button id="wipe-cancel" class="button secondary" type="button" data-i18n="cancelButton">Cancel</button>
+          <button id="wipe-confirm" class="button danger" type="button" data-i18n="wipeConfirmButton">Wipe now</button>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>

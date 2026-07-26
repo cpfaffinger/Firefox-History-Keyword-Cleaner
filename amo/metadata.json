@@ -1,0 +1,18 @@
+{
+  "summary": {
+    "en-US": "Automatically remove Firefox history entries matching your private local keywords.",
+    "de": "Entfernt automatisch Firefox-Chronikeinträge anhand deiner lokal gespeicherten Keywords.",
+    "fr": "Supprime automatiquement l’historique Firefox selon vos mots-clés privés stockés localement.",
+    "it": "Rimuove automaticamente la cronologia di Firefox in base alle parole chiave private salvate localmente.",
+    "nl": "Verwijdert automatisch Firefox-geschiedenis op basis van je privé, lokaal opgeslagen trefwoorden.",
+    "tr": "Firefox geçmişini özel ve yerel olarak saklanan anahtar kelimelerinize göre otomatik olarak siler."
+  },
+  "categories": [
+    "privacy-security"
+  ],
+  "requires_payment": false,
+  "version": {
+    "license": "MIT",
+    "approval_notes": "No account or test credentials are required. Load the extension, open its settings page, add the keyword 'history-cleaner-test', then visit https://example.com/history-cleaner-test. The matching history entry is deleted immediately. Preview and manual cleanup can be tested from the settings page. The extension makes no network requests. Packaged files are the original readable source; there is no transpilation or minification. See amo/reviewer-notes.md in the source repository for the complete test procedure."
+  }
+}

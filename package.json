@@ -1,0 +1,28 @@
+{
+  "name": "history-keyword-cleaner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A privacy-first Firefox add-on that removes history entries matching local keywords.",
+  "license": "MIT",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test",
+    "test:coverage": "node --test --experimental-test-coverage",
+    "check": "node tools/validate-project.mjs",
+    "lint:addons": "addons-linter src --warnings-as-errors",
+    "lint:webext": "web-ext lint --source-dir src --warnings-as-errors",
+    "lint": "pnpm check && pnpm lint:webext && pnpm lint:addons",
+    "build": "web-ext build --source-dir src --artifacts-dir artifacts --overwrite-dest",
+    "dev": "web-ext run --source-dir src",
+    "dev:local": "web-ext run --source-dir src --firefox \"C:\\Program Files\\Mozilla Firefox\\firefox.exe\"",
+    "verify": "pnpm test:coverage && pnpm lint && pnpm build"
+  },
+  "devDependencies": {
+    "addons-linter": "10.9.0",
+    "web-ext": "10.5.0"
+  }
+}

@@ -1,0 +1,298 @@
+{
+  "extensionName": {
+    "message": "History Keyword Cleaner"
+  },
+  "extensionDescription": {
+    "message": "Rimuove automaticamente dalla cronologia di Firefox le pagine il cui URL o titolo contiene una delle parole chiave private salvate localmente."
+  },
+  "actionTitle": {
+    "message": "Pulisci la cronologia per parola chiave"
+  },
+  "enabledLabel": {
+    "message": "Pulizia automatica"
+  },
+  "quickAddTitle": {
+    "message": "Aggiungi una parola chiave"
+  },
+  "localOnlyShort": {
+    "message": "Solo locale"
+  },
+  "keywordPlaceholder": {
+    "message": "es. example.com o nome progetto"
+  },
+  "addButton": {
+    "message": "Aggiungi"
+  },
+  "quickAddHint": {
+    "message": "Le nuove corrispondenze negli URL o nei titoli vengono rimosse automaticamente."
+  },
+  "wipeNow": {
+    "message": "Cancella ora"
+  },
+  "wipeDialogTitle": {
+    "message": "Cancellare ora la cronologia corrispondente?"
+  },
+  "wipeDialogDescription": {
+    "message": "Tutte le voci esistenti che corrispondono alle parole chiave attuali verranno eliminate definitivamente. Le altre voci resteranno invariate."
+  },
+  "cancelButton": {
+    "message": "Annulla"
+  },
+  "wipeConfirmButton": {
+    "message": "Cancella le voci corrispondenti"
+  },
+  "settingsButton": {
+    "message": "Impostazioni"
+  },
+  "keywordCount": {
+    "message": "$COUNT$ parola/e chiave configurata/e",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "lastCleanup": {
+    "message": "$COUNT$ eliminata/e · $DATE$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "readyStatus": {
+    "message": "Pronto. Nulla lascia questo browser."
+  },
+  "workingStatus": {
+    "message": "Analisi della cronologia del browser…"
+  },
+  "savedStatus": {
+    "message": "Impostazioni salvate."
+  },
+  "cleanupResult": {
+    "message": "$DELETED$ corrispondenza/e eliminata/e dopo aver controllato $CHECKED$ voci.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "optionsSubtitle": {
+    "message": "Pulizia privata e automatica della cronologia"
+  },
+  "localOnlyTitle": {
+    "message": "100% locale"
+  },
+  "localOnlyDescription": {
+    "message": "Nessuna telemetria, account o richiesta di rete"
+  },
+  "sectionAutomation": {
+    "message": "Automazione"
+  },
+  "automaticCleaning": {
+    "message": "Pulizia automatica"
+  },
+  "automaticCleaningDescription": {
+    "message": "Le visite corrispondenti vengono rimosse non appena Firefox ne registra l’URL o il titolo."
+  },
+  "cleanOnStartup": {
+    "message": "Pulisci all’avvio di Firefox"
+  },
+  "cleanOnStartupDescription": {
+    "message": "Recupera le visite non elaborate mentre il componente era inattivo."
+  },
+  "cleanOnChange": {
+    "message": "Pulisci dopo il salvataggio"
+  },
+  "cleanOnChangeDescription": {
+    "message": "Applica le nuove regole all’intera cronologia esistente."
+  },
+  "sectionRules": {
+    "message": "Regole"
+  },
+  "keywordListTitle": {
+    "message": "Elenco delle parole chiave"
+  },
+  "keywordListDescription": {
+    "message": "Inserisci una parola chiave letterale per riga. Le espressioni regolari non vengono utilizzate intenzionalmente."
+  },
+  "keywordsLabel": {
+    "message": "Parole chiave"
+  },
+  "keywordsPlaceholder": {
+    "message": "example.com\nprogetto riservato\n/privato/"
+  },
+  "matchIn": {
+    "message": "Cerca in:"
+  },
+  "urlsLabel": {
+    "message": "URL"
+  },
+  "titlesLabel": {
+    "message": "Titoli delle pagine"
+  },
+  "caseSensitive": {
+    "message": "Maiuscole/minuscole"
+  },
+  "saveButton": {
+    "message": "Salva regole"
+  },
+  "previewButton": {
+    "message": "Anteprima corrispondenze"
+  },
+  "sectionMaintenance": {
+    "message": "Manutenzione"
+  },
+  "existingHistory": {
+    "message": "Cronologia esistente"
+  },
+  "irreversibleTitle": {
+    "message": "L’eliminazione non può essere annullata"
+  },
+  "irreversibleDescription": {
+    "message": "Usa prima l’anteprima se hai dubbi su una regola."
+  },
+  "exportButton": {
+    "message": "Esporta impostazioni"
+  },
+  "importButton": {
+    "message": "Importa impostazioni"
+  },
+  "sectionStatus": {
+    "message": "Stato"
+  },
+  "activityTitle": {
+    "message": "Attività di pulizia"
+  },
+  "lastRunLabel": {
+    "message": "Ultima esecuzione"
+  },
+  "lastDeletedLabel": {
+    "message": "Ultima eliminazione"
+  },
+  "totalDeletedLabel": {
+    "message": "Totale eliminato"
+  },
+  "matchFieldRequired": {
+    "message": "Seleziona URL, titoli delle pagine o entrambi."
+  },
+  "tooManyKeywords": {
+    "message": "L’elenco è limitato a 500 parole chiave."
+  },
+  "previewResult": {
+    "message": "$MATCHED$ corrispondenza/e in $CHECKED$ voci (ne vengono mostrate al massimo 25).",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "matchedBy": {
+    "message": "corrisponde a “$KEYWORD$”",
+    "placeholders": {
+      "keyword": {
+        "content": "$1"
+      }
+    }
+  },
+  "previewComplete": {
+    "message": "Anteprima completata. Non è stato eliminato nulla."
+  },
+  "exportedStatus": {
+    "message": "Impostazioni esportate."
+  },
+  "importedStatus": {
+    "message": "Impostazioni importate e salvate."
+  },
+  "invalidImport": {
+    "message": "Questo file non contiene JSON valido."
+  },
+  "phaseStarting": {
+    "message": "Preparazione dell’operazione"
+  },
+  "phaseScanning": {
+    "message": "Analisi della cronologia di Firefox"
+  },
+  "phaseMatching": {
+    "message": "Verifica delle parole chiave"
+  },
+  "phaseDeleting": {
+    "message": "Eliminazione delle voci corrispondenti"
+  },
+  "phaseComplete": {
+    "message": "Operazione completata"
+  },
+  "phaseError": {
+    "message": "Operazione non riuscita"
+  },
+  "operationFailed": {
+    "message": "Firefox non ha potuto completare questa operazione sulla cronologia."
+  },
+  "operationScanningDetail": {
+    "message": "Finora sono state trovate $COUNT$ voci univoche.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "operationMatchingDetail": {
+    "message": "$CHECKED$ di $TOTAL$ controllate · $MATCHED$ corrispondenza/e",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "matched": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationDeletingDetail": {
+    "message": "$CHECKED$ di $TOTAL$ elaborate · $DELETED$ eliminate",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "deleted": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationPreviewDone": {
+    "message": "L’anteprima ha trovato $MATCHED$ corrispondenza/e in $CHECKED$ voci. Non è stato eliminato nulla.",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "operationWipeDone": {
+    "message": "$DELETED$ voci corrispondenti eliminate dopo aver controllato $CHECKED$ voci.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  }
+}

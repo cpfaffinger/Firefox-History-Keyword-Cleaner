@@ -1,0 +1,298 @@
+{
+  "extensionName": {
+    "message": "History Keyword Cleaner"
+  },
+  "extensionDescription": {
+    "message": "URL’si veya sayfa başlığı özel ve yerel olarak saklanan anahtar kelimelerinizden birini içeren Firefox geçmişi kayıtlarını otomatik olarak siler."
+  },
+  "actionTitle": {
+    "message": "Geçmişi anahtar kelimeye göre temizle"
+  },
+  "enabledLabel": {
+    "message": "Otomatik temizleme"
+  },
+  "quickAddTitle": {
+    "message": "Anahtar kelime ekle"
+  },
+  "localOnlyShort": {
+    "message": "Yalnızca yerel"
+  },
+  "keywordPlaceholder": {
+    "message": "örn. example.com veya proje adı"
+  },
+  "addButton": {
+    "message": "Ekle"
+  },
+  "quickAddHint": {
+    "message": "URL’lerdeki veya sayfa başlıklarındaki yeni eşleşmeler otomatik olarak silinir."
+  },
+  "wipeNow": {
+    "message": "Şimdi sil"
+  },
+  "wipeDialogTitle": {
+    "message": "Eşleşen geçmiş şimdi silinsin mi?"
+  },
+  "wipeDialogDescription": {
+    "message": "Geçerli anahtar kelimelerinizle eşleşen tüm mevcut kayıtlar kalıcı olarak silinecek. Diğer geçmiş kayıtlarına dokunulmayacak."
+  },
+  "cancelButton": {
+    "message": "İptal"
+  },
+  "wipeConfirmButton": {
+    "message": "Eşleşen kayıtları sil"
+  },
+  "settingsButton": {
+    "message": "Ayarlar"
+  },
+  "keywordCount": {
+    "message": "$COUNT$ anahtar kelime yapılandırıldı",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "lastCleanup": {
+    "message": "$COUNT$ silindi · $DATE$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "readyStatus": {
+    "message": "Hazır. Hiçbir veri bu tarayıcıdan ayrılmaz."
+  },
+  "workingStatus": {
+    "message": "Tarayıcı geçmişi kontrol ediliyor…"
+  },
+  "savedStatus": {
+    "message": "Ayarlar kaydedildi."
+  },
+  "cleanupResult": {
+    "message": "$CHECKED$ geçmiş kaydı kontrol edildikten sonra $DELETED$ eşleşme silindi.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "optionsSubtitle": {
+    "message": "Gizli ve otomatik geçmiş temizleme"
+  },
+  "localOnlyTitle": {
+    "message": "%100 yerel"
+  },
+  "localOnlyDescription": {
+    "message": "Telemetri, hesap veya ağ isteği yok"
+  },
+  "sectionAutomation": {
+    "message": "Otomasyon"
+  },
+  "automaticCleaning": {
+    "message": "Otomatik temizleme"
+  },
+  "automaticCleaningDescription": {
+    "message": "Eşleşen ziyaretler, Firefox URL veya başlıklarını kaydeder kaydetmez silinir."
+  },
+  "cleanOnStartup": {
+    "message": "Firefox başladığında temizle"
+  },
+  "cleanOnStartupDescription": {
+    "message": "Eklenti devre dışıyken kaçırılan ziyaretleri yakalar."
+  },
+  "cleanOnChange": {
+    "message": "Kaydettikten sonra temizle"
+  },
+  "cleanOnChangeDescription": {
+    "message": "Yeni kuralları mevcut geçmişin tamamına uygular."
+  },
+  "sectionRules": {
+    "message": "Kurallar"
+  },
+  "keywordListTitle": {
+    "message": "Anahtar kelime listesi"
+  },
+  "keywordListDescription": {
+    "message": "Her satıra bir düz metin anahtar kelime girin. Düzenli ifadeler bilinçli olarak kullanılmaz."
+  },
+  "keywordsLabel": {
+    "message": "Anahtar kelimeler"
+  },
+  "keywordsPlaceholder": {
+    "message": "example.com\ngizli proje\n/özel/"
+  },
+  "matchIn": {
+    "message": "Şurada eşleştir:"
+  },
+  "urlsLabel": {
+    "message": "URL’ler"
+  },
+  "titlesLabel": {
+    "message": "Sayfa başlıkları"
+  },
+  "caseSensitive": {
+    "message": "Büyük/küçük harfe duyarlı"
+  },
+  "saveButton": {
+    "message": "Kuralları kaydet"
+  },
+  "previewButton": {
+    "message": "Eşleşmeleri önizle"
+  },
+  "sectionMaintenance": {
+    "message": "Bakım"
+  },
+  "existingHistory": {
+    "message": "Mevcut geçmiş"
+  },
+  "irreversibleTitle": {
+    "message": "Silme işlemi geri alınamaz"
+  },
+  "irreversibleDescription": {
+    "message": "Bir kuraldan emin değilseniz önce önizlemeyi kullanın."
+  },
+  "exportButton": {
+    "message": "Ayarları dışa aktar"
+  },
+  "importButton": {
+    "message": "Ayarları içe aktar"
+  },
+  "sectionStatus": {
+    "message": "Durum"
+  },
+  "activityTitle": {
+    "message": "Temizleme etkinliği"
+  },
+  "lastRunLabel": {
+    "message": "Son çalıştırma"
+  },
+  "lastDeletedLabel": {
+    "message": "Son silinen"
+  },
+  "totalDeletedLabel": {
+    "message": "Toplam silinen"
+  },
+  "matchFieldRequired": {
+    "message": "URL’leri, sayfa başlıklarını veya ikisini birden seçin."
+  },
+  "tooManyKeywords": {
+    "message": "Liste 500 anahtar kelimeyle sınırlıdır."
+  },
+  "previewResult": {
+    "message": "$CHECKED$ geçmiş kaydında $MATCHED$ eşleşme (en fazla 25 tanesi gösterilir).",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "matchedBy": {
+    "message": "“$KEYWORD$” ile eşleşti",
+    "placeholders": {
+      "keyword": {
+        "content": "$1"
+      }
+    }
+  },
+  "previewComplete": {
+    "message": "Önizleme tamamlandı. Hiçbir şey silinmedi."
+  },
+  "exportedStatus": {
+    "message": "Ayarlar dışa aktarıldı."
+  },
+  "importedStatus": {
+    "message": "Ayarlar içe aktarıldı ve kaydedildi."
+  },
+  "invalidImport": {
+    "message": "Bu dosya geçerli JSON içermiyor."
+  },
+  "phaseStarting": {
+    "message": "Geçmiş işlemi hazırlanıyor"
+  },
+  "phaseScanning": {
+    "message": "Firefox geçmişi taranıyor"
+  },
+  "phaseMatching": {
+    "message": "Anahtar kelime eşleşmeleri kontrol ediliyor"
+  },
+  "phaseDeleting": {
+    "message": "Eşleşen kayıtlar siliniyor"
+  },
+  "phaseComplete": {
+    "message": "İşlem tamamlandı"
+  },
+  "phaseError": {
+    "message": "İşlem başarısız oldu"
+  },
+  "operationFailed": {
+    "message": "Firefox bu geçmiş işlemini tamamlayamadı."
+  },
+  "operationScanningDetail": {
+    "message": "Şimdiye kadar $COUNT$ benzersiz geçmiş kaydı bulundu.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "operationMatchingDetail": {
+    "message": "$TOTAL$ kaydın $CHECKED$ tanesi kontrol edildi · $MATCHED$ eşleşme",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "matched": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationDeletingDetail": {
+    "message": "$TOTAL$ kaydın $CHECKED$ tanesi işlendi · $DELETED$ silindi",
+    "placeholders": {
+      "checked": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "deleted": {
+        "content": "$3"
+      }
+    }
+  },
+  "operationPreviewDone": {
+    "message": "Önizleme, $CHECKED$ kayıtta $MATCHED$ eşleşme buldu. Hiçbir şey silinmedi.",
+    "placeholders": {
+      "matched": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  },
+  "operationWipeDone": {
+    "message": "$CHECKED$ kayıt kontrol edildikten sonra $DELETED$ eşleşen kayıt silindi.",
+    "placeholders": {
+      "deleted": {
+        "content": "$1"
+      },
+      "checked": {
+        "content": "$2"
+      }
+    }
+  }
+}
