@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 - 2026-07-26
+
+- AMO-taugliche, eindeutige Produktions-ID statt lokaler Entwicklungs-ID
+- Versionsnummer für eine erneute AMO-Einreichung erhöht
+
 ## 0.1.0 - 2026-07-26
 
 - erste vollständige lokale Dev-Version

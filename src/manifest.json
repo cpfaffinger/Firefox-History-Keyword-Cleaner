@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_extensionName__",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "__MSG_extensionDescription__",
   "default_locale": "en",
   "permissions": [
@@ -33,7 +33,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "history-keyword-cleaner@local.addons",
+      "id": "history-keyword-cleaner@cpfaffinger.github.io",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": [

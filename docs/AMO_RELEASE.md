@@ -4,7 +4,8 @@ Stand: 26. Juli 2026.
 
 ## Bereits erfüllt
 
-- Manifest V3 mit expliziter Entwicklungs-ID
+- Manifest V3 mit der eindeutigen Produktions-ID
+  `history-keyword-cleaner@cpfaffinger.github.io`
 - `strict_min_version` 140 (Desktop) und 142 (Android)
 - vorgeschriebene `data_collection_permissions.required: ["none"]`
 - nur notwendige Berechtigungen (`history`, `storage`)
@@ -19,18 +20,21 @@ Stand: 26. Juli 2026.
 
 ## Vor der ersten öffentlichen Einreichung
 
-1. die endgültige Add-on-ID bestätigen; der Produktname
-   **History Keyword Cleaner** ist festgelegt und wird nicht lokalisiert;
-2. verantwortliche Support- und Security-Adresse in den Dokumenten und
+Auf AMO existiert bereits ein anderes Add-on mit dem Anzeigenamen
+**History Keyword Cleaner**. Der festgelegte Produktname kann im Manifest
+bestehen bleiben, aber für das AMO-Listing muss eine andere, eindeutige
+Listing-URL gewählt werden.
+
+1. verantwortliche Support- und Security-Adresse in den Dokumenten und
    AMO-Metadaten ergänzen;
-3. finale Screenshots aus Firefox erstellen und im AMO-Listing hochladen;
-4. AMO-Entwicklerkonto erstellen und die Developer Agreement akzeptieren;
-5. die manuellen Tests in `docs/MANUAL_TESTS.md` in einem frischen Profil
+2. finale Screenshots aus Firefox erstellen und im AMO-Listing hochladen;
+3. AMO-Entwicklerkonto erstellen und die Developer Agreement akzeptieren;
+4. die manuellen Tests in `docs/MANUAL_TESTS.md` in einem frischen Profil
    vollständig ausführen;
-6. Versionsnummer in `package.json`, `src/manifest.json` und `CHANGELOG.md`
+5. Versionsnummer in `package.json`, `src/manifest.json` und `CHANGELOG.md`
    gemeinsam aktualisieren;
-7. `pnpm install --frozen-lockfile && pnpm verify` ausführen;
-8. den Inhalt von `artifacts/*.zip` prüfen.
+6. `pnpm install --frozen-lockfile && pnpm verify` ausführen;
+7. den Inhalt von `artifacts/*.zip` prüfen.
 
 ## Einreichen
 
@@ -60,7 +64,7 @@ transparente Policy.
 
 Falls Code minifiziert, transpiliert oder anderweitig generiert würde, müsste
 zusätzlich der menschenlesbare Quellcode samt reproduzierbarer Build-Anleitung
-eingereicht werden. Version 0.1.0 benötigt das nicht: `src/` ist bereits der
+eingereicht werden. Version 0.1.1 benötigt das nicht: `src/` ist bereits der
 unveränderte, ausgelieferte Quellcode.
 
 ## Relevante Mozilla-Quellen

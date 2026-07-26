@@ -87,15 +87,15 @@ führt für Pull Requests und Pushes Tests, Sicherheitschecks, `web-ext`,
   GitHub Release namens `main-<Commit-SHA>` mit dem geprüften, unsignierten ZIP
   als Download-Asset. Zusätzlich bleibt das Build 90 Tage als
   GitHub-Actions-Artefakt verfügbar.
-- Ein Tag wie `v0.1.0` erzeugt ein normales, stabiles GitHub Release und hängt
+- Ein Tag wie `v0.1.1` erzeugt ein normales, stabiles GitHub Release und hängt
   dasselbe geprüfte ZIP als Download-Asset an.
 
 Ein Release-Tag sollte mit der Version in `package.json` und
 `src/manifest.json` übereinstimmen:
 
 ```sh
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.1.1
+git push origin v0.1.1
 ```
 
 Das GitHub-ZIP ist ein überprüfbares, aber **unsigniertes** Entwicklerpaket.
