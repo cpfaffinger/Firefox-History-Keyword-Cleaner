@@ -1,51 +1,45 @@
-# Veröffentlichung auf addons.mozilla.org (AMO)
+# Publishing on addons.mozilla.org (AMO)
 
-Stand: 26. Juli 2026.
+Last updated: July 26, 2026.
 
-## Bereits erfüllt
+## Completed requirements
 
-- Manifest V3 mit der permanenten, vom bestehenden AMO-Listing erwarteten ID
+- Manifest V3 with the permanent ID expected by the existing AMO listing:
   `history-keyword-cleaner@local.addons`
-- `strict_min_version` 140 (Desktop) und 142 (Android)
-- vorgeschriebene `data_collection_permissions.required: ["none"]`
-- nur notwendige Berechtigungen (`history`, `storage`)
-- keine Host-Permissions, Remote-Skripte, Telemetrie oder Obfuskation
-- lesbarer Originalcode entspricht direkt dem Paketinhalt
-- vollständige EN-, DE-, FR-, IT-, NL- und TR-Lokalisierung
-- Unit-, Manifest- und statische Sicherheitstests
+- `strict_min_version` 140 for desktop and 142 for Android
+- required `data_collection_permissions.required: ["none"]` declaration
+- only necessary permissions: `history` and `storage`
+- no host permissions, remote scripts, telemetry, or obfuscation
+- readable original source code that directly matches the package contents
+- complete EN, DE, FR, IT, NL, and TR localization
+- unit, manifest, and static security tests
 - `web-ext lint --warnings-as-errors`
-- reproduzierbarer Build mit festgeschriebener `web-ext`-Version
-- Reviewer-Anleitung und Listing-Entwurf
-- drei AMO-Screenshots im empfohlenen Format 1280 × 800
-- Datenschutz- und Sicherheitsdokumentation
+- reproducible build with a pinned `web-ext` version
+- reviewer instructions and AMO listing copy
+- three AMO screenshots in the recommended 1280 × 800 format
+- privacy and security documentation
 
-## Vor dem nächsten öffentlichen Update
+## Before the next public update
 
-Auf AMO existiert bereits ein anderes Add-on mit dem Anzeigenamen
-**History Keyword Cleaner**. Der festgelegte Produktname kann im Manifest
-bestehen bleiben, aber für das AMO-Listing muss eine andere, eindeutige
-Listing-URL gewählt werden.
+The permanent add-on ID is `history-keyword-cleaner@local.addons`. Despite its
+former development-oriented name, the ID must never be changed: the first AMO
+upload registered it as the listing's permanent identity. Every update to the
+existing listing must use the same ID.
 
-Die Add-on-ID `history-keyword-cleaner@local.addons` darf trotz ihres früheren
-Entwicklungsnamens nicht mehr geändert werden: Der erste AMO-Upload hat sie als
-permanente Identität des Listings registriert. Jedes Update muss dieselbe ID
-verwenden.
+1. Add a responsible support and security address to the documentation and AMO
+   metadata.
+2. Upload the prepared files from `amo/screenshots/` to the AMO listing.
+3. Complete all tests in `docs/MANUAL_TESTS.md` with a fresh Firefox profile.
+4. For a versioned tag, update the version in `package.json`,
+   `src/manifest.json`, and `CHANGELOG.md` together. Regular `main` builds
+   receive a monotonically increasing CI version automatically.
+5. Run `pnpm install --frozen-lockfile && pnpm verify`.
+6. Inspect the contents of `artifacts/*.zip`.
 
-1. verantwortliche Support- und Security-Adresse in den Dokumenten und
-   AMO-Metadaten ergänzen;
-2. die vorbereiteten Dateien aus `amo/screenshots/` im AMO-Listing hochladen;
-3. die manuellen Tests in `docs/MANUAL_TESTS.md` in einem frischen Profil
-   vollständig ausführen;
-4. für ein versioniertes Tag die Versionsnummer in `package.json`,
-   `src/manifest.json` und `CHANGELOG.md` gemeinsam aktualisieren; reguläre
-   `main`-Builds erhalten automatisch eine monotone CI-Version;
-5. `pnpm install --frozen-lockfile && pnpm verify` ausführen;
-6. den Inhalt von `artifacts/*.zip` prüfen.
+## Submission
 
-## Einreichen
-
-API-Zugangsdaten im AMO Developer Hub erstellen und nur als Umgebungsvariablen
-setzen:
+Create API credentials in the AMO Developer Hub and provide them only through
+environment variables:
 
 ```sh
 web-ext sign \
@@ -56,24 +50,24 @@ web-ext sign \
   --api-secret "$AMO_JWT_SECRET"
 ```
 
-Alternativ kann das von `pnpm build` erstellte ZIP über den AMO Developer Hub
-hochgeladen werden. Secrets dürfen nie in Dateien oder Git eingecheckt werden.
+Alternatively, upload the ZIP produced by `pnpm build` through the AMO
+Developer Hub. Never commit secrets to files or Git.
 
-## Was Mozilla tatsächlich verlangt
+## What Mozilla requires
 
-Mozilla gibt keine Mindestquote für Unit-Test-Coverage vor. Gefordert werden
-funktionierender, überprüfbarer Code, grundlegende funktionale Testbarkeit,
-Reviewer-Testinformationen, nur notwendige Berechtigungen, kein Remote-Code
-und eine korrekte Datensammlungsdeklaration. Eine Privacy Policy ist bei
-Datenübertragung zwingend; dieses Add-on überträgt nichts, liefert dennoch eine
-transparente Policy.
+Mozilla does not prescribe a minimum unit-test coverage percentage. It requires
+functional and reviewable code, basic functional testability, reviewer test
+instructions, only necessary permissions, no remote code, and a correct data
+collection declaration. A privacy policy is mandatory when data is
+transmitted; this add-on transmits nothing but still provides a transparent
+policy.
 
-Falls Code minifiziert, transpiliert oder anderweitig generiert würde, müsste
-zusätzlich der menschenlesbare Quellcode samt reproduzierbarer Build-Anleitung
-eingereicht werden. Version 0.1.1 benötigt das nicht: `src/` ist bereits der
-unveränderte, ausgelieferte Quellcode.
+If the project introduced minification, transpilation, or other generated code,
+the human-readable source and reproducible build instructions would also need
+to be submitted. The current package does not require a separate source-code
+submission because `src/` is already the unchanged shipping source.
 
-## Relevante Mozilla-Quellen
+## Relevant Mozilla resources
 
 - [Add-on Policies](https://extensionworkshop.com/documentation/publish/add-on-policies/)
 - [Submitting an add-on](https://extensionworkshop.com/documentation/publish/submitting-an-add-on/)

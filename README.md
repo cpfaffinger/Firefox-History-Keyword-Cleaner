@@ -1,6 +1,6 @@
 # History Keyword Cleaner
 
-[![Get the add-on for Firefox](https://img.shields.io/badge/Firefox-Get_the_Add--on-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/de/firefox/addon/history-keyword-sanitizer/)
+[![Get the add-on for Firefox](https://img.shields.io/badge/Firefox-Get_the_Add--on-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/history-keyword-sanitizer/)
 [![CI, lint, and package](https://github.com/cpfaffinger/Firefox-History-Keyword-Cleaner/actions/workflows/ci.yml/badge.svg)](https://github.com/cpfaffinger/Firefox-History-Keyword-Cleaner/actions/workflows/ci.yml)
 [![Line coverage: 100%](https://img.shields.io/badge/line_coverage-100%25-brightgreen.svg)](#quality-and-packaging)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -13,7 +13,7 @@ language.
 
 ## Install
 
-[Install History Keyword Cleaner from Firefox Add-ons](https://addons.mozilla.org/de/firefox/addon/history-keyword-sanitizer/).
+[Install History Keyword Cleaner from Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/history-keyword-sanitizer/).
 
 The extension targets Firefox Desktop 140+ and Firefox for Android 142+. Local
 development and verification use Firefox 153.0.
@@ -150,6 +150,12 @@ Everything shipped in `src/` is readable source code. There is no
 transpilation, minification, obfuscation, or remotely loaded runtime
 dependency.
 
+## Documentation language
+
+All Markdown documentation, policies, release notes, AMO copy, and reviewer
+instructions in this repository must be written exclusively in English.
+Product-interface translations belong only in `src/_locales/`.
+
 ## Technical design
 
 History scans split large time ranges so the extension is not limited to the
@@ -166,7 +172,7 @@ through `background.scripts`.
 The full checklist is in [docs/AMO_RELEASE.md](docs/AMO_RELEASE.md). The
 published Firefox product page is:
 
-<https://addons.mozilla.org/de/firefox/addon/history-keyword-sanitizer/>
+<https://addons.mozilla.org/en-US/firefox/addon/history-keyword-sanitizer/>
 
 ## Icon attribution
 

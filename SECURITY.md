@@ -1,23 +1,23 @@
 # Security
 
-## Sicherheitsmodell
+## Security model
 
-- keine Host-Permissions, Content-Scripts oder Webseiten-Manipulation
-- keine Netzwerkzugriffe oder Remote-Code-Ausführung
-- keine `eval`-/`Function`-Konstruktion und keine Inline-Skripte
-- alle dynamischen Texte werden mit `textContent` gerendert
-- Importdaten werden normalisiert und auf 500 Keywords à 256 Zeichen begrenzt
-- begrenzte parallele Löschvorgänge verhindern unnötige Browserlast
-- das ausgelieferte Paket enthält ausschließlich die Dateien unter `src/`
+- no host permissions, content scripts, or website manipulation
+- no network access or remote code execution
+- no `eval` or `Function` construction and no inline scripts
+- all dynamic text is rendered with `textContent`
+- imported data is normalized and limited to 500 keywords of 256 characters
+  each
+- bounded deletion concurrency prevents unnecessary browser load
+- the distributed package contains only files from `src/`
 
-## Schwachstellen melden
+## Reporting a vulnerability
 
-Vor einer öffentlichen Veröffentlichung muss hier eine private
-Security-Kontaktadresse ergänzt werden. Bitte keine sensiblen Browserdaten in
-Fehlerberichten mitsenden.
+A private security contact address must be configured before production
+security support is offered. Do not include sensitive browsing data in a
+vulnerability report.
 
-## Unterstützte Versionen
+## Supported versions
 
-Während der lokalen Entwicklung wird nur die jeweils neueste Version gepflegt.
-Für einen Store-Release sollten Sicherheitskorrekturen stets als neue
-Patch-Version veröffentlicht werden.
+Only the latest version is maintained during local development. Security fixes
+for a store release should always be published as a new patch version.

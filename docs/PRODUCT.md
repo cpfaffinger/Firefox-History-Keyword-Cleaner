@@ -1,33 +1,31 @@
-# Produkt- und Monetarisierungsnotizen
+# Product and monetization notes
 
-## Positionierung
+## Positioning
 
-Das Kernversprechen ist einfach: bestimmte Chronikeinträge verschwinden
-automatisch, ohne dass Browseraktivitäten den Rechner verlassen. Dieses
-Vertrauen ist der wichtigste Produktwert und sollte nicht für kurzfristige
-Monetarisierung aufgegeben werden.
+The core promise is simple: selected history entries disappear automatically
+without browsing activity ever leaving the device. This trust is the product's
+most important value and should not be traded for short-term monetization.
 
-## Sinnvolle spätere Erweiterungen
+## Potential future enhancements
 
-- optionale Regeln pro Keyword (nur Domain, nur Pfad, nur Titel)
-- zeitlich begrenzte Regeln
-- lokale Regelgruppen und Profile
-- lokale Backup-Historie der Regeln, niemals der besuchten URLs
-- Chrome-/Edge-Portierung mit derselben lokalen Datenschutzarchitektur
+- optional per-keyword rules for domains, paths, or titles
+- time-limited rules
+- local rule groups and profiles
+- local rule revision history, but never a backup of visited URLs
+- Chrome and Edge ports using the same local-first privacy architecture
 
-## Monetarisierungsoptionen
+## Monetization options
 
-Das Produkt bleibt vorerst vollständig kostenlos. Falls später monetarisiert
-wird, sind folgende Modelle mit dem Privacy-Versprechen vereinbar:
+The product remains completely free for now. If monetization is introduced
+later, the following models would remain compatible with the privacy promise:
 
-1. freiwillige Spenden über einen klar gekennzeichneten Link in der
-   Add-on-Oberfläche;
-2. einmaliger Kauf für zusätzliche rein lokale Komfortfunktionen;
-3. Pro-Version für verwaltete Unternehmensrichtlinien, Support und
-   Konfigurationsverteilung.
+1. voluntary donations through a clearly labeled link in the add-on UI;
+2. a one-time purchase for additional local-only convenience features;
+3. a professional edition for managed enterprise policies, support, and
+   configuration distribution.
 
-Nicht vorgesehen sind Werbung in Webseiten, Affiliate-URL-Manipulation,
-Verkauf von Browserdaten oder Analyse des Browserverlaufs. Bei bezahlten
-Funktionen muss das AMO-Listing laut Mozilla klar offenlegen, welche Funktionen
-eine Zahlung erfordern. Jede spätere Netzwerk- oder Zahlungsintegration
-benötigt eine neue Datenschutz- und Consent-Prüfung.
+Advertising on websites, affiliate URL manipulation, the sale of browsing
+data, and browsing-history analytics are explicitly out of scope. If paid
+features are introduced, the AMO listing must clearly identify which features
+require payment. Any future network or payment integration requires a new
+privacy and consent review.

@@ -1,13 +1,11 @@
 # AMO listing copy
 
-## English
-
-### Short summary
+## Short summary
 
 Automatically remove Firefox history entries matching your private local
 keywords.
 
-### Description
+## Description
 
 History Keyword Cleaner watches the history that Firefox records and removes
 entries whose URL or page title contains one of your keywords.
@@ -28,35 +26,6 @@ Features:
 All matching happens locally in Firefox. Your keywords and browsing history
 never leave the browser.
 
-### Search tags
+## Search tags
 
 history, privacy, cleanup, delete history, keywords
-
-## Deutsch
-
-### Kurzbeschreibung
-
-Entfernt automatisch Firefox-Chronikeinträge anhand deiner lokal gespeicherten
-Keywords.
-
-### Beschreibung
-
-History Keyword Cleaner überwacht die von Firefox gespeicherte Chronik und
-entfernt Einträge, deren URL oder Seitentitel eines deiner Keywords enthält.
-
-Nutze Domains, URL-Fragmente, Projektnamen oder beliebige andere wörtliche
-Texte. Die Suche ignoriert standardmäßig Groß-/Kleinschreibung und kann auf
-URLs oder Seitentitel begrenzt werden.
-
-Funktionen:
-
-- automatische Bereinigung beim Besuch einer Seite;
-- optionale vollständige Bereinigung beim Firefox-Start;
-- sichere Vorschau vor dem Löschen der bestehenden Chronik;
-- Import und Export der Einstellungen;
-- englische, deutsche, französische, italienische, niederländische und
-  türkische Oberfläche;
-- keine Telemetrie, Konten, Werbung oder Netzwerkanfragen.
-
-Alle Vergleiche passieren lokal in Firefox. Keywords und Chronik verlassen den
-Browser niemals.

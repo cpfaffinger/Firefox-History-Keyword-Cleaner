@@ -10,18 +10,17 @@
 
 ## 0.1.1 - 2026-07-26
 
-- AMO-taugliche, eindeutige Produktions-ID statt lokaler Entwicklungs-ID
-- Versionsnummer für eine erneute AMO-Einreichung erhöht
+- replaced the local development ID with an AMO-compatible production ID
+- increased the version for a new AMO submission
 
 ## 0.1.0 - 2026-07-26
 
-- erste vollständige lokale Dev-Version
-- URL- und Seitentitel-Matching mit lokalen Keywords
-- Echtzeit-, Start- und manuelle Chronikbereinigung
-- Treffer-Vorschau sowie Einstellungsimport und -export
-- nicht blockierender Wipe-now-Dialog mit Live-Phasen, Spinner und Zählern
-- Produkt- und Markenname „History Keyword Cleaner“ über alle Sprachen fixiert
-- englische, deutsche, französische, italienische, niederländische und
-  türkische Oberfläche
-- Manifest V3 mit Firefox-140+-Datenschutzerklärung
-- Unit-Tests, Paketvalidierung, CI und AMO-Vorbereitung
+- first complete local development version
+- URL and page-title matching with locally stored keywords
+- real-time, startup, and manual history cleanup
+- match preview plus settings import and export
+- non-blocking Wipe now dialog with live phases, spinner, and counters
+- consistent History Keyword Cleaner product and brand name in every locale
+- English, German, French, Italian, Dutch, and Turkish interface
+- Manifest V3 with the Firefox 140+ data-collection declaration
+- unit tests, package validation, CI, and AMO release preparation

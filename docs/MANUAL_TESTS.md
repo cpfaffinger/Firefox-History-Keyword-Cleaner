@@ -1,50 +1,50 @@
-# Manueller Testplan
+# Manual test plan
 
-Mozilla schreibt keine bestimmte Unit-Test-Quote vor. Reviewer führen jedoch
-grundlegende Funktionstests aus und benötigen klare Testinformationen. Dieser
-Plan ergänzt die automatisierten Tests.
+Mozilla does not require a specific unit-test coverage percentage. Reviewers do
+perform basic functional tests and need clear test instructions. This plan
+complements the automated test suite.
 
-## Vorbereitung
+## Preparation
 
-1. `pnpm verify` ausführen.
-2. `pnpm dev:local` starten.
-3. Im temporären Firefox-Profil die Add-on-Einstellungen öffnen.
-4. Darauf achten, keine reale, erhaltenswerte Chronik für Löschtests zu nutzen.
+1. Run `pnpm verify`.
+2. Start `pnpm dev:local`.
+3. Open the add-on settings in the temporary Firefox profile.
+4. Do not use valuable real-world history data for deletion tests.
 
-## Kernfälle
+## Core scenarios
 
-1. Keyword `history-cleaner-test` eintragen, URL- und Titel-Matching aktivieren.
-2. `https://example.com/history-cleaner-test` öffnen.
-3. `about:history` öffnen und prüfen, dass die URL nicht vorhanden ist.
-4. Eine lokale Testseite öffnen, deren URL nicht matcht, deren Titel aber
-   `history-cleaner-test` enthält; prüfen, dass der Titel-Event den Eintrag
-   löscht.
-5. Automatik deaktivieren, passende Seite besuchen und prüfen, dass sie bleibt.
-6. Automatik wieder aktivieren und „Bestehende Chronik bereinigen“ ausführen.
-7. Groß-/Kleinschreibung mit `Secret` gegen `secret` in beiden Modi prüfen.
-8. URL-kodiertes Keyword wie `private file` gegen `private%20file` prüfen.
-9. Vorschau ausführen und sicherstellen, dass dabei kein Eintrag gelöscht wird.
-10. Einstellungen exportieren, Keywords ändern und Export wieder importieren.
-11. Firefox neu starten und die Startbereinigung prüfen.
-12. „Jetzt löschen“ öffnen, den Dialog mit Escape abbrechen und prüfen, dass
-    nichts gelöscht wird.
-13. Wipe erneut bestätigen und beobachten, dass Scan-, Match- und Löschphase
-    mit Spinner/Zählern erscheinen, ohne dass die Seite einfriert.
+1. Add the keyword `history-cleaner-test` and enable URL and title matching.
+2. Open `https://example.com/history-cleaner-test`.
+3. Open `about:history` and confirm that the URL is absent.
+4. Open a local test page whose URL does not match but whose title contains
+   `history-cleaner-test`; confirm that the title event deletes the entry.
+5. Disable automatic cleaning, visit a matching page, and confirm that it
+   remains in history.
+6. Re-enable automatic cleaning and run **Wipe now** for existing history.
+7. Test `Secret` against `secret` in both case-sensitivity modes.
+8. Test a decoded keyword such as `private file` against `private%20file`.
+9. Run a preview and confirm that it does not delete any entry.
+10. Export settings, change the keywords, and import the export again.
+11. Restart Firefox and verify startup cleanup.
+12. Open **Wipe now**, cancel the dialog with Escape, and confirm that nothing
+    is deleted.
+13. Confirm **Wipe now** again and verify that the scan, match, and delete
+    phases show a spinner and counters without freezing the page.
 
-## UI und Barrierefreiheit
+## UI and accessibility
 
-- Popup bei 100 % und 200 % Skalierung prüfen.
-- Einstellungsseite bei 320 px, 768 px und Desktopbreite prüfen.
-- Tastaturreihenfolge, sichtbare Fokusmarken und Space-Bedienung der Schalter
-  prüfen.
-- Hell- und Dunkelmodus prüfen.
-- englische, deutsche, französische, italienische, niederländische und
-  türkische Firefox-Sprache prüfen.
+- Test the popup at 100% and 200% zoom.
+- Test the settings page at 320 px, 768 px, and desktop width.
+- Verify keyboard order, visible focus indicators, and Space-key operation for
+  switches.
+- Test light and dark mode.
+- Test Firefox with the English, German, French, Italian, Dutch, and Turkish
+  locales.
 
-## Datenschutz
+## Privacy
 
-- Firefox-Netzwerkmonitor öffnen und bestätigen, dass das Add-on keine
-  Requests sendet.
-- Paketinhalt prüfen: keine Secrets, Quellkarten, Testdateien oder
+- Open Firefox Network Monitor and confirm that the add-on sends no requests.
+- Inspect the package: it must contain no secrets, source maps, test files, or
   `node_modules`.
-- `about:addons` prüfen: nur Chronik- und Speicherberechtigung.
+- Inspect `about:addons`: only the history and storage permissions should be
+  present.
