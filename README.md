@@ -84,8 +84,8 @@ führt für Pull Requests und Pushes Tests, Sicherheitschecks, `web-ext`,
 `addons-linter` und den Build aus.
 
 - Jeder erfolgreiche Commit oder Merge auf `main` erzeugt ein dauerhaftes
-  GitHub-Prerelease namens `main-<Commit-SHA>` mit dem geprüften, unsignierten
-  ZIP als Download-Asset. Zusätzlich bleibt das Build 90 Tage als
+  GitHub Release namens `main-<Commit-SHA>` mit dem geprüften, unsignierten ZIP
+  als Download-Asset. Zusätzlich bleibt das Build 90 Tage als
   GitHub-Actions-Artefakt verfügbar.
 - Ein Tag wie `v0.1.0` erzeugt ein normales, stabiles GitHub Release und hängt
   dasselbe geprüfte ZIP als Download-Asset an.

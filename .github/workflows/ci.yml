@@ -107,11 +107,11 @@ jobs:
           if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
             echo "tag=${GITHUB_REF_NAME}" >> "${GITHUB_OUTPUT}"
             echo "title=History Keyword Cleaner ${GITHUB_REF_NAME}" >> "${GITHUB_OUTPUT}"
-            echo "prerelease=false" >> "${GITHUB_OUTPUT}"
+            echo "version_tag=true" >> "${GITHUB_OUTPUT}"
           else
             echo "tag=main-${SHORT_SHA}" >> "${GITHUB_OUTPUT}"
             echo "title=History Keyword Cleaner main ${SHORT_SHA}" >> "${GITHUB_OUTPUT}"
-            echo "prerelease=true" >> "${GITHUB_OUTPUT}"
+            echo "version_tag=false" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Create or update GitHub release
@@ -120,7 +120,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
           RELEASE_TAG: ${{ steps.release.outputs.tag }}
           RELEASE_TITLE: ${{ steps.release.outputs.title }}
-          IS_PRERELEASE: ${{ steps.release.outputs.prerelease }}
+          IS_VERSION_TAG: ${{ steps.release.outputs.version_tag }}
         shell: bash
         run: |
           set -euo pipefail
@@ -129,10 +129,12 @@ jobs:
 
           if gh release view "${RELEASE_TAG}" >/dev/null 2>&1; then
             gh release upload "${RELEASE_TAG}" "${ASSET_PATH}" --clobber
-          elif [[ "${IS_PRERELEASE}" == "true" ]]; then
+            gh release edit "${RELEASE_TAG}" \
+              --prerelease=false \
+              --title "${RELEASE_TITLE}"
+          elif [[ "${IS_VERSION_TAG}" == "false" ]]; then
             gh release create "${RELEASE_TAG}" "${ASSET_PATH}" \
               --target "${GITHUB_SHA}" \
-              --prerelease \
               --generate-notes \
               --title "${RELEASE_TITLE}"
           else
