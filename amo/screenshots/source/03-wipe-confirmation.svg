@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+    <defs>
+      <linearGradient id="background" x1="0" y1="0" x2="1280" y2="800">
+        <stop stop-color="#eee9ff"/>
+        <stop offset=".42" stop-color="#f7f5fc"/>
+        <stop offset="1" stop-color="#f5f3fb"/>
+      </linearGradient>
+      <linearGradient id="brandGradient" x1="0" y1="0" x2="48" y2="48">
+        <stop stop-color="#7c5cff"/>
+        <stop offset="1" stop-color="#3e2ba8"/>
+      </linearGradient>
+      <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+        <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#2f2262" flood-opacity=".13"/>
+      </filter>
+    </defs>
+    <rect width="1280" height="800" fill="url(#background)"/>
+    <g font-family="Inter, Segoe UI, Arial, sans-serif">
+      
+    <g transform="translate(100 35) scale(1)">
+      <rect width="48" height="48" rx="13" fill="url(#brandGradient)"/>
+      <path d="M31 33H17l-6-6.2a2 2 0 0 1 0-2.8l12-12a2 2 0 0 1 2.8 0l8.2 8.2a2 2 0 0 1 0 2.8L22 35" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M30 25L21 16" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M12 40h25" fill="none" stroke="#57e4c5" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <text x="164" y="57" font-size="23" font-weight="760" fill="#201f2a" >History Keyword Cleaner</text>
+    <text x="164" y="77" font-size="13" font-weight="400" fill="#676475" >Private, automatic history cleanup</text>
+    <rect x="888" y="38" width="292" height="47" rx="12" fill="#edf9f6" stroke="#b8dfd7" />
+    <text x="1162" y="57" font-size="12" font-weight="800" fill="#087f68" text-anchor="end">100% local</text>
+    <text x="1162" y="73" font-size="11" font-weight="400" fill="#676475" text-anchor="end">No telemetry, accounts, or network requests</text><rect x="100" y="109" width="777" height="205" rx="18" fill="#fff" stroke="#ded9ea" filter="url(#shadow)"/>
+    <text x="122" y="138" font-size="10" font-weight="800" fill="#6547d9" letter-spacing="1.4">AUTOMATION</text>
+    <text x="122" y="166" font-size="18" font-weight="740" fill="#201f2a" >Automatic cleaning</text>
+    <rect x="809" y="133" width="44" height="24" rx="12" fill="#6547d9"/>
+    <circle cx="841" cy="145" r="9" fill="#fff"/>
+    <text x="122" y="193" font-size="13" font-weight="400" fill="#676475" >Matching visits are removed as soon as Firefox records their URL or title.</text>
+    <rect x="122" y="218" width="351" height="70" rx="12" fill="#fff" stroke="#ded9ea" />
+    <rect x="136" y="233" width="16" height="16" rx="4" fill="#6547d9" stroke="#6547d9" /><path d="M140 241l3 3 6-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="162" y="247" font-size="12" font-weight="700" fill="#201f2a" >Clean when Firefox starts</text>
+    <text x="162" y="267" font-size="11" font-weight="400" fill="#676475" >Catches visits missed while the add-on was inactive.</text>
+    <rect x="483" y="218" width="370" height="70" rx="12" fill="#fff" stroke="#ded9ea" />
+    <rect x="497" y="233" width="16" height="16" rx="4" fill="#6547d9" stroke="#6547d9" /><path d="M501 241l3 3 6-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="523" y="247" font-size="12" font-weight="700" fill="#201f2a" >Clean after saving keywords</text>
+    <text x="523" y="267" font-size="11" font-weight="400" fill="#676475" >Applies new rules to the complete existing history.</text><rect x="100" y="334" width="777" height="418" rx="18" fill="#fff" stroke="#ded9ea" filter="url(#shadow)"/>
+    <text x="122" y="363" font-size="10" font-weight="800" fill="#6547d9" letter-spacing="1.4">RULES</text>
+    <text x="122" y="391" font-size="18" font-weight="740" fill="#201f2a" >Keyword list</text>
+    <rect x="785" y="359" width="68" height="26" rx="13" fill="#eee9ff" stroke="none" />
+    <text x="819" y="377" font-size="11" font-weight="800" fill="#6547d9" text-anchor="middle">3 / 500</text>
+    <text x="122" y="418" font-size="13" font-weight="400" fill="#676475" >Enter one literal keyword per line. Regular expressions are intentionally not used.</text>
+    <text x="122" y="447" font-size="12" font-weight="700" fill="#201f2a" >Keywords</text>
+    <rect x="122" y="458" width="731" height="164" rx="10" fill="#fbfaff" stroke="#ded9ea" />
+    <text x="138" y="484" font-size="13" font-weight="400" fill="#201f2a" >example.com</text>
+    <text x="138" y="507" font-size="13" font-weight="400" fill="#201f2a" >private project</text>
+    <text x="138" y="530" font-size="13" font-weight="400" fill="#201f2a" >/sensitive/</text>
+    <text x="122" y="651" font-size="12" font-weight="700" fill="#676475" >Match in:</text>
+    <rect x="194" y="638" width="16" height="16" rx="4" fill="#6547d9" stroke="#6547d9" /><path d="M198 646l3 3 6-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="217" y="651" font-size="12" font-weight="400" fill="#201f2a" >URLs</text>
+    <rect x="274" y="638" width="16" height="16" rx="4" fill="#6547d9" stroke="#6547d9" /><path d="M278 646l3 3 6-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="297" y="651" font-size="12" font-weight="400" fill="#201f2a" >Page titles</text>
+    <rect x="389" y="638" width="16" height="16" rx="4" fill="#fff" stroke="#ded9ea" />
+    <text x="412" y="651" font-size="12" font-weight="400" fill="#201f2a" >Case-sensitive</text>
+    <rect x="122" y="690" width="112" height="40" rx="11" fill="#6547d9" stroke="#6547d9" /><text x="178" y="715" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Save rules</text>
+       <rect x="245" y="690" width="142" height="40" rx="11" fill="#fff" stroke="#ded9ea" /><text x="316" y="715" font-size="13" font-weight="700" fill="#201f2a" text-anchor="middle">Preview matches</text><rect x="897" y="109" width="283" height="313" rx="18" fill="#fff" stroke="#ded9ea" filter="url(#shadow)"/>
+    <text x="919" y="139" font-size="10" font-weight="800" fill="#6547d9" letter-spacing="1.4">STATUS</text>
+    <text x="919" y="165" font-size="18" font-weight="740" fill="#201f2a" >Cleaning activity</text>
+    
+    <text x="919" y="205" font-size="11" font-weight="400" fill="#676475" >Last run</text>
+    <text x="1158" y="205" font-size="13" font-weight="700" fill="#201f2a" text-anchor="end">just now</text>
+    <line x1="919" y1="218" x2="1158" y2="218" stroke="#ded9ea"/>
+    <text x="919" y="252" font-size="11" font-weight="400" fill="#676475" >Last deleted</text>
+    <text x="1158" y="252" font-size="13" font-weight="700" fill="#201f2a" text-anchor="end">4</text>
+    <line x1="919" y1="265" x2="1158" y2="265" stroke="#ded9ea"/>
+    <text x="919" y="299" font-size="11" font-weight="400" fill="#676475" >Total deleted</text>
+    <text x="1158" y="299" font-size="13" font-weight="700" fill="#201f2a" text-anchor="end">137</text>
+    <text x="1158" y="399" font-size="10" font-weight="400" fill="#676475" text-anchor="end">v0.1.1</text>
+      
+  <rect width="1280" height="800" fill="#17131f" opacity=".58"/>
+  <rect x="425" y="235" width="430" height="270" rx="18" fill="#fff" stroke="#ded9ea" filter="url(#shadow)"/>
+  <text x="457" y="279" font-size="22" font-weight="760" fill="#201f2a" >Wipe matching history now?</text>
+  <text x="457" y="319" font-size="13" font-weight="400" fill="#676475" >Every existing entry matching your current keywords will be</text>
+  <text x="457" y="341" font-size="13" font-weight="400" fill="#676475" >permanently deleted. Other history entries remain untouched.</text>
+  <rect x="457" y="369" width="366" height="54" rx="12" fill="#fff5dc" stroke="none" />
+  <text x="475" y="392" font-size="12" font-weight="750" fill="#8b5b00" >Only matching entries are removed.</text>
+  <text x="475" y="410" font-size="11" font-weight="400" fill="#676475" >This action cannot be undone.</text>
+  <rect x="551" y="445" width="100" height="40" rx="11" fill="#fff" stroke="#ded9ea" /><text x="601" y="470" font-size="13" font-weight="700" fill="#201f2a" text-anchor="middle">Cancel</text>
+  <rect x="663" y="445" width="160" height="40" rx="11" fill="#be3b51" stroke="#be3b51" /><text x="743" y="470" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Wipe matching entries</text>
+    </g>
+  </svg>
