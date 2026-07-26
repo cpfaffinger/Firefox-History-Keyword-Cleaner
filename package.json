@@ -11,19 +11,20 @@
   },
   "scripts": {
     "test": "node --test",
-    "test:coverage": "node --test --experimental-test-coverage --test-coverage-lines=100",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-include=\"src/**/*.js\" --test-coverage-lines=100",
     "check": "node tools/validate-project.mjs",
     "lint:addons": "addons-linter src --warnings-as-errors",
     "lint:webext": "web-ext lint --source-dir src --warnings-as-errors",
     "lint": "pnpm check && pnpm lint:webext && pnpm lint:addons",
     "build": "web-ext build --source-dir src --artifacts-dir artifacts --overwrite-dest",
-    "screenshots:amo": "node tools/render-amo-screenshots.mjs",
+    "screenshots:amo": "node tools/validate-amo-screenshots.mjs",
     "dev": "web-ext run --source-dir src",
     "dev:local": "web-ext run --source-dir src --firefox \"C:\\Program Files\\Mozilla Firefox\\firefox.exe\"",
-    "verify": "pnpm test:coverage && pnpm lint && pnpm build"
+    "verify": "pnpm test:coverage && pnpm lint && pnpm build && pnpm screenshots:amo"
   },
   "devDependencies": {
     "addons-linter": "10.9.0",
+    "jsdom": "27.4.0",
     "web-ext": "10.5.0"
   }
 }

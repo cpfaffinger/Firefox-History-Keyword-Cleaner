@@ -202,3 +202,50 @@ test("deleteMatches isolates individual API failures", async () => {
     { url: failingUrl, message: "simulated deletion failure" }
   ]);
 });
+
+test("history operations cancel cooperatively and reject saturated fallback ranges", async () => {
+  await assert.rejects(
+    queryAllHistory(
+      {
+        async search() {
+          return [];
+        }
+      },
+      { shouldCancel: () => true }
+    ),
+    (error) => error.code === "operationCancelled"
+  );
+
+  let calls = 0;
+  await assert.rejects(
+    queryAllHistory(
+      {
+        async search() {
+          calls += 1;
+          return calls === 1
+            ? [{ url: "one" }, { url: "two" }]
+            : { length: 1_000_000 };
+        }
+      },
+      { batchSize: 2, startTime: 0, endTime: 1 }
+    ),
+    (error) => error.code === "historyRangeSaturated"
+  );
+});
+
+test("deleteMatches skips URLs that no longer have visits", async () => {
+  const deleted = [];
+  const result = await deleteMatches(
+    {
+      async getVisits() {
+        return [];
+      },
+      async deleteUrl({ url }) {
+        deleted.push(url);
+      }
+    },
+    [{ item: { url: "https://gone.test" }, keyword: "gone" }]
+  );
+  assert.equal(result.deleted, 0);
+  assert.deepEqual(deleted, []);
+});

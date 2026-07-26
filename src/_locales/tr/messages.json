@@ -107,12 +107,6 @@
   "cleanOnStartupDescription": {
     "message": "Eklenti devre dışıyken kaçırılan ziyaretleri yakalar."
   },
-  "cleanOnChange": {
-    "message": "Kaydettikten sonra temizle"
-  },
-  "cleanOnChangeDescription": {
-    "message": "Yeni kuralları mevcut geçmişin tamamına uygular."
-  },
   "sectionRules": {
     "message": "Kurallar"
   },
@@ -216,6 +210,54 @@
   "invalidImport": {
     "message": "Bu dosya geçerli JSON içermiyor."
   },
+  "importTooLarge": { "message": "İçe aktarma dosyası 1 MB’den büyük." },
+  "exceptionsLabel": { "message": "İstisnalar" },
+  "exceptionsPlaceholder": { "message": "guvenilir.example.com\n/kalsin/" },
+  "exceptionsDescription": { "message": "İstisna içeren bir kayıt hiçbir zaman silinmez." },
+  "matchModeLabel": { "message": "Eşleşme modu" },
+  "matchModeContains": { "message": "İçerir" },
+  "matchModeWord": { "message": "Tam sözcük" },
+  "matchModeExact": { "message": "Tam değer" },
+  "urlScopeLabel": { "message": "URL kapsamı" },
+  "urlScopeAny": { "message": "Tam URL" },
+  "urlScopeDomain": { "message": "Yalnızca alan adı" },
+  "urlScopePath": { "message": "Yalnızca yol ve sorgu" },
+  "cancelOperation": { "message": "İşlemi iptal et" },
+  "broadRuleDialogTitle": { "message": "Geniş kurallar kaydedilsin mi?" },
+  "broadRuleDialogDescription": { "message": "Geniş anahtar kelimeler gelecekteki birçok geçmiş kaydını otomatik olarak silebilir." },
+  "saveBroadRules": { "message": "Geniş kuralları kaydet" },
+  "savedWithoutCleanup": { "message": "Kurallar kaydedildi. Mevcut geçmiş değiştirilmedi." },
+  "saveCancelled": { "message": "Kaydetme iptal edildi." },
+  "previewBeforeWipe": { "message": "Silmeden önce eşleşmeler önizleniyor…" },
+  "noMatchesToDelete": { "message": "Eşleşen geçmiş kaydı bulunamadı." },
+  "wipePreviewSummary": {
+    "message": "$CHECKED$ geçmiş URL’sinden $MATCHED$ tanesi tüm ziyaretleriyle silinecek.",
+    "placeholders": { "matched": { "content": "$1" }, "checked": { "content": "$2" } }
+  },
+  "wipeRiskHigh": { "message": "Yüksek risk: Bu kural çok geniş veya geçmişinizin en az yarısıyla eşleşiyor." },
+  "wipeRiskMedium": { "message": "Dikkat: Bu kural geçmişinizin önemli bir bölümüyle eşleşiyor." },
+  "wipeCancelled": { "message": "Silme iptal edildi. Hiçbir şey kaldırılmadı." },
+  "cancellingOperation": { "message": "Geçerli tarayıcı isteğinden sonra iptal ediliyor…" },
+  "keywordTooShort": {
+    "message": "Her anahtar kelime en az $MINIMUM$ karakter içermelidir.",
+    "placeholders": { "minimum": { "content": "$1" } }
+  },
+  "keywordTooLong": {
+    "message": "Bir anahtar kelime $MAXIMUM$ karakteri aşamaz.",
+    "placeholders": { "maximum": { "content": "$1" } }
+  },
+  "deletionFailures": {
+    "message": "$COUNT$ URL silinemedi.",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+  "operationBusy": { "message": "Başka bir geçmiş işlemi zaten çalışıyor." },
+  "previewRequired": { "message": "Geçmiş değişti veya önizleme süresi doldu. Silmeden önce yeniden önizleyin." },
+  "unknownAction": { "message": "İstenen eklenti işlemi bilinmiyor." },
+  "unexpectedError": { "message": "Beklenmeyen bir eklenti hatası oluştu." },
+  "operationCancelled": { "message": "İşlem güvenli biçimde iptal edildi." },
+  "backgroundRestarted": { "message": "Firefox arka plan sürecini yeniden başlattı. İşlemi yeniden çalıştırın." },
+  "historyRangeSaturated": { "message": "Firefox bir zaman aralığı için çok fazla sonuç döndürdü. Eksik sonuçtan hiçbir şey silinmedi." },
+  "phaseCancelled": { "message": "İşlem iptal edildi" },
   "phaseStarting": {
     "message": "Geçmiş işlemi hazırlanıyor"
   },

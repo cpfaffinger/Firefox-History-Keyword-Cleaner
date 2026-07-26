@@ -1,17 +1,21 @@
 # AMO screenshots
 
-These screenshots are prepared for the Firefox Add-ons product page at
-1280 × 800 pixels (1.6:1).
+These JPEG files are captures of the real add-on UI running through
+`tests/ui/preview.html`. The harness supplies deterministic sample data, so no
+real history URL or keyword is exposed.
 
-Recommended upload order and captions:
+Recommended order and captions:
 
-1. `01-automatic-cleaning.png` — “Private, automatic history cleanup with
-   flexible URL and page-title rules.”
-2. `02-preview-matches.png` — “Preview matching history entries before
-   deleting anything.”
-3. `03-wipe-confirmation.png` — “Run a manual cleanup with an explicit safety
-   confirmation.”
+1. `01-automatic-cleaning.jpg` (1265 × 791) — “Configure private automatic
+   cleanup, matching scopes, and protected exceptions.”
+2. `02-preview-matches.jpg` (1265 × 791) — “Preview matching history URLs
+   without deleting anything.”
+3. `03-wipe-confirmation.jpg` (1265 × 791) — “Review the exact match count and
+   risk before permanent deletion.”
+4. `04-popup-mobile.jpg` (390 × 720) — “Quickly add a local rule or start a
+   preview-first wipe from the compact popup.”
 
-The images mirror the real options UI and use deterministic sample data rather
-than exposing real browser-history entries. Run `pnpm screenshots:amo` to
-regenerate the editable SVG sources. The PNG files are the AMO upload assets.
+Run `pnpm screenshots:amo` to validate the required JPEG files and dimensions.
+To refresh an image, serve the repository locally, open
+`tests/ui/preview.html?surface=options` or `?surface=popup`, select the target
+viewport, and capture the rendered page.

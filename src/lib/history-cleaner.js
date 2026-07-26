@@ -1,4 +1,4 @@
-import { collectMatches } from "./rules.js";
+import { collectMatches, compileRules } from "./rules.js";
 
 const DEFAULT_BATCH_SIZE = 2000;
 const FALLBACK_BATCH_SIZE = 1_000_000;
@@ -7,6 +7,14 @@ const DEFAULT_MATCH_CHUNK_SIZE = 500;
 
 async function yieldToEventLoop() {
   await new Promise((resolve) => setTimeout(resolve, 0));
+}
+
+async function throwIfCancelled(options) {
+  if (await options.shouldCancel?.()) {
+    const error = new Error("Operation cancelled.");
+    error.code = "operationCancelled";
+    throw error;
+  }
 }
 
 export async function queryAllHistory(historyApi, options = {}) {
@@ -18,6 +26,7 @@ export async function queryAllHistory(historyApi, options = {}) {
   const itemsByUrl = new Map();
 
   async function queryRange(rangeStart, rangeEnd, depth = 0) {
+    await throwIfCancelled(options);
     const query = {
       text: "",
       startTime: rangeStart,
@@ -34,6 +43,11 @@ export async function queryAllHistory(historyApi, options = {}) {
         ...query,
         maxResults: FALLBACK_BATCH_SIZE
       });
+      if (items.length >= FALLBACK_BATCH_SIZE) {
+        const error = new Error("History range contains too many results.");
+        error.code = "historyRangeSaturated";
+        throw error;
+      }
     } else if (items.length >= batchSize && depth < 64) {
       const midpoint = Math.floor((rangeStart + rangeEnd) / 2);
       if (midpoint > rangeStart && midpoint < rangeEnd) {
@@ -60,6 +74,7 @@ export async function queryAllHistory(historyApi, options = {}) {
       phase: "scanning",
       checked: itemsByUrl.size
     });
+    await throwIfCancelled(options);
     await yieldToEventLoop();
   }
 
@@ -90,14 +105,17 @@ async function collectMatchesCooperatively(
   settings,
   {
     chunkSize = DEFAULT_MATCH_CHUNK_SIZE,
-    onProgress
+    onProgress,
+    shouldCancel
   } = {}
 ) {
   const matches = [];
+  const compiled = settings?.needles ? settings : compileRules(settings);
 
   for (let index = 0; index < items.length; index += chunkSize) {
+    await throwIfCancelled({ shouldCancel });
     const chunk = items.slice(index, index + chunkSize);
-    matches.push(...collectMatches(chunk, settings));
+    matches.push(...collectMatches(chunk, compiled));
     await onProgress?.({
       phase: "matching",
       checked: Math.min(index + chunk.length, items.length),
@@ -115,7 +133,8 @@ export async function deleteMatches(
   matches,
   {
     concurrency = DEFAULT_DELETE_CONCURRENCY,
-    onProgress
+    onProgress,
+    shouldCancel
   } = {}
 ) {
   const failures = [];
@@ -123,7 +142,14 @@ export async function deleteMatches(
   let processed = 0;
 
   await runWithConcurrency(matches, concurrency, async ({ item }) => {
+    await throwIfCancelled({ shouldCancel });
     try {
+      if (typeof historyApi.getVisits === "function") {
+        const visits = await historyApi.getVisits({ url: item.url });
+        if (visits.length === 0) {
+          return;
+        }
+      }
       await historyApi.deleteUrl({ url: item.url });
       deleted += 1;
     } catch (error) {

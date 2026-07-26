@@ -153,6 +153,44 @@ body {
   line-height: 1.55;
 }
 
+.exceptions-area {
+  display: block;
+  min-height: 90px;
+  padding: 12px 14px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.secondary-field-label {
+  margin-top: 16px;
+}
+
+.field-help {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.select-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.select-grid label > span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.select-grid select {
+  min-height: 40px;
+  padding: 8px 10px;
+}
+
 .match-options {
   display: flex;
   flex-wrap: wrap;
@@ -322,6 +360,10 @@ body {
   }
 
   .check-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .select-grid {
     grid-template-columns: 1fr;
   }
 

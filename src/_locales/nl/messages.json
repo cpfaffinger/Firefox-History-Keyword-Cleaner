@@ -107,12 +107,6 @@
   "cleanOnStartupDescription": {
     "message": "Verwerkt bezoeken die zijn gemist terwijl de add-on inactief was."
   },
-  "cleanOnChange": {
-    "message": "Opschonen na opslaan"
-  },
-  "cleanOnChangeDescription": {
-    "message": "Past nieuwe regels toe op de volledige bestaande geschiedenis."
-  },
   "sectionRules": {
     "message": "Regels"
   },
@@ -216,6 +210,54 @@
   "invalidImport": {
     "message": "Dit bestand bevat geen geldige JSON."
   },
+  "importTooLarge": { "message": "Het importbestand is groter dan 1 MB." },
+  "exceptionsLabel": { "message": "Uitzonderingen" },
+  "exceptionsPlaceholder": { "message": "vertrouwd.example.com\n/behouden/" },
+  "exceptionsDescription": { "message": "Een item met een uitzondering wordt nooit verwijderd." },
+  "matchModeLabel": { "message": "Overeenkomstmodus" },
+  "matchModeContains": { "message": "Bevat" },
+  "matchModeWord": { "message": "Heel woord" },
+  "matchModeExact": { "message": "Exacte waarde" },
+  "urlScopeLabel": { "message": "URL-bereik" },
+  "urlScopeAny": { "message": "Volledige URL" },
+  "urlScopeDomain": { "message": "Alleen domein" },
+  "urlScopePath": { "message": "Alleen pad en query" },
+  "cancelOperation": { "message": "Bewerking annuleren" },
+  "broadRuleDialogTitle": { "message": "Brede regels opslaan?" },
+  "broadRuleDialogDescription": { "message": "Brede trefwoorden kunnen automatisch veel toekomstige geschiedenisitems verwijderen." },
+  "saveBroadRules": { "message": "Brede regels opslaan" },
+  "savedWithoutCleanup": { "message": "Regels opgeslagen. Bestaande geschiedenis is niet gewijzigd." },
+  "saveCancelled": { "message": "Opslaan is geannuleerd." },
+  "previewBeforeWipe": { "message": "Overeenkomsten controleren vóór verwijdering…" },
+  "noMatchesToDelete": { "message": "Geen overeenkomende geschiedenisitems gevonden." },
+  "wipePreviewSummary": {
+    "message": "$MATCHED$ van $CHECKED$ geschiedenis-URL’s worden met alle bezoeken verwijderd.",
+    "placeholders": { "matched": { "content": "$1" }, "checked": { "content": "$2" } }
+  },
+  "wipeRiskHigh": { "message": "Hoog risico: deze regel is zeer breed of komt overeen met minstens de helft van je geschiedenis." },
+  "wipeRiskMedium": { "message": "Let op: deze regel komt overeen met een aanzienlijk deel van je geschiedenis." },
+  "wipeCancelled": { "message": "Verwijderen is geannuleerd. Er is niets verwijderd." },
+  "cancellingOperation": { "message": "Annuleren na het huidige browserverzoek…" },
+  "keywordTooShort": {
+    "message": "Elk trefwoord moet minstens $MINIMUM$ tekens bevatten.",
+    "placeholders": { "minimum": { "content": "$1" } }
+  },
+  "keywordTooLong": {
+    "message": "Een trefwoord mag niet langer zijn dan $MAXIMUM$ tekens.",
+    "placeholders": { "maximum": { "content": "$1" } }
+  },
+  "deletionFailures": {
+    "message": "$COUNT$ URL(’s) konden niet worden verwijderd.",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+  "operationBusy": { "message": "Er wordt al een andere geschiedenisbewerking uitgevoerd." },
+  "previewRequired": { "message": "De geschiedenis is gewijzigd of het voorbeeld is verlopen. Controleer opnieuw vóór het verwijderen." },
+  "unknownAction": { "message": "De gevraagde add-onactie is onbekend." },
+  "unexpectedError": { "message": "Er is een onverwachte add-onfout opgetreden." },
+  "operationCancelled": { "message": "De bewerking is veilig geannuleerd." },
+  "backgroundRestarted": { "message": "Firefox heeft het achtergrondproces opnieuw gestart. Voer de bewerking opnieuw uit." },
+  "historyRangeSaturated": { "message": "Firefox gaf te veel resultaten voor één periode. Er is niets uit het onvolledige resultaat verwijderd." },
+  "phaseCancelled": { "message": "Bewerking geannuleerd" },
   "phaseStarting": {
     "message": "Geschiedenisbewerking voorbereiden"
   },

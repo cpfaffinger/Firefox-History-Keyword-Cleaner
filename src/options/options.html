@@ -6,7 +6,7 @@
     <title>History Keyword Cleaner</title>
     <link rel="stylesheet" href="../ui/base.css">
     <link rel="stylesheet" href="options.css">
-    <script type="module" src="options.js"></script>
+    <script type="module" src="options-entry.js"></script>
   </head>
   <body>
     <main class="page-shell">
@@ -49,13 +49,6 @@
                   <small data-i18n="cleanOnStartupDescription">Catches visits missed while the add-on was inactive.</small>
                 </span>
               </label>
-              <label class="check-row">
-                <input id="clean-on-change" type="checkbox">
-                <span>
-                  <strong data-i18n="cleanOnChange">Clean after saving keywords</strong>
-                  <small data-i18n="cleanOnChangeDescription">Applies new rules to the complete existing history.</small>
-                </span>
-              </label>
             </div>
           </article>
 
@@ -79,11 +72,39 @@
               data-i18n-placeholder="keywordsPlaceholder"
               placeholder="example.com&#10;confidential project&#10;/private/"
             ></textarea>
+            <label class="field-label secondary-field-label" for="exceptions" data-i18n="exceptionsLabel">Exceptions</label>
+            <textarea
+              id="exceptions"
+              class="field exceptions-area"
+              maxlength="128500"
+              spellcheck="false"
+              data-i18n-placeholder="exceptionsPlaceholder"
+              placeholder="trusted.example.com&#10;/keep/"
+            ></textarea>
+            <p class="field-help" data-i18n="exceptionsDescription">Matching entries containing an exception are never deleted.</p>
             <div class="match-options">
               <span data-i18n="matchIn">Match in:</span>
               <label><input id="match-url" type="checkbox"> <span data-i18n="urlsLabel">URLs</span></label>
               <label><input id="match-title" type="checkbox"> <span data-i18n="titlesLabel">Page titles</span></label>
               <label><input id="case-sensitive" type="checkbox"> <span data-i18n="caseSensitive">Case-sensitive</span></label>
+            </div>
+            <div class="select-grid">
+              <label>
+                <span data-i18n="matchModeLabel">Match mode</span>
+                <select id="match-mode" class="field">
+                  <option value="contains" data-i18n="matchModeContains">Contains</option>
+                  <option value="word" data-i18n="matchModeWord">Whole word</option>
+                  <option value="exact" data-i18n="matchModeExact">Exact value</option>
+                </select>
+              </label>
+              <label>
+                <span data-i18n="urlScopeLabel">URL scope</span>
+                <select id="url-scope" class="field">
+                  <option value="any" data-i18n="urlScopeAny">Complete URL</option>
+                  <option value="domain" data-i18n="urlScopeDomain">Domain only</option>
+                  <option value="path" data-i18n="urlScopePath">Path and query only</option>
+                </select>
+              </label>
             </div>
             <div class="button-row">
               <button id="save" class="button" type="button" data-operation-control data-i18n="saveButton">Save rules</button>
@@ -124,6 +145,7 @@
               </div>
               <p id="operation-detail" class="operation-detail"></p>
               <progress id="operation-progress"></progress>
+              <button id="cancel-operation" class="text-button" type="button" hidden data-i18n="cancelOperation">Cancel operation</button>
             </section>
             <dl class="stats">
               <div>
@@ -152,9 +174,22 @@
         <p data-i18n="wipeDialogDescription">
           Every existing entry matching your current keywords will be permanently deleted.
         </p>
+        <p id="wipe-preview-summary" class="dialog-summary"></p>
+        <p id="wipe-risk-warning" class="dialog-risk" hidden></p>
         <div class="dialog-actions">
           <button id="wipe-cancel" class="button secondary" type="button" data-i18n="cancelButton">Cancel</button>
           <button id="wipe-confirm" class="button danger" type="button" data-i18n="wipeConfirmButton">Wipe now</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="rule-dialog" class="confirm-dialog" aria-labelledby="rule-dialog-title">
+      <div class="dialog-content">
+        <h2 id="rule-dialog-title" data-i18n="broadRuleDialogTitle">Save broad rules?</h2>
+        <p data-i18n="broadRuleDialogDescription">Broad keywords can automatically remove many future history entries.</p>
+        <div class="dialog-actions">
+          <button id="rule-cancel" class="button secondary" type="button" data-i18n="cancelButton">Cancel</button>
+          <button id="rule-confirm" class="button danger" type="button" data-i18n="saveBroadRules">Save broad rules</button>
         </div>
       </div>
     </dialog>

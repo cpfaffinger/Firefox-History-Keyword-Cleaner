@@ -1,0 +1,79 @@
+name: Submit a tagged release to AMO
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing version tag to submit, for example v0.2.0
+        required: true
+        type: string
+
+concurrency:
+  group: amo-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    name: Verify and submit to AMO
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: amo-production
+
+    steps:
+      - name: Validate release tag
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          [[ "${RELEASE_TAG}" =~ ^v(0|[1-9][0-9]{0,8})(\.(0|[1-9][0-9]{0,8})){2}$ ]]
+
+      - name: Check out the tagged source
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.tag }}
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11.7.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Apply tagged package version
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: node tools/set-build-version.mjs --version "${RELEASE_TAG#v}"
+
+      - name: Verify source and package
+        run: pnpm verify
+
+      - name: Submit listed version to AMO
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: >-
+          pnpm exec web-ext sign
+          --source-dir src
+          --artifacts-dir artifacts
+          --channel listed
+          --amo-metadata amo/metadata.json
+
+      - name: Preserve signed artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: History-Keyword-Cleaner-signed-${{ inputs.tag }}
+          path: artifacts/*.xpi
+          if-no-files-found: warn
+          retention-days: 90
+          compression-level: 0

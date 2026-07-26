@@ -8,15 +8,18 @@ const [template, messages] = await Promise.all([
 ]);
 
 const listeners = [];
+const demoMatches = 642;
 const previewState = {
   settings: {
     enabled: true,
     keywords: ["example.com", "private project", "/sensitive/"],
+    exceptions: ["trusted.example.com"],
     matchUrl: true,
     matchTitle: true,
     caseSensitive: false,
-    cleanOnStartup: true,
-    cleanExistingOnChange: true
+    matchMode: "contains",
+    urlScope: "any",
+    cleanOnStartup: false
   },
   stats: {
     lastRunAt: new Date().toISOString(),
@@ -81,7 +84,7 @@ async function simulateOperation(type) {
     phase: "matching",
     checked: 842,
     total: 1240,
-    matched: 11
+    matched: demoMatches
   });
   await delay(300);
 
@@ -89,8 +92,8 @@ async function simulateOperation(type) {
     await emitOperation({
       phase: "deleting",
       checked: 7,
-      total: 11,
-      matched: 11,
+      total: demoMatches,
+      matched: demoMatches,
       deleted: 7
     });
     await delay(300);
@@ -98,9 +101,15 @@ async function simulateOperation(type) {
 
   const result = {
     checked: 1240,
-    matched: 11,
-    deleted: type === "preview" ? 0 : 11,
+    matched: demoMatches,
+    deleted: type === "preview" ? 0 : demoMatches,
     failures: [],
+    risk: {
+      level: "high",
+      ratio: demoMatches / 1240,
+      reasons: [{ code: "highMatchRatio", ratio: demoMatches / 1240 }]
+    },
+    previewId: previewState.operation.id,
     samples:
       type === "preview"
         ? [
@@ -141,26 +150,32 @@ globalThis.browser = {
     },
     async sendMessage(message) {
       if (message.action === "get-state") {
-        return structuredClone(previewState);
+        return { ok: true, value: structuredClone(previewState) };
       }
       if (message.action === "save-settings") {
         previewState.settings = structuredClone(message.settings);
-        const cleanup = message.runCleanup === false
-          ? null
-          : await simulateOperation("cleanup");
-        return { settings: previewState.settings, cleanup };
+        return {
+          ok: true,
+          value: { settings: previewState.settings }
+        };
       }
       if (message.action === "preview") {
-        return simulateOperation("preview");
+        return { ok: true, value: await simulateOperation("preview") };
       }
       if (message.action === "clean-now") {
         const result = await simulateOperation("wipe");
         previewState.stats.lastDeleted = result.deleted;
         previewState.stats.totalDeleted += result.deleted;
         previewState.stats.lastRunAt = new Date().toISOString();
-        return result;
+        return { ok: true, value: result };
       }
-      return undefined;
+      if (message.action === "cancel-operation") {
+        return { ok: true, value: { cancelled: true } };
+      }
+      return {
+        ok: false,
+        error: { code: "unknownAction", args: [] }
+      };
     }
   }
 };
@@ -173,8 +188,8 @@ const transformedTemplate = template
     `href="/src/${surface}/${surface}.css"`
   )
   .replace(
-    `src="${surface}.js"`,
-    `src="/src/${surface}/${surface}.js"`
+    `src="${surface}-entry.js"`,
+    `src="/src/${surface}/${surface}-entry.js"`
   );
 
 document.open();

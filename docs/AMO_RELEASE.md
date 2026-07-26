@@ -2,76 +2,87 @@
 
 Last updated: July 26, 2026.
 
-## Completed requirements
+## Permanent identity
 
-- Manifest V3 with the permanent ID expected by the existing AMO listing:
-  `history-keyword-cleaner@local.addons`
-- `strict_min_version` 140 for desktop and 142 for Android
-- required `data_collection_permissions.required: ["none"]` declaration
-- only necessary permissions: `history` and `storage`
-- no host permissions, remote scripts, telemetry, or obfuscation
-- readable original source code that directly matches the package contents
-- complete EN, DE, FR, IT, NL, and TR localization
-- unit, manifest, and static security tests
-- `web-ext lint --warnings-as-errors`
-- reproducible build with a pinned `web-ext` version
-- reviewer instructions and AMO listing copy
-- three AMO screenshots in the recommended 1280 × 800 format
-- privacy and security documentation
+The existing AMO listing owns the ID
+`history-keyword-cleaner@local.addons`. It must never change. The user-facing
+brand remains **History Keyword Cleaner**; the immutable internal ID does not
+need to match the listing slug or product name.
 
-## Before the next public update
+## Release safeguards
 
-The permanent add-on ID is `history-keyword-cleaner@local.addons`. Despite its
-former development-oriented name, the ID must never be changed: the first AMO
-upload registered it as the listing's permanent identity. Every update to the
-existing listing must use the same ID.
+- Manifest V3 and readable, unminified shipping source.
+- Firefox Desktop 140+ and Firefox for Android 142+.
+- Only `history` and `storage` permissions.
+- `data_collection_permissions.required: ["none"]`.
+- No host permissions, remote code, telemetry, or network request.
+- EN, DE, FR, IT, NL, and TR localization.
+- 100% line coverage over shipped JavaScript.
+- `web-ext` and `addons-linter` warnings treated as errors.
+- The exact release ZIP is linted after packaging.
+- Four screenshots captured from the real UI.
+- Privacy policy, security reporting, reviewer notes, and manual test plan.
 
-1. Add a responsible support and security address to the documentation and AMO
-   metadata.
-2. Upload the prepared files from `amo/screenshots/` to the AMO listing.
-3. Complete all tests in `docs/MANUAL_TESTS.md` with a fresh Firefox profile.
-4. For a versioned tag, update the version in `package.json`,
-   `src/manifest.json`, and `CHANGELOG.md` together. Regular `main` builds
-   receive a monotonically increasing CI version automatically.
-5. Run `pnpm install --frozen-lockfile && pnpm verify`.
-6. Inspect the contents of `artifacts/*.zip`.
+Mozilla does not require a particular coverage percentage. The project uses a
+100% line gate as its own regression safeguard.
 
-## Submission
+## One-time GitHub configuration
 
-Create API credentials in the AMO Developer Hub and provide them only through
-environment variables:
+1. Create AMO API credentials in the AMO Developer Hub.
+2. Add repository environment `amo-production`.
+3. Add environment secrets `AMO_JWT_ISSUER` and `AMO_JWT_SECRET`.
+4. Configure required reviewers on `amo-production` so submission always needs
+   explicit human approval.
+5. Keep the credentials out of files, logs, issues, and pull requests.
+
+The normal `main` workflow never receives AMO credentials and never uploads to
+AMO.
+
+## Create a public version
+
+1. Complete [MANUAL_TESTS.md](MANUAL_TESTS.md) using disposable history.
+2. Update `CHANGELOG.md`.
+3. Choose a numeric three-part version, for example `0.2.0`.
+4. Run `pnpm install --frozen-lockfile` and `pnpm verify`.
+5. Tag the reviewed commit and push the tag:
+
+   ```sh
+   git tag v0.2.0
+   git push origin v0.2.0
+   ```
+
+The CI workflow derives both `package.json` and manifest versions from the tag,
+builds the package, validates it, and creates the GitHub release.
+
+## Submit to AMO
+
+1. Open GitHub Actions.
+2. Run **Submit a tagged release to AMO**.
+3. Enter the existing tag, such as `v0.2.0`.
+4. Review and approve the protected `amo-production` environment.
+5. Retain the signed XPI artifact if AMO makes it immediately available;
+   otherwise download it from AMO after review.
+6. Monitor the AMO Developer Hub until automated and human review are complete.
+
+The manual workflow checks out the exact tag, reapplies its version, runs the
+full verification chain, then calls `web-ext sign --channel listed`.
+
+For an emergency manual submission, run:
 
 ```sh
-web-ext sign \
+WEB_EXT_API_KEY="$AMO_JWT_ISSUER" \
+WEB_EXT_API_SECRET="$AMO_JWT_SECRET" \
+pnpm exec web-ext sign \
   --source-dir src \
+  --artifacts-dir artifacts \
   --channel listed \
-  --amo-metadata amo/metadata.json \
-  --api-key "$AMO_JWT_ISSUER" \
-  --api-secret "$AMO_JWT_SECRET"
+  --amo-metadata amo/metadata.json
 ```
-
-Alternatively, upload the ZIP produced by `pnpm build` through the AMO
-Developer Hub. Never commit secrets to files or Git.
-
-## What Mozilla requires
-
-Mozilla does not prescribe a minimum unit-test coverage percentage. It requires
-functional and reviewable code, basic functional testability, reviewer test
-instructions, only necessary permissions, no remote code, and a correct data
-collection declaration. A privacy policy is mandatory when data is
-transmitted; this add-on transmits nothing but still provides a transparent
-policy.
-
-If the project introduced minification, transpilation, or other generated code,
-the human-readable source and reproducible build instructions would also need
-to be submitted. The current package does not require a separate source-code
-submission because `src/` is already the unchanged shipping source.
 
 ## Relevant Mozilla resources
 
 - [Add-on Policies](https://extensionworkshop.com/documentation/publish/add-on-policies/)
 - [Submitting an add-on](https://extensionworkshop.com/documentation/publish/submitting-an-add-on/)
-- [Getting started with web-ext](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/)
 - [web-ext command reference](https://extensionworkshop.com/documentation/develop/web-ext-command-reference/)
 - [Built-in data consent](https://extensionworkshop.com/documentation/develop/firefox-builtin-data-consent/)
-- [Manifest `browser_specific_settings`](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings)
+- [Manifest browser-specific settings](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings)

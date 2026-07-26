@@ -1,0 +1,66 @@
+name: Firefox compatibility
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 5 * * 1"
+
+concurrency:
+  group: firefox-compatibility-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: Firefox ${{ matrix.firefox }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        firefox:
+          - "140.0"
+          - latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11.7.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install Firefox
+        uses: browser-actions/setup-firefox@v1
+        with:
+          firefox-version: ${{ matrix.firefox }}
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify add-on
+        run: pnpm verify
+
+      - name: Load the extension in headless Firefox
+        shell: bash
+        run: |
+          set +e
+          timeout 20s pnpm exec web-ext run \
+            --source-dir src \
+            --firefox "$(command -v firefox)" \
+            --headless \
+            --no-reload
+          STATUS=$?
+          set -e
+          if [[ "${STATUS}" -ne 0 && "${STATUS}" -ne 124 ]]; then
+            exit "${STATUS}"
+          fi

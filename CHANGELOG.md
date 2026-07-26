@@ -2,11 +2,16 @@
 
 ## Unreleased
 
-- restored the permanent ID registered by the existing AMO listing
-- packaged MIT-licensed eraser icon registered for all Firefox icon surfaces
-- English README with direct Firefox Add-ons product link
-- monotonically increasing CI binary versions for every `main` commit or merge
-- 100% line coverage with a mandatory CI coverage threshold
+- added safe exception rules, match modes, and URL scopes
+- made startup cleanup opt-in and removed implicit cleanup after saves/imports
+- added preview-bound wipe confirmation with match counts and risk warnings
+- serialized background mutations with cooperative cancellation and recovery
+- added localized structured errors and visible asynchronous progress
+- prevented incomplete million-result history scans from deleting partial data
+- expanded unit and UI tests to 100% line coverage over all shipped JavaScript
+- added real desktop and mobile AMO screenshots
+- added protected, manual tagged AMO submission and weekly Firefox smoke tests
+- made tag versions authoritative while retaining automatic `main` build bumps
 
 ## 0.1.1 - 2026-07-26
 

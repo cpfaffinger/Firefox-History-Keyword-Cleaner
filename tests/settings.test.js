@@ -10,6 +10,7 @@ import {
   normalizeKeywords,
   normalizeSettings,
   normalizeStats,
+  validateSettings,
   saveSettings,
   saveStats
 } from "../src/lib/settings.js";
@@ -23,6 +24,13 @@ test("normalizeKeywords trims, normalizes, removes blanks and deduplicates", () 
   assert.deepEqual(
     normalizeKeywords(["  Example  ", "", "example", "ＡＢＣ", "ABC"]),
     ["Example", "ABC"]
+  );
+
+  assert.equal(
+    validateSettings({
+      keywords: Array.from({ length: MAX_KEYWORDS + 1 }, (_, index) => `key-${index}`)
+    }).errors[0].code,
+    "tooManyKeywords"
   );
 });
 
@@ -53,33 +61,55 @@ test("normalizeSettings applies safe defaults and validates primitive types", ()
   assert.deepEqual(normalizeSettings({ keywords: "not-an-array" }), {
     enabled: true,
     keywords: [],
+    exceptions: [],
     matchUrl: true,
     matchTitle: true,
     caseSensitive: false,
-    cleanOnStartup: true,
-    cleanExistingOnChange: true
+    matchMode: "contains",
+    urlScope: "any",
+    cleanOnStartup: false
   });
 
   assert.deepEqual(
     normalizeSettings({
       enabled: false,
       keywords: ["secret"],
+      exceptions: ["safe"],
       matchUrl: false,
       matchTitle: false,
       caseSensitive: true,
+      matchMode: "word",
+      urlScope: "domain",
       cleanOnStartup: false,
-      cleanExistingOnChange: false
     }),
     {
       enabled: false,
       keywords: ["secret"],
+      exceptions: ["safe"],
       matchUrl: false,
       matchTitle: false,
       caseSensitive: true,
-      cleanOnStartup: false,
-      cleanExistingOnChange: false
+      matchMode: "word",
+      urlScope: "domain",
+      cleanOnStartup: false
     }
   );
+});
+
+test("validateSettings reports destructive-input limits without silent truncation", () => {
+  assert.deepEqual(validateSettings({
+    keywords: ["x"],
+    matchUrl: false,
+    matchTitle: false
+  }).errors, [
+    { code: "matchFieldRequired" },
+    { code: "keywordTooShort", args: ["2"] }
+  ]);
+
+  const overlong = "x".repeat(MAX_KEYWORD_LENGTH + 1);
+  assert.deepEqual(validateSettings({ keywords: [overlong] }).errors, [
+    { code: "keywordTooLong", args: [String(MAX_KEYWORD_LENGTH)] }
+  ]);
 });
 
 test("normalizeStats discards invalid persisted values", () => {
@@ -116,11 +146,13 @@ test("settings and stats storage helpers normalize round trips", async () => {
   const settings = await saveSettings(storageArea, {
     enabled: false,
     keywords: ["  Secret  "],
+    exceptions: [],
     matchUrl: true,
     matchTitle: false,
     caseSensitive: true,
+    matchMode: "contains",
+    urlScope: "any",
     cleanOnStartup: false,
-    cleanExistingOnChange: true
   });
   assert.deepEqual(await loadSettings(storageArea), settings);
 

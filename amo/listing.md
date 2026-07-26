@@ -2,29 +2,31 @@
 
 ## Short summary
 
-Automatically remove Firefox history entries matching your private local
-keywords.
+Safe, local history rules for Firefox with preview-first deletion.
 
 ## Description
 
-History Keyword Cleaner watches the history that Firefox records and removes
-entries whose URL or page title contains one of your keywords.
+History Keyword Cleaner removes Firefox history URLs when their URL or page
+title matches one of your private, locally stored rules.
 
-Use it for domains, URL fragments, project names, or any other literal text you
-do not want retained in browser history. Matching is case-insensitive by
-default and can be limited to URLs or page titles.
+Choose substring, whole-word, or exact matching. Restrict URL rules to domains
+or paths, add exceptions, and decide whether matching is case-sensitive.
 
-Features:
+Safety is built into existing-history cleanup:
 
-- automatic cleanup as pages are visited;
-- optional full cleanup at Firefox startup;
-- safe preview before deleting existing history;
-- settings import and export;
-- English, German, French, Italian, Dutch, and Turkish interface;
-- no telemetry, accounts, ads, or network requests.
+- saving and importing rules never deletes existing history;
+- Wipe now always previews first;
+- match counts and risk are shown before confirmation;
+- broad rules require an extra warning;
+- running work reports progress and can be cancelled.
 
-All matching happens locally in Firefox. Your keywords and browsing history
-never leave the browser.
+Automatic cleaning handles new visits and title updates. Optional startup
+cleanup is off by default.
+
+The interface is available in English, German, French, Italian, Dutch, and
+Turkish. There is no telemetry, account, advertisement, host permission,
+content script, or network request. Keywords and browsing activity never leave
+Firefox.
 
 ## Search tags
 

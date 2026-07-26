@@ -46,6 +46,11 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: node tools/set-build-version.mjs --run-number "${GITHUB_RUN_NUMBER}"
 
+      - name: Apply and validate version tag
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        run: node tools/set-build-version.mjs --version "${GITHUB_REF_NAME#v}"
+
       - name: Run unit tests with coverage
         run: pnpm test:coverage
 
@@ -114,7 +119,7 @@ jobs:
             echo "version_tag=true" >> "${GITHUB_OUTPUT}"
           else
             echo "tag=main-${SHORT_SHA}" >> "${GITHUB_OUTPUT}"
-            echo "title=History Keyword Cleaner main ${SHORT_SHA}" >> "${GITHUB_OUTPUT}"
+            echo "title=History Keyword Cleaner development build ${SHORT_SHA}" >> "${GITHUB_OUTPUT}"
             echo "version_tag=false" >> "${GITHUB_OUTPUT}"
           fi
 

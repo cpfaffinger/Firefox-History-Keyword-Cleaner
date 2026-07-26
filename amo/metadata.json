@@ -1,6 +1,6 @@
 {
   "summary": {
-    "en-US": "Automatically remove Firefox history entries matching your private local keywords.",
+    "en-US": "Safe, local history rules for Firefox with preview-first deletion.",
     "de": "Entfernt automatisch Firefox-Chronikeinträge anhand deiner lokal gespeicherten Keywords.",
     "fr": "Supprime automatiquement l’historique Firefox selon vos mots-clés privés stockés localement.",
     "it": "Rimuove automaticamente la cronologia di Firefox in base alle parole chiave private salvate localmente.",
@@ -13,6 +13,6 @@
   "requires_payment": false,
   "version": {
     "license": "MIT",
-    "approval_notes": "No account or test credentials are required. Load the extension, open its settings page, add the keyword 'history-cleaner-test', then visit https://example.com/history-cleaner-test. The matching history entry is deleted immediately. Preview and manual cleanup can be tested from the settings page. The extension makes no network requests. Packaged files are the original readable source; there is no transpilation or minification. See amo/reviewer-notes.md in the source repository for the complete test procedure."
+    "approval_notes": "No account or test credentials are required. In a fresh profile, add and save 'history-cleaner-test', then visit https://example.com/history-cleaner-test and confirm its history URL is removed. Saving or importing rules never deletes existing history. Wipe now always runs a preview, shows the match count and risk, and requires explicit confirmation. The extension makes no network requests. Packaged files are readable source with no transpilation or minification. See amo/reviewer-notes.md for the complete procedure."
   }
 }

@@ -2,6 +2,16 @@ export function message(key, substitutions) {
   return browser.i18n.getMessage(key, substitutions) || key;
 }
 
+export function problemMessage(problem) {
+  if (!problem) {
+    return message("unexpectedError");
+  }
+  if (problem.code === "rawError") {
+    return problem.args?.[0] || message("unexpectedError");
+  }
+  return message(problem.code, problem.args);
+}
+
 export function localizeDocument(root = document) {
   const uiLanguage = browser.i18n.getUILanguage?.();
   if (uiLanguage && root.documentElement) {

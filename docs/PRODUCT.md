@@ -2,30 +2,31 @@
 
 ## Positioning
 
-The core promise is simple: selected history entries disappear automatically
-without browsing activity ever leaving the device. This trust is the product's
-most important value and should not be traded for short-term monetization.
+History Keyword Cleaner is a free, privacy-first utility for safe, local
+history rules in Firefox. Its differentiators are explicit deletion safety,
+clear scope controls, responsive progress, and zero network dependency.
 
-## Potential future enhancements
+## Product principles
 
-- optional per-keyword rules for domains, paths, or titles
-- time-limited rules
-- local rule groups and profiles
-- local rule revision history, but never a backup of visited URLs
-- Chrome and Edge ports using the same local-first privacy architecture
+- Local-only behavior is a permanent trust boundary.
+- Saving a rule must never imply deletion of existing history.
+- Destructive work requires a fresh preview and explicit confirmation.
+- Errors, cancellation, and background restarts must be visible.
+- Advanced matching must remain understandable without regular expressions.
+- Accessibility and desktop/mobile layouts are release requirements.
 
-## Monetization options
+## Possible future enhancements
 
-The product remains completely free for now. If monetization is introduced
-later, the following models would remain compatible with the privacy promise:
+- time-limited rules;
+- local rule groups and profiles;
+- local revision history for rules, never visited URLs;
+- optional managed enterprise policies;
+- Chrome and Edge ports with the same local-first architecture.
 
-1. voluntary donations through a clearly labeled link in the add-on UI;
-2. a one-time purchase for additional local-only convenience features;
-3. a professional edition for managed enterprise policies, support, and
-   configuration distribution.
+## Monetization
 
-Advertising on websites, affiliate URL manipulation, the sale of browsing
-data, and browsing-history analytics are explicitly out of scope. If paid
-features are introduced, the AMO listing must clearly identify which features
-require payment. Any future network or payment integration requires a new
-privacy and consent review.
+The product remains free and has no current monetization path. A future
+voluntary donation link outside the core workflow could be considered, but it
+must not add tracking, affiliate behavior, advertisements, or browsing-data
+analytics. Any payment or network integration requires a separate privacy,
+permission, consent, and AMO policy review before implementation.

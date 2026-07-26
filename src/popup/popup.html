@@ -6,7 +6,7 @@
     <title>History Keyword Cleaner</title>
     <link rel="stylesheet" href="../ui/base.css">
     <link rel="stylesheet" href="popup.css">
-    <script type="module" src="popup.js"></script>
+    <script type="module" src="popup-entry.js"></script>
   </head>
   <body>
     <main class="popup-shell">
@@ -56,6 +56,7 @@
         </div>
         <p id="operation-detail" class="operation-detail"></p>
         <progress id="operation-progress"></progress>
+        <button id="cancel-operation" class="text-button" type="button" hidden data-i18n="cancelOperation">Cancel operation</button>
       </section>
 
       <section class="actions">
@@ -78,9 +79,22 @@
         <p data-i18n="wipeDialogDescription">
           Every existing entry matching your current keywords will be permanently deleted.
         </p>
+        <p id="wipe-preview-summary" class="dialog-summary"></p>
+        <p id="wipe-risk-warning" class="dialog-risk" hidden></p>
         <div class="dialog-actions">
           <button id="wipe-cancel" class="button secondary" type="button" data-i18n="cancelButton">Cancel</button>
           <button id="wipe-confirm" class="button danger" type="button" data-i18n="wipeConfirmButton">Wipe now</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="rule-dialog" class="confirm-dialog" aria-labelledby="rule-dialog-title">
+      <div class="dialog-content">
+        <h2 id="rule-dialog-title" data-i18n="broadRuleDialogTitle">Save broad keyword?</h2>
+        <p data-i18n="broadRuleDialogDescription">Broad keywords can automatically remove many future history entries.</p>
+        <div class="dialog-actions">
+          <button id="rule-cancel" class="button secondary" type="button" data-i18n="cancelButton">Cancel</button>
+          <button id="rule-confirm" class="button danger" type="button" data-i18n="saveBroadRules">Save broad rule</button>
         </div>
       </div>
     </dialog>

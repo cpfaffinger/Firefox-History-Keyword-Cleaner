@@ -7,14 +7,17 @@ function phaseMessage(operation) {
     matching: "phaseMatching",
     deleting: "phaseDeleting",
     complete: "phaseComplete",
-    error: "phaseError"
+    error: "phaseError",
+    cancelled: "phaseCancelled"
   };
   return message(phaseKeys[operation.phase] ?? "phaseStarting");
 }
 
 function detailMessage(operation) {
-  if (operation.status === "error") {
-    return operation.error || message("operationFailed");
+  if (operation.status === "error" || operation.status === "cancelled") {
+    return operation.error?.code
+      ? message(operation.error.code, operation.error.args)
+      : message("operationFailed");
   }
 
   if (operation.status === "complete") {
@@ -75,6 +78,9 @@ export function renderOperation(elements, operation) {
   elements.spinner.hidden = operation.status !== "running";
   elements.icon.hidden = operation.status === "running";
   elements.icon.textContent = operation.status === "error" ? "!" : "✓";
+  if (elements.cancel) {
+    elements.cancel.hidden = operation.status !== "running";
+  }
 
   return operation.status === "running";
 }

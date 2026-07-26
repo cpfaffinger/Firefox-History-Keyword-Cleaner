@@ -1,186 +1,164 @@
 # History Keyword Cleaner
 
-[![Get the add-on for Firefox](https://img.shields.io/badge/Firefox-Get_the_Add--on-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/history-keyword-sanitizer/)
+[![Get the add-on for Firefox](https://img.shields.io/badge/Firefox-Get_the_Add--on-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/de/firefox/addon/history-keyword-sanitizer/)
 [![CI, lint, and package](https://github.com/cpfaffinger/Firefox-History-Keyword-Cleaner/actions/workflows/ci.yml/badge.svg)](https://github.com/cpfaffinger/Firefox-History-Keyword-Cleaner/actions/workflows/ci.yml)
-[![Line coverage: 100%](https://img.shields.io/badge/line_coverage-100%25-brightgreen.svg)](#quality-and-packaging)
+[![Line coverage: 100%](https://img.shields.io/badge/line_coverage-100%25-brightgreen.svg)](#quality)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-A privacy-first Firefox extension that automatically removes history entries
-when their URL or page title contains one of your locally defined keywords.
+Safe, local history rules for Firefox.
 
-The product and brand name is **History Keyword Cleaner** in every supported
-language.
+History Keyword Cleaner automatically removes Firefox history URLs whose URL
+or page title matches a locally defined keyword. It never transmits keywords or
+browsing activity.
 
-## Install
+## Safety model
 
-[Install History Keyword Cleaner from Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/history-keyword-sanitizer/).
+- Saving, importing, enabling, or disabling rules never scans or changes
+  existing history.
+- **Wipe now** always performs a fresh preview before asking for confirmation.
+- The confirmation shows the exact number of matching URLs, the number checked,
+  and a low, medium, or high risk indication.
+- Broad rules require an additional confirmation before they can be saved.
+- Exceptions protect matching URLs from deletion.
+- Long operations are asynchronous, report their phase and progress, and can be
+  cancelled cooperatively.
+- Startup cleanup is disabled by default and must be explicitly enabled.
 
-The extension targets Firefox Desktop 140+ and Firefox for Android 142+. Local
-development and verification use Firefox 153.0.
+Firefox's `history.deleteUrl()` removes every recorded visit to a matching URL.
+The confirmation states this explicitly. Deletion cannot be undone.
 
 ## Features
 
-- Literal keyword matching in URLs, decoded URLs, and page titles.
-- Case-insensitive matching by default, with an optional case-sensitive mode.
-- Immediate cleanup through `history.onVisited` and
-  `history.onTitleChanged`.
-- Optional full cleanup at Firefox startup and after rule changes.
-- Safe preview before deleting existing history.
-- Manual **Wipe now** flow with a non-blocking in-app confirmation.
-- Live phases, spinner, progress bar, and counters for longer operations.
+- Match URLs, page titles, or both.
+- Match by substring, whole Unicode word, or exact value.
+- Limit URL matching to the complete URL, domain, or path and query.
+- Optional case-sensitive matching and local exception rules.
+- Match percent-encoded URL text where it can be decoded safely.
+- Automatic cleaning for new visits and title updates.
+- Optional startup cleanup and a manual **Wipe now** flow.
 - Settings import and export as JSON.
 - English by default, plus German, French, Italian, Dutch, and Turkish.
-- No telemetry, accounts, ads, network requests, host permissions, or content
-  scripts.
+- No telemetry, account, advertising, network request, host permission, or
+  content script.
 
-Keywords, settings, and aggregate usage statistics are stored only in
-`browser.storage.local`. The extension deliberately does not use
+Keywords, settings, operation state, and aggregate deletion counters remain in
+the local Firefox profile. The add-on deliberately does not use
 `storage.sync`.
 
 ## Screenshots
 
-![Automatic history cleaning settings](amo/screenshots/01-automatic-cleaning.png)
+![History cleanup settings in dark mode](amo/screenshots/01-automatic-cleaning.jpg)
 
-![Safe preview of matching history entries](amo/screenshots/02-preview-matches.png)
+![Preview of matching history URLs](amo/screenshots/02-preview-matches.jpg)
 
-![Manual wipe confirmation](amo/screenshots/03-wipe-confirmation.png)
+![Risk-aware wipe confirmation](amo/screenshots/03-wipe-confirmation.jpg)
+
+![Mobile-sized Firefox popup](amo/screenshots/04-popup-mobile.jpg)
+
+These are captures of the real add-on UI driven by the local preview harness;
+they contain deterministic sample data and no real browsing history.
+
+## Install
+
+[Install History Keyword Cleaner from Firefox Add-ons](https://addons.mozilla.org/de/firefox/addon/history-keyword-sanitizer/).
+
+The manifest supports Firefox Desktop 140+ and Firefox for Android 142+.
 
 ## Permissions and privacy
 
 The extension requests only:
 
-- `history` to search for and delete matching history entries and receive
-  visit/title events.
-- `storage` to save keywords, options, and local aggregate counters.
+- `history`, to inspect and delete matching history URLs and receive visit/title
+  events;
+- `storage`, to retain local rules, operation state, and aggregate counters.
 
-The manifest declares Mozilla's required data-collection permission as
+The manifest declares Mozilla's data-collection permission as
 `required: ["none"]`. See [PRIVACY.md](PRIVACY.md) and
 [SECURITY.md](SECURITY.md).
 
 ## Local development
 
-Requirements: Node.js 22+, pnpm, and a current Firefox installation.
+Requirements: Node.js 22+, pnpm, and Firefox.
 
 ```powershell
 pnpm install
 pnpm dev:local
 ```
 
-The Windows-specific command uses:
+The Windows command uses `C:\Program Files\Mozilla Firefox\firefox.exe`.
+`pnpm dev` uses the Firefox executable discovered by `web-ext`.
 
-```text
-C:\Program Files\Mozilla Firefox\firefox.exe
-```
+Firefox starts with a temporary profile. Alternatively, open
+`about:debugging`, choose **This Firefox**, select **Load Temporary Add-on**,
+and open `src/manifest.json`.
 
-The platform-independent alternative is:
-
-```sh
-pnpm dev
-```
-
-Firefox starts with a temporary development profile. You can also open
-`about:debugging`, select **This Firefox**, choose **Load Temporary Add-on**,
-and select `src/manifest.json`.
-
-## Quality and packaging
-
-```sh
-pnpm test:coverage
-pnpm lint
-pnpm build
-```
-
-Or run the complete verification chain:
+## Quality
 
 ```sh
 pnpm verify
+pnpm screenshots:amo
 ```
 
-The test command enforces 100% line coverage. Mozilla's
-[`web-ext`](https://github.com/mozilla/web-ext/) and
-[`addons-linter`](https://github.com/mozilla/addons-linter/) both run with
-warnings treated as errors. The exact ZIP generated for a release is linted a
-second time before publication.
+The verification chain enforces 100% line coverage across every JavaScript file
+shipped in `src/`, runs project safety checks, treats all `web-ext` and
+`addons-linter` warnings as errors, builds the ZIP, and validates the exact
+package. Tests cover rules, history scanning, cancellation, orchestration,
+background recovery, and both user interfaces.
 
-Unsigned packages are written to `artifacts/`. Regular Firefox releases only
-install Mozilla-signed XPI files permanently.
+The weekly compatibility workflow loads the extension in Firefox 140 and the
+latest stable Firefox. Responsive and Android-focused manual checks are listed
+in [docs/MANUAL_TESTS.md](docs/MANUAL_TESTS.md).
 
-## CI releases and automatic versions
+## Releases and versions
 
-The workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs
-tests, the coverage gate, safety checks, both Mozilla linters, and packaging.
+Every successful commit or merge to `main` receives a monotonically increasing
+CI-only version `0.1.<GitHub run number>`. The verified ZIP is attached to a
+non-prerelease GitHub release named `main-<short SHA>` and retained as a workflow
+artifact for 90 days.
 
-Every successful commit or merge on `main`:
-
-1. receives a monotonically increasing binary version in the form
-   `0.1.<GitHub run number>`;
-2. creates a permanent GitHub release named `main-<commit SHA>`;
-3. attaches the verified unsigned ZIP as a release asset; and
-4. keeps the same build as a GitHub Actions artifact for 90 days.
-
-The generated version is applied only inside the CI build workspace. This
-avoids automated version commits and infinite workflow loops while ensuring
-that every `main` binary has a version greater than the previous one.
-
-Version tags such as `v0.2.0` retain the explicit version stored in
-`package.json` and `src/manifest.json`:
+Version tags are authoritative. Pushing `v0.2.0`, for example, builds a binary
+with manifest version `0.2.0` even when the source branch still contains the
+development version:
 
 ```sh
 git tag v0.2.0
 git push origin v0.2.0
 ```
 
+AMO submission is intentionally separated from ordinary builds. A maintainer
+starts **Submit a tagged release to AMO**, selects a version tag, and approves
+the protected `amo-production` environment. See
+[docs/AMO_RELEASE.md](docs/AMO_RELEASE.md).
+
 ## Project structure
 
 ```text
-src/
-  background.js          Firefox events, messages, and orchestration
-  lib/                   tested matching, settings, and history scan logic
-  popup/                 quick rule entry and manual cleanup
-  options/               full settings, preview, import, and export UI
-  icons/                 packaged extension icon and third-party notice
-  _locales/              EN, DE, FR, IT, NL, and TR translations
-tests/                   Node unit, localization, manifest, and UI tests
-amo/                     AMO listing metadata and reviewer notes
-docs/                    product, release, and manual test documentation
-tools/                   project and CI build validation
+src/      Human-readable files shipped to Firefox
+tests/    Unit, integration, UI, manifest, locale, and policy tests
+amo/      Product-page metadata, screenshots, and reviewer notes
+docs/     Release, product, and manual-test documentation
+tools/    Validation and CI version helpers
 ```
 
-Everything shipped in `src/` is readable source code. There is no
-transpilation, minification, obfuscation, or remotely loaded runtime
-dependency.
+There is no transpilation, minification, obfuscation, or remotely loaded
+runtime dependency.
+
+## Support and security
+
+Report normal defects through
+[GitHub Issues](https://github.com/cpfaffinger/Firefox-History-Keyword-Cleaner/issues).
+Report vulnerabilities privately through
+[GitHub Security Advisories](https://github.com/cpfaffinger/Firefox-History-Keyword-Cleaner/security/advisories/new).
+Do not include private URLs, keywords, or browsing records in a public issue.
 
 ## Documentation language
 
-All Markdown documentation, policies, release notes, AMO copy, and reviewer
-instructions in this repository must be written exclusively in English.
-Product-interface translations belong only in `src/_locales/`.
+Repository documentation, policies, release notes, AMO copy, and reviewer
+instructions are maintained exclusively in English. Product-interface
+translations belong in `src/_locales/`.
 
-## Technical design
+## License and icon
 
-History scans split large time ranges so the extension is not limited to the
-default result count of `history.search()`. Matching and deletion run in
-cooperative chunks, and URL deletion uses bounded concurrency. Long-running
-work yields back to Firefox between chunks so the extension UI remains
-responsive.
-
-Firefox runs the Manifest V3 background code as a non-persistent event page
-through `background.scripts`.
-
-## Publishing on AMO
-
-The full checklist is in [docs/AMO_RELEASE.md](docs/AMO_RELEASE.md). The
-published Firefox product page is:
-
-<https://addons.mozilla.org/en-US/firefox/addon/history-keyword-sanitizer/>
-
-## Icon attribution
-
-The packaged eraser glyph is adapted from
-[Tabler Icons](https://github.com/tabler/tabler-icons), which is available
-under the MIT License. The complete notice ships with the extension in
-[`src/icons/LICENSE.md`](src/icons/LICENSE.md).
-
-## License
-
-History Keyword Cleaner is available under the [MIT License](LICENSE).
+History Keyword Cleaner is available under the [MIT License](LICENSE). The
+eraser glyph is adapted from [Tabler Icons](https://github.com/tabler/tabler-icons);
+the packaged notice is in [src/icons/LICENSE.md](src/icons/LICENSE.md).
