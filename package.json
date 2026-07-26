@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "node --test",
-    "test:coverage": "node --test --experimental-test-coverage",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-lines=100",
     "check": "node tools/validate-project.mjs",
     "lint:addons": "addons-linter src --warnings-as-errors",
     "lint:webext": "web-ext lint --source-dir src --warnings-as-errors",

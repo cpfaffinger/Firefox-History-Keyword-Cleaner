@@ -30,6 +30,20 @@ test("manifest uses the production AMO identity and synchronized version", () =>
   assert.equal(manifest.version, packageMetadata.version);
 });
 
+test("manifest publishes the packaged icon for browser and add-on surfaces", () => {
+  assert.deepEqual(manifest.action.default_icon, {
+    16: "icons/icon.svg",
+    32: "icons/icon.svg",
+    64: "icons/icon.svg"
+  });
+  assert.deepEqual(manifest.icons, {
+    32: "icons/icon.svg",
+    48: "icons/icon.svg",
+    96: "icons/icon.svg",
+    128: "icons/icon.svg"
+  });
+});
+
 test("manifest uses Firefox-compatible Manifest V3 background scripts", () => {
   assert.equal(manifest.manifest_version, 3);
   assert.deepEqual(manifest.background.scripts, ["background.js"]);

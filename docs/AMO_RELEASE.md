@@ -31,8 +31,9 @@ Listing-URL gewählt werden.
 3. AMO-Entwicklerkonto erstellen und die Developer Agreement akzeptieren;
 4. die manuellen Tests in `docs/MANUAL_TESTS.md` in einem frischen Profil
    vollständig ausführen;
-5. Versionsnummer in `package.json`, `src/manifest.json` und `CHANGELOG.md`
-   gemeinsam aktualisieren;
+5. für ein versioniertes Tag die Versionsnummer in `package.json`,
+   `src/manifest.json` und `CHANGELOG.md` gemeinsam aktualisieren; reguläre
+   `main`-Builds erhalten automatisch eine monotone CI-Version;
 6. `pnpm install --frozen-lockfile && pnpm verify` ausführen;
 7. den Inhalt von `artifacts/*.zip` prüfen.
 

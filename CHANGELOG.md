@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- packaged MIT-licensed eraser icon registered for all Firefox icon surfaces
+- English README with direct Firefox Add-ons product link
+- monotonically increasing CI binary versions for every `main` commit or merge
+- 100% line coverage with a mandatory CI coverage threshold
+
 ## 0.1.1 - 2026-07-26
 
 - AMO-taugliche, eindeutige Produktions-ID statt lokaler Entwicklungs-ID

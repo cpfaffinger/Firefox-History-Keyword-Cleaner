@@ -46,6 +46,7 @@ const referencedFiles = [
   ...(manifest.background?.scripts ?? []),
   manifest.action?.default_popup,
   manifest.options_ui?.page,
+  ...Object.values(manifest.action?.default_icon ?? {}),
   ...Object.values(manifest.icons ?? {})
 ].filter(Boolean);
 

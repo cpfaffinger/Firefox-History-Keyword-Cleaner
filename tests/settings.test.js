@@ -2,11 +2,22 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  MAX_KEYWORDS,
   MAX_KEYWORD_LENGTH,
+  loadSettings,
+  loadStats,
+  normalizeKeyword,
   normalizeKeywords,
   normalizeSettings,
-  normalizeStats
+  normalizeStats,
+  saveSettings,
+  saveStats
 } from "../src/lib/settings.js";
+
+test("normalizeKeyword rejects non-string values", () => {
+  assert.equal(normalizeKeyword(null), "");
+  assert.equal(normalizeKeyword(42), "");
+});
 
 test("normalizeKeywords trims, normalizes, removes blanks and deduplicates", () => {
   assert.deepEqual(
@@ -25,6 +36,17 @@ test("normalizeKeywords preserves case-distinct entries in case-sensitive mode",
 test("normalizeKeywords limits individual keyword length", () => {
   const [keyword] = normalizeKeywords(["x".repeat(MAX_KEYWORD_LENGTH + 20)]);
   assert.equal(keyword.length, MAX_KEYWORD_LENGTH);
+});
+
+test("normalizeKeywords enforces the maximum list size", () => {
+  const values = Array.from(
+    { length: MAX_KEYWORDS + 25 },
+    (_, index) => `keyword-${index}`
+  );
+  const keywords = normalizeKeywords(values);
+
+  assert.equal(keywords.length, MAX_KEYWORDS);
+  assert.equal(keywords.at(-1), `keyword-${MAX_KEYWORDS - 1}`);
 });
 
 test("normalizeSettings applies safe defaults and validates primitive types", () => {
@@ -78,4 +100,37 @@ test("normalizeStats discards invalid persisted values", () => {
       lastError: null
     }
   );
+});
+
+test("settings and stats storage helpers normalize round trips", async () => {
+  const values = {};
+  const storageArea = {
+    async get(key) {
+      return { [key]: values[key] };
+    },
+    async set(update) {
+      Object.assign(values, update);
+    }
+  };
+
+  const settings = await saveSettings(storageArea, {
+    enabled: false,
+    keywords: ["  Secret  "],
+    matchUrl: true,
+    matchTitle: false,
+    caseSensitive: true,
+    cleanOnStartup: false,
+    cleanExistingOnChange: true
+  });
+  assert.deepEqual(await loadSettings(storageArea), settings);
+
+  const stats = await saveStats(storageArea, {
+    lastRunAt: "2026-07-26T14:00:00.000Z",
+    lastRunReason: "manual",
+    lastChecked: 12,
+    lastDeleted: 3,
+    totalDeleted: 42,
+    lastError: "none"
+  });
+  assert.deepEqual(await loadStats(storageArea), stats);
 });

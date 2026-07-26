@@ -74,6 +74,29 @@ test("queryAllHistory deduplicates URLs returned from separate ranges", async ()
   assert.equal(result[0].title, "New");
 });
 
+test("queryAllHistory retries saturated one-millisecond ranges without truncation", async () => {
+  const maxResultsCalls = [];
+  const items = [
+    { url: "https://one.test", title: "One", lastVisitTime: 0.9 },
+    { url: "https://two.test", title: "Two", lastVisitTime: 0.8 }
+  ];
+  const historyApi = {
+    async search({ maxResults }) {
+      maxResultsCalls.push(maxResults);
+      return items.slice(0, maxResults);
+    }
+  };
+
+  const result = await queryAllHistory(historyApi, {
+    batchSize: 2,
+    startTime: 0,
+    endTime: 1
+  });
+
+  assert.deepEqual(maxResultsCalls, [2, 1_000_000]);
+  assert.deepEqual(result, items);
+});
+
 test("preview reports matches without deleting history", async () => {
   const historyApi = createHistoryApi([
     {

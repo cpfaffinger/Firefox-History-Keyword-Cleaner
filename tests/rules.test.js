@@ -31,6 +31,16 @@ test("matches URL-encoded text after decoding", () => {
   );
 });
 
+test("falls back to the literal URL when percent encoding is malformed", () => {
+  assert.equal(
+    findMatchingKeyword(
+      { url: "https://example.test/%E0%A4%A-secret", title: "" },
+      baseSettings
+    ),
+    "secret"
+  );
+});
+
 test("matches page titles when URL matching is disabled", () => {
   assert.equal(
     findMatchingKeyword(

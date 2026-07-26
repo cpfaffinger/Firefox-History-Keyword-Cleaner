@@ -42,6 +42,10 @@ jobs:
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Set monotonically increasing main binary version
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: node tools/set-build-version.mjs --run-number "${GITHUB_RUN_NUMBER}"
+
       - name: Run unit tests with coverage
         run: pnpm test:coverage
 
