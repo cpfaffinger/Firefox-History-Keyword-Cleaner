@@ -67,21 +67,23 @@ async function findMarkdownFiles(directory) {
 }
 
 test("all Markdown documentation is written exclusively in English", async () => {
-  const violations = [];
+  const analyses = [];
   for (const file of await findMarkdownFiles(projectRoot)) {
     const content = await readFile(file, "utf8");
     const germanCharacters = [...new Set(content.match(/[äöüß]/giu) ?? [])];
     const germanWords = [
       ...new Set(content.match(commonGermanWordPattern) ?? [])
     ];
-    if (germanCharacters.length > 0 || germanWords.length > 0) {
-      violations.push({
-        file: relative(projectRoot, file),
-        germanCharacters,
-        germanWords
-      });
-    }
+    analyses.push({
+      file: relative(projectRoot, file),
+      germanCharacters,
+      germanWords
+    });
   }
 
+  const violations = analyses.filter(
+    ({ germanCharacters, germanWords }) =>
+      germanCharacters.length > 0 || germanWords.length > 0
+  );
   assert.deepEqual(violations, []);
 });
