@@ -26,15 +26,15 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 11.7.0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
@@ -75,7 +75,7 @@ jobs:
 
       - name: Upload package from main
         if: github.event_name == 'push'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.package.outputs.artifact_name }}
           path: artifacts/${{ steps.package.outputs.asset_name }}
@@ -93,7 +93,7 @@ jobs:
 
     steps:
       - name: Download verified package
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: History-Keyword-Cleaner-*
           path: release-assets
