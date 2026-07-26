@@ -35,7 +35,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "history-keyword-cleaner@cpfaffinger.github.io",
+      "id": "history-keyword-cleaner@local.addons",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": [

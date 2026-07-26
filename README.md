@@ -37,6 +37,14 @@ Keywords, settings, and aggregate usage statistics are stored only in
 `browser.storage.local`. The extension deliberately does not use
 `storage.sync`.
 
+## Screenshots
+
+![Automatic history cleaning settings](amo/screenshots/01-automatic-cleaning.png)
+
+![Safe preview of matching history entries](amo/screenshots/02-preview-matches.png)
+
+![Manual wipe confirmation](amo/screenshots/03-wipe-confirmation.png)
+
 ## Permissions and privacy
 
 The extension requests only:

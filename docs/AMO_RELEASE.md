@@ -4,8 +4,8 @@ Stand: 26. Juli 2026.
 
 ## Bereits erfüllt
 
-- Manifest V3 mit der eindeutigen Produktions-ID
-  `history-keyword-cleaner@cpfaffinger.github.io`
+- Manifest V3 mit der permanenten, vom bestehenden AMO-Listing erwarteten ID
+  `history-keyword-cleaner@local.addons`
 - `strict_min_version` 140 (Desktop) und 142 (Android)
 - vorgeschriebene `data_collection_permissions.required: ["none"]`
 - nur notwendige Berechtigungen (`history`, `storage`)
@@ -16,26 +16,31 @@ Stand: 26. Juli 2026.
 - `web-ext lint --warnings-as-errors`
 - reproduzierbarer Build mit festgeschriebener `web-ext`-Version
 - Reviewer-Anleitung und Listing-Entwurf
+- drei AMO-Screenshots im empfohlenen Format 1280 × 800
 - Datenschutz- und Sicherheitsdokumentation
 
-## Vor der ersten öffentlichen Einreichung
+## Vor dem nächsten öffentlichen Update
 
 Auf AMO existiert bereits ein anderes Add-on mit dem Anzeigenamen
 **History Keyword Cleaner**. Der festgelegte Produktname kann im Manifest
 bestehen bleiben, aber für das AMO-Listing muss eine andere, eindeutige
 Listing-URL gewählt werden.
 
+Die Add-on-ID `history-keyword-cleaner@local.addons` darf trotz ihres früheren
+Entwicklungsnamens nicht mehr geändert werden: Der erste AMO-Upload hat sie als
+permanente Identität des Listings registriert. Jedes Update muss dieselbe ID
+verwenden.
+
 1. verantwortliche Support- und Security-Adresse in den Dokumenten und
    AMO-Metadaten ergänzen;
-2. finale Screenshots aus Firefox erstellen und im AMO-Listing hochladen;
-3. AMO-Entwicklerkonto erstellen und die Developer Agreement akzeptieren;
-4. die manuellen Tests in `docs/MANUAL_TESTS.md` in einem frischen Profil
+2. die vorbereiteten Dateien aus `amo/screenshots/` im AMO-Listing hochladen;
+3. die manuellen Tests in `docs/MANUAL_TESTS.md` in einem frischen Profil
    vollständig ausführen;
-5. für ein versioniertes Tag die Versionsnummer in `package.json`,
+4. für ein versioniertes Tag die Versionsnummer in `package.json`,
    `src/manifest.json` und `CHANGELOG.md` gemeinsam aktualisieren; reguläre
    `main`-Builds erhalten automatisch eine monotone CI-Version;
-6. `pnpm install --frozen-lockfile && pnpm verify` ausführen;
-7. den Inhalt von `artifacts/*.zip` prüfen.
+5. `pnpm install --frozen-lockfile && pnpm verify` ausführen;
+6. den Inhalt von `artifacts/*.zip` prüfen.
 
 ## Einreichen
 

@@ -17,6 +17,7 @@
     "lint:webext": "web-ext lint --source-dir src --warnings-as-errors",
     "lint": "pnpm check && pnpm lint:webext && pnpm lint:addons",
     "build": "web-ext build --source-dir src --artifacts-dir artifacts --overwrite-dest",
+    "screenshots:amo": "node tools/render-amo-screenshots.mjs",
     "dev": "web-ext run --source-dir src",
     "dev:local": "web-ext run --source-dir src --firefox \"C:\\Program Files\\Mozilla Firefox\\firefox.exe\"",
     "verify": "pnpm test:coverage && pnpm lint && pnpm build"

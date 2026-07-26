@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- restored the permanent ID registered by the existing AMO listing
 - packaged MIT-licensed eraser icon registered for all Firefox icon surfaces
 - English README with direct Firefox Add-ons product link
 - monotonically increasing CI binary versions for every `main` commit or merge
