@@ -57,7 +57,7 @@ jobs:
           timeout 20s pnpm exec web-ext run \
             --source-dir src \
             --firefox "$(command -v firefox)" \
-            --headless \
+            --args=-headless \
             --no-reload
           STATUS=$?
           set -e
