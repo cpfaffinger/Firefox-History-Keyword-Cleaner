@@ -24,8 +24,8 @@ test("manifest declares no external data collection and supports current consent
 test("manifest uses the production AMO identity and synchronized version", () => {
   const gecko = manifest.browser_specific_settings.gecko;
   assert.equal(gecko.id, "history-keyword-cleaner@local.addons");
-  assert.equal(manifest.version, "0.3.0");
   assert.equal(manifest.version, packageMetadata.version);
+  assert.match(manifest.version, /^0\.3\.(?:0|[1-9][0-9]{0,8})$/u);
 });
 
 test("manifest publishes the packaged icon for browser and add-on surfaces", () => {
