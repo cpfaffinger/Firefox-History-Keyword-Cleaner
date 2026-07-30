@@ -26,8 +26,16 @@ export function createStorageArea(initial = {}) {
 
 export function createBrowserMock({
   historyItems = [],
+  historyAvailable = true,
   messageFailure = false,
-  deleteFailures = new Set()
+  deleteFailures = new Set(),
+  browserInfo = {
+    name: "Firefox",
+    vendor: "Mozilla",
+    version: "147.0",
+    buildID: "20260730000000"
+  },
+  platformInfo = { os: "win", arch: "x86-64" }
 } = {}) {
   const local = createStorageArea();
   const session = createStorageArea();
@@ -49,6 +57,12 @@ export function createBrowserMock({
       onStartup: events.startup,
       onMessage: events.message,
       getManifest: () => ({ version: "9.8.7" }),
+      async getBrowserInfo() {
+        return browserInfo;
+      },
+      async getPlatformInfo() {
+        return platformInfo;
+      },
       async openOptionsPage() {
         optionsOpened += 1;
       },
@@ -84,6 +98,10 @@ export function createBrowserMock({
       }
     }
   };
+
+  if (!historyAvailable) {
+    delete browserApi.history;
+  }
 
   return {
     browserApi,

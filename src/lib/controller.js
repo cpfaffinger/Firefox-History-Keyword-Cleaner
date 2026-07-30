@@ -8,6 +8,7 @@ import {
 } from "./settings.js";
 import { findMatchingKeyword, analyzeRuleRisk } from "./rules.js";
 import { cleanHistory, previewHistoryMatches } from "./history-cleaner.js";
+import { createDebugLog } from "./debug-log.js";
 
 const OPERATION_KEY = "activeOperation";
 const PROGRESS_INTERVAL_MS = 150;
@@ -33,18 +34,71 @@ function settingsFingerprint(settings) {
   return JSON.stringify(settings);
 }
 
+function supportsListener(event) {
+  return typeof event?.addListener === "function";
+}
+
+function detectCapabilities(browserApi) {
+  const historyRead = typeof browserApi.history?.search === "function";
+  const historyDelete = typeof browserApi.history?.deleteUrl === "function";
+  const realtime =
+    supportsListener(browserApi.history?.onVisited) ||
+    supportsListener(browserApi.history?.onTitleChanged);
+  return {
+    history: historyRead && historyDelete,
+    historyRead,
+    historyDelete,
+    realtime
+  };
+}
+
 export function createController(browserApi, {
   now = () => Date.now(),
   isoNow = () => new Date(now()).toISOString()
 } = {}) {
   const storage = browserApi.storage.local;
   const session = browserApi.storage.session ?? storage;
+  const capabilities = detectCapabilities(browserApi);
+  const debugLog = createDebugLog(storage, { isoNow });
   let operation = null;
   let activeOperationPromise = null;
   let operationSequence = 0;
   let serialQueue = Promise.resolve();
   let lastProgressPublishedAt = 0;
   const cancelledOperations = new Set();
+
+  function ensureHistoryAvailable() {
+    if (!capabilities.history) {
+      throw problem("historyApiUnavailable");
+    }
+  }
+
+  async function runtimeEnvironment() {
+    const browserInfo =
+      typeof browserApi.runtime.getBrowserInfo === "function"
+        ? await browserApi.runtime.getBrowserInfo().catch(() => null)
+        : null;
+    const platformInfo =
+      typeof browserApi.runtime.getPlatformInfo === "function"
+        ? await browserApi.runtime.getPlatformInfo().catch(() => null)
+        : null;
+    return {
+      browser: browserInfo
+        ? {
+            name: browserInfo.name ?? null,
+            vendor: browserInfo.vendor ?? null,
+            version: browserInfo.version ?? null,
+            buildId: browserInfo.buildID ?? null
+          }
+        : null,
+      platform: platformInfo
+        ? {
+            os: platformInfo.os ?? null,
+            arch: platformInfo.arch ?? null
+          }
+        : null
+    };
+  }
 
   function enqueue(task) {
     const result = serialQueue.then(task, task);
@@ -120,6 +174,7 @@ export function createController(browserApi, {
       finishedAt: null,
       error: null
     };
+    void debugLog.record("operation-started", { id, type, reason });
 
     activeOperationPromise = enqueue(async () => {
       await publishOperation({}, true);
@@ -141,6 +196,15 @@ export function createController(browserApi, {
           },
           true
         );
+        await debugLog.record("operation-completed", {
+          id,
+          type,
+          reason,
+          checked: result.checked ?? 0,
+          matched: result.matched ?? 0,
+          deleted: result.deleted ?? 0,
+          failures: result.failures?.length ?? 0
+        });
         return result;
       } catch (error) {
         const serialized = serializeError(error);
@@ -152,6 +216,18 @@ export function createController(browserApi, {
             finishedAt: isoNow()
           },
           true
+        );
+        await debugLog.record(
+          "operation-failed",
+          {
+            id,
+            type,
+            reason,
+            code: serialized.code,
+            errorName: error?.name ?? null,
+            errorMessage: error?.message ?? null
+          },
+          "error"
         );
         throw error;
       } finally {
@@ -194,6 +270,7 @@ export function createController(browserApi, {
           return result;
         }
 
+        ensureHistoryAvailable();
         try {
           const result = await cleanHistory(
             browserApi.history,
@@ -222,6 +299,7 @@ export function createController(browserApi, {
       "preview",
       "preview",
       async (onProgress, cancellationCheck) => {
+        ensureHistoryAvailable();
         const result = await previewHistoryMatches(
           browserApi.history,
           { ...settings, enabled: true },
@@ -234,6 +312,12 @@ export function createController(browserApi, {
   }
 
   async function deleteItemIfMatched(item) {
+    if (!capabilities.history) {
+      return {
+        deleted: false,
+        error: { code: "historyApiUnavailable", args: [] }
+      };
+    }
     const settings = await loadSettings(storage);
     if (!settings.enabled || !findMatchingKeyword(item, settings)) {
       return { deleted: false };
@@ -268,7 +352,40 @@ export function createController(browserApi, {
       settings,
       stats,
       version: browserApi.runtime.getManifest().version,
-      operation: operation ?? persistedOperation
+      operation: operation ?? persistedOperation,
+      capabilities
+    };
+  }
+
+  async function exportDebugLog() {
+    const [entries, environment, settings, stats] = await Promise.all([
+      debugLog.read(),
+      runtimeEnvironment(),
+      loadSettings(storage),
+      loadStats(storage)
+    ]);
+    return {
+      format: "history-keyword-cleaner-debug-log",
+      schemaVersion: 1,
+      exportedAt: isoNow(),
+      addOn: {
+        version: browserApi.runtime.getManifest().version
+      },
+      environment,
+      capabilities,
+      stateSummary: {
+        enabled: settings.enabled,
+        cleanOnStartup: settings.cleanOnStartup,
+        keywordCount: settings.keywords.length,
+        exceptionCount: settings.exceptions.length,
+        lastRunAt: stats.lastRunAt,
+        lastRunReason: stats.lastRunReason,
+        lastChecked: stats.lastChecked,
+        lastDeleted: stats.lastDeleted,
+        totalDeleted: stats.totalDeleted,
+        lastError: stats.lastError
+      },
+      entries
     };
   }
 
@@ -327,6 +444,9 @@ export function createController(browserApi, {
         }
         return { cancelled: Boolean(operation?.status === "running") };
 
+      case "export-debug-log":
+        return exportDebugLog();
+
       default:
         throw problem("unknownAction");
     }
@@ -336,9 +456,26 @@ export function createController(browserApi, {
     if (!message || message.target !== "history-keyword-cleaner") {
       return undefined;
     }
+    await debugLog.record("message-received", {
+      action: message.action ?? null
+    });
     try {
-      return { ok: true, value: await dispatch(message) };
+      const value = await dispatch(message);
+      await debugLog.record("message-completed", {
+        action: message.action ?? null
+      });
+      return { ok: true, value };
     } catch (error) {
+      await debugLog.record(
+        "message-failed",
+        {
+          action: message.action ?? null,
+          code: serializeError(error).code,
+          errorName: error?.name ?? null,
+          errorMessage: error?.message ?? null
+        },
+        "error"
+      );
       return { ok: false, error: serializeError(error) };
     }
   }
@@ -351,6 +488,7 @@ export function createController(browserApi, {
       await saveSettings(storage, current.settings);
     }
     await recoverOperation();
+    await debugLog.record("extension-installed", { reason });
     if (reason === "install") {
       await browserApi.runtime.openOptionsPage();
     }
@@ -360,29 +498,43 @@ export function createController(browserApi, {
     await recoverOperation();
     const settings = await loadSettings(storage);
     if (settings.enabled && settings.cleanOnStartup) {
-      await runCleanup("startup", settings);
+      if (capabilities.history) {
+        await runCleanup("startup", settings);
+      } else {
+        await debugLog.record(
+          "startup-cleanup-skipped",
+          { reason: "history-api-unavailable" },
+          "warning"
+        );
+      }
     }
   }
 
   function register() {
+    browserApi.runtime.onMessage.addListener((message) =>
+      handleMessage(message)
+    );
     browserApi.runtime.onInstalled.addListener((details) =>
       onInstalled(details)
     );
     browserApi.runtime.onStartup.addListener(() => onStartup());
-    browserApi.history.onVisited.addListener((item) =>
-      enqueue(() => deleteItemIfMatched(item))
-    );
-    browserApi.history.onTitleChanged.addListener((item) =>
-      enqueue(() => deleteItemIfMatched(item))
-    );
-    browserApi.runtime.onMessage.addListener((message) =>
-      handleMessage(message)
-    );
+    if (supportsListener(browserApi.history?.onVisited)) {
+      browserApi.history.onVisited.addListener((item) =>
+        enqueue(() => deleteItemIfMatched(item))
+      );
+    }
+    if (supportsListener(browserApi.history?.onTitleChanged)) {
+      browserApi.history.onTitleChanged.addListener((item) =>
+        enqueue(() => deleteItemIfMatched(item))
+      );
+    }
+    void debugLog.record("background-registered", capabilities);
   }
 
   return {
     deleteItemIfMatched,
     dispatch,
+    exportDebugLog,
     getState,
     handleMessage,
     onInstalled,

@@ -155,6 +155,12 @@
   "exportButton": {
     "message": "Ayarları dışa aktar"
   },
+  "debugExportButton": {
+    "message": "Hata ayıklama günlüğünü dışa aktar"
+  },
+  "debugExportDescription": {
+    "message": "Hata ayıklama dışa aktarımı teknik olayları ve sayıları içerir; URL’leri, sayfa başlıklarını, anahtar kelimeleri veya istisnaları asla içermez."
+  },
   "importButton": {
     "message": "Ayarları içe aktar"
   },
@@ -203,6 +209,9 @@
   },
   "exportedStatus": {
     "message": "Ayarlar dışa aktarıldı."
+  },
+  "debugExportedStatus": {
+    "message": "Gizliliği koruyan hata ayıklama günlüğü dışa aktarıldı."
   },
   "importedStatus": {
     "message": "Ayarlar içe aktarıldı ve kaydedildi."
@@ -254,6 +263,9 @@
   "previewRequired": { "message": "Geçmiş değişti veya önizleme süresi doldu. Silmeden önce yeniden önizleyin." },
   "unknownAction": { "message": "İstenen eklenti işlemi bilinmiyor." },
   "unexpectedError": { "message": "Beklenmeyen bir eklenti hatası oluştu." },
+  "historyUnavailableTitle": { "message": "Geçmiş temizleme bu cihazda kullanılamıyor" },
+  "historyUnavailableDescription": { "message": "Kurallar kaydedilebilir, ancak Android için Firefox eklentilerin geçmişi incelemesine veya seçerek silmesine izin vermez." },
+  "historyApiUnavailable": { "message": "Bu cihazdaki Firefox, eklentilerin geçmişi incelemesine veya seçerek silmesine izin vermiyor." },
   "operationCancelled": { "message": "İşlem güvenli biçimde iptal edildi." },
   "backgroundRestarted": { "message": "Firefox arka plan sürecini yeniden başlattı. İşlemi yeniden çalıştırın." },
   "historyRangeSaturated": { "message": "Firefox bir zaman aralığı için çok fazla sonuç döndürdü. Eksik sonuçtan hiçbir şey silinmedi." },

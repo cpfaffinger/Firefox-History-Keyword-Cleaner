@@ -34,16 +34,20 @@
               </div>
               <label class="switch">
                 <span class="sr-only" data-i18n="enabledLabel">Automatic cleaning</span>
-                <input id="enabled" type="checkbox">
+                <input id="enabled" type="checkbox" data-history-control>
                 <span aria-hidden="true"></span>
               </label>
             </div>
             <p class="explanation" data-i18n="automaticCleaningDescription">
               Matching visits are removed as soon as Firefox records their URL or title.
             </p>
+            <div id="history-unavailable" class="warning capability-warning" role="note" hidden>
+              <strong data-i18n="historyUnavailableTitle">History cleaning is unavailable on this device</strong>
+              <span data-i18n="historyUnavailableDescription">Rules can be saved, but Firefox for Android does not allow add-ons to inspect or selectively delete history.</span>
+            </div>
             <div class="check-grid">
               <label class="check-row">
-                <input id="clean-on-startup" type="checkbox">
+                <input id="clean-on-startup" type="checkbox" data-history-control>
                 <span>
                   <strong data-i18n="cleanOnStartup">Clean when Firefox starts</strong>
                   <small data-i18n="cleanOnStartupDescription">Catches visits missed while the add-on was inactive.</small>
@@ -108,7 +112,7 @@
             </div>
             <div class="button-row">
               <button id="save" class="button" type="button" data-operation-control data-i18n="saveButton">Save rules</button>
-              <button id="preview" class="button secondary" type="button" data-operation-control data-i18n="previewButton">Preview matches</button>
+              <button id="preview" class="button secondary" type="button" data-operation-control data-history-control data-i18n="previewButton">Preview matches</button>
             </div>
           </article>
 
@@ -124,11 +128,13 @@
               <span data-i18n="irreversibleDescription">Preview first if you are unsure about a rule.</span>
             </div>
             <div class="button-row">
-              <button id="clean-now" class="button danger" type="button" data-operation-control data-i18n="wipeNow">Wipe now</button>
+              <button id="clean-now" class="button danger" type="button" data-operation-control data-history-control data-i18n="wipeNow">Wipe now</button>
               <button id="export" class="button secondary" type="button" data-operation-control data-i18n="exportButton">Export settings</button>
               <button id="import" class="button secondary" type="button" data-operation-control data-i18n="importButton">Import settings</button>
+              <button id="export-debug" class="button secondary" type="button" data-operation-control data-i18n="debugExportButton">Export debug log</button>
               <input id="import-file" type="file" accept="application/json,.json" hidden>
             </div>
+            <p class="field-help" data-i18n="debugExportDescription">The debug export contains technical events and counts, never URLs, page titles, keywords, or exceptions.</p>
             <div id="preview-results" class="preview-results" hidden></div>
           </article>
         </section>
@@ -162,7 +168,7 @@
               </div>
             </dl>
             <p id="status" class="status" role="status" aria-live="polite"></p>
-            <p class="version">v<span id="version">0.1.1</span></p>
+            <p class="version">v<span id="version">0.3.0</span></p>
           </article>
         </aside>
       </div>

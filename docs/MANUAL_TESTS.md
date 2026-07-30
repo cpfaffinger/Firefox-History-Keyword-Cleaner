@@ -53,6 +53,26 @@ and deleting one URL removes all recorded visits to that URL.
 4. Use Firefox Network Monitor to confirm the add-on sends no requests.
 5. Inspect the ZIP: no secrets, tests, `node_modules`, or source maps.
 6. Inspect `about:addons`: only history and storage permissions are present.
+7. Export the debug log and verify it contains runtime capabilities, event
+   names, timestamps, counts, and structured errors.
+8. Verify the debug export contains no keywords, exceptions, URLs, page titles,
+   or browsing records.
+
+## Firefox for Android capability fallback
+
+1. Install on Firefox for Android 142 or current stable on a real device or
+   emulator.
+2. Open the popup and settings; neither may remain on **Loading** or show a
+   generic unexpected add-on error.
+3. Verify the explanation that selective history access is unavailable.
+4. Verify automatic cleaning, startup cleaning, preview, and **Wipe now** are
+   disabled.
+5. Add and save a rule, close both interfaces, reopen them, and verify the rule
+   persists.
+6. Export a debug log and verify it identifies Android and reports
+   `history: false`.
+7. Confirm no history is deleted and no time-based whole-history fallback is
+   attempted.
 
 ## UI, accessibility, and compatibility
 
@@ -63,5 +83,5 @@ and deleting one URL removes all recorded visits to that URL.
   Space-key operation for switches.
 - Test EN, DE, FR, IT, NL, and TR interfaces.
 - Test Firefox Desktop 140 and current stable.
-- Test Firefox for Android 142 and current stable on a phone-sized viewport and
-  on a real device or emulator before each AMO release.
+- Test the Firefox for Android capability fallback above on a phone-sized
+  viewport and on a real device or emulator before each AMO release.

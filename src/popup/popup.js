@@ -21,6 +21,7 @@ export function initializePopup(
   const optionsButton = documentRoot.querySelector("#open-options");
   const summary = documentRoot.querySelector("#summary");
   const status = documentRoot.querySelector("#status");
+  const historyUnavailable = documentRoot.querySelector("#history-unavailable");
   const cancelOperation = documentRoot.querySelector("#cancel-operation");
   const wipeDialog = documentRoot.querySelector("#wipe-dialog");
   const wipeConfirm = documentRoot.querySelector("#wipe-confirm");
@@ -62,7 +63,10 @@ export function initializePopup(
     documentRoot
       .querySelectorAll("[data-operation-control], #enabled, #keyword")
       .forEach((element) => {
-        element.disabled = isBusy;
+        element.disabled =
+          isBusy ||
+          (state?.capabilities?.history === false &&
+            element.hasAttribute("data-history-control"));
       });
     busyButton?.classList.toggle("is-loading", isBusy);
     if (!isBusy) {
@@ -80,11 +84,15 @@ export function initializePopup(
   }
 
   function render() {
+    const hasHistoryAccess = state.capabilities?.history !== false;
     enabledInput.checked = state.settings.enabled;
+    historyUnavailable.hidden = hasHistoryAccess;
     summary.textContent = message("keywordCount", [
       String(state.settings.keywords.length)
     ]);
-    if (state.stats.lastError) {
+    if (!hasHistoryAccess) {
+      setStatus(message("historyApiUnavailable"), "error");
+    } else if (state.stats.lastError) {
       setStatus(problemMessage(state.stats.lastError), "error");
     } else if (state.stats.lastRunAt) {
       setStatus(
@@ -230,7 +238,10 @@ export function initializePopup(
   });
 
   localizeDocument(documentRoot);
-  refresh().catch((error) => setStatus(error.message, "error"));
+  setBusy(true);
+  refresh()
+    .catch((error) => setStatus(error.message, "error"))
+    .finally(() => setBusy(false));
 
   return { refresh, render, save, validatedSettings };
 }

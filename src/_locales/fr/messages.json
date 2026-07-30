@@ -155,6 +155,12 @@
   "exportButton": {
     "message": "Exporter les paramètres"
   },
+  "debugExportButton": {
+    "message": "Exporter le journal de débogage"
+  },
+  "debugExportDescription": {
+    "message": "L’export de débogage contient des événements techniques et des compteurs, mais jamais d’URL, de titres, de mots-clés ou d’exceptions."
+  },
   "importButton": {
     "message": "Importer les paramètres"
   },
@@ -203,6 +209,9 @@
   },
   "exportedStatus": {
     "message": "Paramètres exportés."
+  },
+  "debugExportedStatus": {
+    "message": "Journal de débogage respectueux de la vie privée exporté."
   },
   "importedStatus": {
     "message": "Paramètres importés et enregistrés."
@@ -254,6 +263,9 @@
   "previewRequired": { "message": "L’historique a changé ou l’aperçu a expiré. Relancez l’aperçu avant de supprimer." },
   "unknownAction": { "message": "L’action demandée est inconnue." },
   "unexpectedError": { "message": "Une erreur inattendue de l’extension s’est produite." },
+  "historyUnavailableTitle": { "message": "Le nettoyage de l’historique n’est pas disponible sur cet appareil" },
+  "historyUnavailableDescription": { "message": "Les règles peuvent être enregistrées, mais Firefox pour Android ne permet pas aux extensions d’inspecter ou de supprimer sélectivement l’historique." },
+  "historyApiUnavailable": { "message": "Firefox sur cet appareil ne permet pas aux extensions d’inspecter ou de supprimer sélectivement l’historique." },
   "operationCancelled": { "message": "L’opération a été annulée en toute sécurité." },
   "backgroundRestarted": { "message": "Firefox a redémarré le processus d’arrière-plan. Relancez l’opération." },
   "historyRangeSaturated": { "message": "Firefox a renvoyé trop de résultats pour cette période. Aucun résultat incomplet n’a été supprimé." },
