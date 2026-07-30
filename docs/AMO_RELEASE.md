@@ -12,7 +12,8 @@ need to match the listing slug or product name.
 ## Release safeguards
 
 - Manifest V3 and readable, unminified shipping source.
-- Firefox Desktop 140+ and Firefox for Android 142+.
+- Firefox Desktop 140+ and a non-crashing capability fallback for Firefox for
+  Android 142+, where Firefox does not expose selective history access.
 - Only `history` and `storage` permissions.
 - `data_collection_permissions.required: ["none"]`.
 - No host permissions, remote code, telemetry, or network request.
@@ -42,13 +43,13 @@ AMO.
 
 1. Complete [MANUAL_TESTS.md](MANUAL_TESTS.md) using disposable history.
 2. Update `CHANGELOG.md`.
-3. Choose a numeric three-part version, for example `0.2.0`.
+3. Choose a numeric three-part version, for example `0.3.0`.
 4. Run `pnpm install --frozen-lockfile` and `pnpm verify`.
 5. Tag the reviewed commit and push the tag:
 
    ```sh
-   git tag v0.2.0
-   git push origin v0.2.0
+   git tag v0.3.0
+   git push origin v0.3.0
    ```
 
 The CI workflow derives both `package.json` and manifest versions from the tag,
@@ -58,7 +59,7 @@ builds the package, validates it, and creates the GitHub release.
 
 1. Open GitHub Actions.
 2. Run **Submit a tagged release to AMO**.
-3. Enter the existing tag, such as `v0.2.0`.
+3. Enter the existing tag, such as `v0.3.0`.
 4. Review and approve the protected `amo-production` environment.
 5. Retain the signed XPI artifact if AMO makes it immediately available;
    otherwise download it from AMO after review.

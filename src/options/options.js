@@ -29,6 +29,7 @@ export function initializeOptions(
     preview: documentRoot.querySelector("#preview"),
     cleanNow: documentRoot.querySelector("#clean-now"),
     export: documentRoot.querySelector("#export"),
+    exportDebug: documentRoot.querySelector("#export-debug"),
     import: documentRoot.querySelector("#import"),
     importFile: documentRoot.querySelector("#import-file"),
     cancelOperation: documentRoot.querySelector("#cancel-operation"),
@@ -37,7 +38,8 @@ export function initializeOptions(
     lastRun: documentRoot.querySelector("#last-run"),
     lastDeleted: documentRoot.querySelector("#last-deleted"),
     totalDeleted: documentRoot.querySelector("#total-deleted"),
-    version: documentRoot.querySelector("#version")
+    version: documentRoot.querySelector("#version"),
+    historyUnavailable: documentRoot.querySelector("#history-unavailable")
   };
   const wipeDialog = documentRoot.querySelector("#wipe-dialog");
   const wipeConfirm = documentRoot.querySelector("#wipe-confirm");
@@ -112,7 +114,10 @@ export function initializeOptions(
     documentRoot
       .querySelectorAll("[data-operation-control]")
       .forEach((element) => {
-        element.disabled = isBusy;
+        element.disabled =
+          isBusy ||
+          (state?.capabilities?.history === false &&
+            element.hasAttribute("data-history-control"));
       });
     busyButton?.classList.toggle("is-loading", isBusy);
     if (!isBusy) {
@@ -159,6 +164,17 @@ export function initializeOptions(
     controls.keywordCount.textContent = `${parseLines(controls.keywords).length} / 500`;
   }
 
+  function renderCapabilities() {
+    const hasHistoryAccess = state.capabilities?.history !== false;
+    controls.historyUnavailable.hidden = hasHistoryAccess;
+    documentRoot.querySelectorAll("[data-history-control]").forEach((element) => {
+      element.disabled = !hasHistoryAccess;
+    });
+    if (!hasHistoryAccess) {
+      setStatus(message("historyApiUnavailable"), "error");
+    }
+  }
+
   async function refresh({ preserveDraft = false } = {}) {
     state = await send("get-state");
     if (!preserveDraft) {
@@ -167,6 +183,7 @@ export function initializeOptions(
     renderStats(state.stats);
     controls.version.textContent = state.version;
     showOperation(state.operation);
+    renderCapabilities();
   }
 
   async function confirmBroadRules(settings) {
@@ -230,6 +247,18 @@ export function initializeOptions(
     const result = await send("preview", { settings });
     renderPreview(result);
     return result;
+  }
+
+  function downloadJson(payload, filename) {
+    const blob = new Blob([`${JSON.stringify(payload, null, 2)}\n`], {
+      type: "application/json"
+    });
+    const url = URL.createObjectURL(blob);
+    const anchor = documentRoot.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.click();
+    setTimeout(() => URL.revokeObjectURL(url), 0);
   }
 
   controls.keywords.addEventListener("input", updateKeywordCount);
@@ -308,18 +337,27 @@ export function initializeOptions(
         exportedAt: new Date().toISOString(),
         settings
       };
-      const blob = new Blob([`${JSON.stringify(payload, null, 2)}\n`], {
-        type: "application/json"
-      });
-      const url = URL.createObjectURL(blob);
-      const anchor = documentRoot.createElement("a");
-      anchor.href = url;
-      anchor.download = "history-keyword-cleaner-settings.json";
-      anchor.click();
-      setTimeout(() => URL.revokeObjectURL(url), 0);
+      downloadJson(payload, "history-keyword-cleaner-settings.json");
       setStatus(message("exportedStatus"), "success");
     } catch (error) {
       setStatus(error.message, "error");
+    }
+  });
+
+  controls.exportDebug.addEventListener("click", async () => {
+    setBusy(true, controls.exportDebug);
+    try {
+      const payload = await send("export-debug-log");
+      const date = new Date().toISOString().slice(0, 10);
+      downloadJson(
+        payload,
+        `history-keyword-cleaner-debug-${date}.json`
+      );
+      setStatus(message("debugExportedStatus"), "success");
+    } catch (error) {
+      setStatus(error.message, "error");
+    } finally {
+      setBusy(false);
     }
   });
 
@@ -373,7 +411,10 @@ export function initializeOptions(
   });
 
   localizeDocument(documentRoot);
-  refresh().catch((error) => setStatus(error.message, "error"));
+  setBusy(true);
+  refresh()
+    .catch((error) => setStatus(error.message, "error"))
+    .finally(() => setBusy(false));
 
   return {
     readSettings,

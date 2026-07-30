@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.0 - 2026-07-30
 
 - added safe exception rules, match modes, and URL scopes
 - made startup cleanup opt-in and removed implicit cleanup after saves/imports
@@ -12,6 +12,14 @@
 - added real desktop and mobile AMO screenshots
 - added protected, manual tagged AMO submission and weekly Firefox smoke tests
 - made tag versions authoritative while retaining automatic `main` build bumps
+- prevented the background process from crashing when Firefox Android omits
+  the WebExtensions history API
+- kept rule editing, settings persistence, status rendering, and diagnostics
+  usable on Firefox Android while disabling unavailable history operations
+- added a bounded, privacy-safe debug log export with Firefox, platform, and
+  capability information
+- added Android capability regression tests and localized explanations for all
+  supported interface languages
 
 ## 0.1.1 - 2026-07-26
 

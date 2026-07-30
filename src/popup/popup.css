@@ -14,6 +14,26 @@ body {
   gap: 16px;
 }
 
+.capability-warning {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--warning-soft);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.capability-warning[hidden] {
+  display: none;
+}
+
+.capability-warning span {
+  color: var(--muted);
+}
+
 .quick-add {
   margin-top: 18px;
   padding: 16px;

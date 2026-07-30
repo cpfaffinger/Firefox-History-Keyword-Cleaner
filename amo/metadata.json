@@ -13,6 +13,6 @@
   "requires_payment": false,
   "version": {
     "license": "MIT",
-    "approval_notes": "No account or test credentials are required. In a fresh profile, add and save 'history-cleaner-test', then visit https://example.com/history-cleaner-test and confirm its history URL is removed. Saving or importing rules never deletes existing history. Wipe now always runs a preview, shows the match count and risk, and requires explicit confirmation. The extension makes no network requests. Packaged files are readable source with no transpilation or minification. See amo/reviewer-notes.md for the complete procedure."
+    "approval_notes": "No account or test credentials are required. On Firefox Desktop, add and save 'history-cleaner-test', visit https://example.com/history-cleaner-test, and confirm its history URL is removed. Saving or importing rules never deletes existing history. Wipe now always runs a preview, shows the match count and risk, and requires explicit confirmation. Firefox Android does not expose the history namespace; the add-on keeps rule management and sanitized debug export available while disabling history operations with an explicit message. The extension makes no network requests. Packaged files are readable source with no transpilation or minification. See amo/reviewer-notes.md for the complete procedure."
   }
 }

@@ -155,6 +155,12 @@
   "exportButton": {
     "message": "Esporta impostazioni"
   },
+  "debugExportButton": {
+    "message": "Esporta registro di debug"
+  },
+  "debugExportDescription": {
+    "message": "L’esportazione di debug contiene eventi tecnici e conteggi, ma mai URL, titoli, parole chiave o eccezioni."
+  },
   "importButton": {
     "message": "Importa impostazioni"
   },
@@ -203,6 +209,9 @@
   },
   "exportedStatus": {
     "message": "Impostazioni esportate."
+  },
+  "debugExportedStatus": {
+    "message": "Registro di debug rispettoso della privacy esportato."
   },
   "importedStatus": {
     "message": "Impostazioni importate e salvate."
@@ -254,6 +263,9 @@
   "previewRequired": { "message": "La cronologia è cambiata o l’anteprima è scaduta. Esegui di nuovo l’anteprima." },
   "unknownAction": { "message": "L’azione richiesta non è riconosciuta." },
   "unexpectedError": { "message": "Si è verificato un errore imprevisto dell’estensione." },
+  "historyUnavailableTitle": { "message": "La pulizia della cronologia non è disponibile su questo dispositivo" },
+  "historyUnavailableDescription": { "message": "Le regole possono essere salvate, ma Firefox per Android non consente alle estensioni di ispezionare o eliminare selettivamente la cronologia." },
+  "historyApiUnavailable": { "message": "Firefox su questo dispositivo non consente alle estensioni di ispezionare o eliminare selettivamente la cronologia." },
   "operationCancelled": { "message": "L’operazione è stata annullata in sicurezza." },
   "backgroundRestarted": { "message": "Firefox ha riavviato il processo in background. Ripeti l’operazione." },
   "historyRangeSaturated": { "message": "Firefox ha restituito troppi risultati per un intervallo. Nessun risultato incompleto è stato eliminato." },

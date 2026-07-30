@@ -155,6 +155,12 @@
   "exportButton": {
     "message": "Instellingen exporteren"
   },
+  "debugExportButton": {
+    "message": "Debuglogboek exporteren"
+  },
+  "debugExportDescription": {
+    "message": "De debugexport bevat technische gebeurtenissen en aantallen, maar nooit URL’s, paginatitels, trefwoorden of uitzonderingen."
+  },
   "importButton": {
     "message": "Instellingen importeren"
   },
@@ -203,6 +209,9 @@
   },
   "exportedStatus": {
     "message": "Instellingen geëxporteerd."
+  },
+  "debugExportedStatus": {
+    "message": "Privacyveilig debuglogboek geëxporteerd."
   },
   "importedStatus": {
     "message": "Instellingen geïmporteerd en opgeslagen."
@@ -254,6 +263,9 @@
   "previewRequired": { "message": "De geschiedenis is gewijzigd of het voorbeeld is verlopen. Controleer opnieuw vóór het verwijderen." },
   "unknownAction": { "message": "De gevraagde add-onactie is onbekend." },
   "unexpectedError": { "message": "Er is een onverwachte add-onfout opgetreden." },
+  "historyUnavailableTitle": { "message": "Geschiedenis opschonen is niet beschikbaar op dit apparaat" },
+  "historyUnavailableDescription": { "message": "Regels kunnen worden opgeslagen, maar Firefox voor Android staat add-ons niet toe de geschiedenis te bekijken of selectief te verwijderen." },
+  "historyApiUnavailable": { "message": "Firefox op dit apparaat staat add-ons niet toe de geschiedenis te bekijken of selectief te verwijderen." },
   "operationCancelled": { "message": "De bewerking is veilig geannuleerd." },
   "backgroundRestarted": { "message": "Firefox heeft het achtergrondproces opnieuw gestart. Voer de bewerking opnieuw uit." },
   "historyRangeSaturated": { "message": "Firefox gaf te veel resultaten voor één periode. Er is niets uit het onvolledige resultaat verwijderd." },

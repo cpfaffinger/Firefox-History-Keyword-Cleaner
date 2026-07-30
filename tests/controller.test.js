@@ -200,11 +200,99 @@ test("controller falls back to local storage when session storage is unavailable
   delete mock.browserApi.storage.session;
   const controller = createController(mock.browserApi);
   assert.equal((await controller.getState()).version, "9.8.7");
+  delete mock.browserApi.runtime.getBrowserInfo;
+  delete mock.browserApi.runtime.getPlatformInfo;
+  assert.deepEqual((await controller.exportDebugLog()).environment, {
+    browser: null,
+    platform: null
+  });
 
   const legacyStorage = createStorageArea({
     activeOperation: null
   });
   mock.browserApi.storage.local = legacyStorage;
+});
+
+test("Android without the history API keeps messaging, settings, and diagnostics available", async () => {
+  const mock = createBrowserMock({
+    historyAvailable: false,
+    platformInfo: { os: "android", arch: "arm64" }
+  });
+  const controller = createController(mock.browserApi, {
+    now: () => 100,
+    isoNow: () => "2026-07-30T10:00:00.000Z"
+  });
+
+  controller.register();
+  assert.equal(mock.events.message.listeners.length, 1);
+  assert.equal(mock.events.installed.listeners.length, 1);
+  assert.equal(mock.events.startup.listeners.length, 1);
+  assert.equal(mock.events.visited.listeners.length, 0);
+  assert.equal(mock.events.titleChanged.listeners.length, 0);
+
+  const saved = await mock.events.message.listeners[0]({
+    target: "history-keyword-cleaner",
+    action: "save-settings",
+    settings: {
+      ...safeSettings,
+      keywords: ["private mobile"],
+      cleanOnStartup: true
+    }
+  });
+  assert.equal(saved.ok, true);
+  await controller.onStartup();
+
+  const state = await controller.getState();
+  assert.deepEqual(state.capabilities, {
+    history: false,
+    historyRead: false,
+    historyDelete: false,
+    realtime: false
+  });
+  assert.deepEqual(await controller.deleteItemIfMatched({}), {
+    deleted: false,
+    error: { code: "historyApiUnavailable", args: [] }
+  });
+
+  const preview = await controller.handleMessage({
+    target: "history-keyword-cleaner",
+    action: "preview",
+    settings: safeSettings
+  });
+  assert.deepEqual(preview, {
+    ok: false,
+    error: { code: "historyApiUnavailable", args: [] }
+  });
+
+  const exported = await controller.handleMessage({
+    target: "history-keyword-cleaner",
+    action: "export-debug-log"
+  });
+  assert.equal(exported.ok, true);
+  assert.equal(exported.value.format, "history-keyword-cleaner-debug-log");
+  assert.equal(exported.value.environment.platform.os, "android");
+  assert.equal(exported.value.stateSummary.keywordCount, 1);
+  assert.ok(
+    exported.value.entries.some(
+      ({ event }) => event === "startup-cleanup-skipped"
+    )
+  );
+  assert.doesNotMatch(JSON.stringify(exported.value), /private mobile/u);
+});
+
+test("debug export tolerates rejected runtime information APIs", async () => {
+  const mock = createBrowserMock();
+  mock.browserApi.runtime.getBrowserInfo = async () => {
+    throw new Error("browser info unavailable");
+  };
+  mock.browserApi.runtime.getPlatformInfo = async () => {
+    throw new Error("platform info unavailable");
+  };
+  const controller = createController(mock.browserApi);
+  assert.deepEqual((await controller.exportDebugLog()).environment, {
+    browser: null,
+    platform: null
+  });
 });
 
 test("running operations can be cancelled and reject overlapping work", async () => {

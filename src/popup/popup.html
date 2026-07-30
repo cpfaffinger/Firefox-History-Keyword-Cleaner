@@ -20,10 +20,15 @@
         </div>
         <label class="switch">
           <span class="sr-only" data-i18n="enabledLabel">Automatic cleaning</span>
-          <input id="enabled" type="checkbox">
+          <input id="enabled" type="checkbox" data-history-control>
           <span aria-hidden="true"></span>
         </label>
       </header>
+
+      <section id="history-unavailable" class="capability-warning" role="note" hidden>
+        <strong data-i18n="historyUnavailableTitle">History cleaning is unavailable on this device</strong>
+        <span data-i18n="historyUnavailableDescription">Rules can be saved, but Firefox for Android does not allow add-ons to inspect or selectively delete history.</span>
+      </section>
 
       <section class="quick-add" aria-labelledby="quick-add-title">
         <div class="section-heading">
@@ -60,7 +65,7 @@
       </section>
 
       <section class="actions">
-        <button id="clean-now" class="button danger" type="button" data-operation-control data-i18n="wipeNow">
+        <button id="clean-now" class="button danger" type="button" data-operation-control data-history-control data-i18n="wipeNow">
           Wipe now
         </button>
         <button id="open-options" class="button secondary" type="button" data-operation-control data-i18n="settingsButton">

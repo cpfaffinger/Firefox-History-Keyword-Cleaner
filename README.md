@@ -37,6 +37,7 @@ The confirmation states this explicitly. Deletion cannot be undone.
 - Automatic cleaning for new visits and title updates.
 - Optional startup cleanup and a manual **Wipe now** flow.
 - Settings import and export as JSON.
+- Privacy-safe diagnostic log export for support requests.
 - English by default, plus German, French, Italian, Dutch, and Turkish.
 - No telemetry, account, advertising, network request, host permission, or
   content script.
@@ -62,7 +63,12 @@ they contain deterministic sample data and no real browsing history.
 
 [Install History Keyword Cleaner from Firefox Add-ons](https://addons.mozilla.org/de/firefox/addon/history-keyword-sanitizer/).
 
-The manifest supports Firefox Desktop 140+ and Firefox for Android 142+.
+The manifest supports Firefox Desktop 140+ and Firefox for Android 142+. Firefox
+for Android currently omits the WebExtensions `history` API. The Android UI
+therefore remains available for rule management and diagnostic export, but
+selective history preview, automatic cleaning, and deletion are disabled with
+a precise explanation. The capability check will enable these operations
+automatically if Firefox exposes the API in a future release.
 
 ## Permissions and privacy
 
@@ -70,7 +76,10 @@ The extension requests only:
 
 - `history`, to inspect and delete matching history URLs and receive visit/title
   events;
-- `storage`, to retain local rules, operation state, and aggregate counters.
+- `storage`, to retain local rules, operation state, aggregate counters, and a
+  bounded diagnostic event log.
+
+The diagnostic export omits rule text, exceptions, URLs, and page titles.
 
 The manifest declares Mozilla's data-collection permission as
 `required: ["none"]`. See [PRIVACY.md](PRIVACY.md) and
@@ -116,13 +125,13 @@ CI-only version `0.1.<GitHub run number>`. The verified ZIP is attached to a
 non-prerelease GitHub release named `main-<short SHA>` and retained as a workflow
 artifact for 90 days.
 
-Version tags are authoritative. Pushing `v0.2.0`, for example, builds a binary
-with manifest version `0.2.0` even when the source branch still contains the
+Version tags are authoritative. Pushing `v0.3.0`, for example, builds a binary
+with manifest version `0.3.0` even when the source branch still contains the
 development version:
 
 ```sh
-git tag v0.2.0
-git push origin v0.2.0
+git tag v0.3.0
+git push origin v0.3.0
 ```
 
 AMO submission is intentionally separated from ordinary builds. A maintainer

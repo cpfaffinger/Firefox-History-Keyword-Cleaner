@@ -23,6 +23,12 @@ Safety is built into existing-history cleanup:
 Automatic cleaning handles new visits and title updates. Optional startup
 cleanup is off by default.
 
+On Firefox for Android, Firefox currently does not provide extensions with
+selective history access. Rule management and privacy-safe debug export remain
+available, while preview and deletion controls clearly report this platform
+limitation instead of failing. Full history cleaning is available on Firefox
+Desktop.
+
 The interface is available in English, German, French, Italian, Dutch, and
 Turkish. There is no telemetry, account, advertisement, host permission,
 content script, or network request. Keywords and browsing activity never leave

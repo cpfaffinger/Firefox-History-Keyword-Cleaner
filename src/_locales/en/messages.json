@@ -155,6 +155,12 @@
   "exportButton": {
     "message": "Export settings"
   },
+  "debugExportButton": {
+    "message": "Export debug log"
+  },
+  "debugExportDescription": {
+    "message": "The debug export contains technical events and counts, never URLs, page titles, keywords, or exceptions."
+  },
   "importButton": {
     "message": "Import settings"
   },
@@ -203,6 +209,9 @@
   },
   "exportedStatus": {
     "message": "Settings exported."
+  },
+  "debugExportedStatus": {
+    "message": "Privacy-safe debug log exported."
   },
   "importedStatus": {
     "message": "Settings imported and saved."
@@ -312,6 +321,15 @@
   },
   "unexpectedError": {
     "message": "An unexpected add-on error occurred."
+  },
+  "historyUnavailableTitle": {
+    "message": "History cleaning is unavailable on this device"
+  },
+  "historyUnavailableDescription": {
+    "message": "Rules can be saved, but Firefox for Android does not allow add-ons to inspect or selectively delete history."
+  },
+  "historyApiUnavailable": {
+    "message": "Firefox on this device does not allow add-ons to inspect or selectively delete history."
   },
   "operationCancelled": {
     "message": "The operation was cancelled safely."

@@ -155,6 +155,12 @@
   "exportButton": {
     "message": "Einstellungen exportieren"
   },
+  "debugExportButton": {
+    "message": "Debug-Protokoll exportieren"
+  },
+  "debugExportDescription": {
+    "message": "Der Debug-Export enthält technische Ereignisse und Zähler, aber niemals URLs, Seitentitel, Keywords oder Ausnahmen."
+  },
   "importButton": {
     "message": "Einstellungen importieren"
   },
@@ -203,6 +209,9 @@
   },
   "exportedStatus": {
     "message": "Einstellungen exportiert."
+  },
+  "debugExportedStatus": {
+    "message": "Datenschutzfreundliches Debug-Protokoll exportiert."
   },
   "importedStatus": {
     "message": "Einstellungen importiert und gespeichert."
@@ -254,6 +263,9 @@
   "previewRequired": { "message": "Die Chronik wurde verändert oder die Vorschau ist abgelaufen. Bitte vor dem Löschen erneut prüfen." },
   "unknownAction": { "message": "Die angeforderte Add-on-Aktion ist unbekannt." },
   "unexpectedError": { "message": "Ein unerwarteter Add-on-Fehler ist aufgetreten." },
+  "historyUnavailableTitle": { "message": "Chronikbereinigung ist auf diesem Gerät nicht verfügbar" },
+  "historyUnavailableDescription": { "message": "Regeln können gespeichert werden, aber Firefox für Android erlaubt Add-ons keinen Zugriff auf einzelne Chronikeinträge und kein selektives Löschen." },
+  "historyApiUnavailable": { "message": "Firefox erlaubt Add-ons auf diesem Gerät keinen Zugriff auf einzelne Chronikeinträge und kein selektives Löschen." },
   "operationCancelled": { "message": "Der Vorgang wurde sicher abgebrochen." },
   "backgroundRestarted": { "message": "Firefox hat den Hintergrundprozess neu gestartet. Bitte den Vorgang wiederholen." },
   "historyRangeSaturated": { "message": "Firefox lieferte zu viele Chronikergebnisse für einen Zeitraum. Aus dem unvollständigen Ergebnis wurde nichts gelöscht." },

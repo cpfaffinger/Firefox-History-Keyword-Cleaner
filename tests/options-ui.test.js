@@ -77,6 +77,15 @@ test("options page saves safely, previews, confirms wipe, preserves drafts, and 
         value: { checked: 4, matched: 1, deleted: 1, failures: [] }
       };
     }
+    if (request.action === "export-debug-log") {
+      return {
+        ok: true,
+        value: {
+          format: "history-keyword-cleaner-debug-log",
+          entries: []
+        }
+      };
+    }
     return { ok: true, value: { cancelled: true } };
   });
   installUiGlobals(dom, mock.browserApi);
@@ -123,6 +132,11 @@ test("options page saves safely, previews, confirms wipe, preserves drafts, and 
   await flushUi();
   assert.ok(calls.some(({ action }) => action === "cancel-operation"));
 
+  root.querySelector("#export-debug").click();
+  await flushUi();
+  assert.ok(calls.some(({ action }) => action === "export-debug-log"));
+  assert.match(root.querySelector("#status").textContent, /debug log exported/iu);
+
   mock.messageListeners[0]({
     target: "history-keyword-cleaner-ui",
     event: "operation-progress",
@@ -135,6 +149,62 @@ test("options page saves safely, previews, confirms wipe, preserves drafts, and 
   });
   assert.equal(root.querySelector("#operation-panel").hidden, false);
   assert.equal(app.readSettings().keywords[0], "private draft");
+  clearUiGlobals();
+});
+
+test("options remain useful when Firefox Android omits the history API", async () => {
+  const dom = await createDom("options/options.html");
+  const state = initialState();
+  state.capabilities = {
+    history: false,
+    historyRead: false,
+    historyDelete: false,
+    realtime: false
+  };
+  const calls = [];
+  const mock = createUiBrowser(async (request) => {
+    calls.push(request);
+    if (request.action === "get-state") {
+      return { ok: true, value: structuredClone(state) };
+    }
+    if (request.action === "save-settings") {
+      state.settings = structuredClone(request.settings);
+      return { ok: true, value: { settings: state.settings } };
+    }
+    if (request.action === "export-debug-log") {
+      return {
+        ok: true,
+        value: {
+          format: "history-keyword-cleaner-debug-log",
+          capabilities: state.capabilities,
+          entries: []
+        }
+      };
+    }
+    throw new Error(`Unexpected action: ${request.action}`);
+  });
+  installUiGlobals(dom, mock.browserApi);
+  const root = dom.window.document;
+  initializeOptions(root, mock.browserApi);
+  await flushUi();
+
+  assert.equal(root.querySelector("#history-unavailable").hidden, false);
+  assert.equal(root.querySelector("#enabled").disabled, true);
+  assert.equal(root.querySelector("#clean-on-startup").disabled, true);
+  assert.equal(root.querySelector("#preview").disabled, true);
+  assert.equal(root.querySelector("#clean-now").disabled, true);
+  assert.equal(root.querySelector("#save").disabled, false);
+  assert.match(root.querySelector("#status").textContent, /does not allow/iu);
+
+  root.querySelector("#keywords").value = "mobile rule";
+  root.querySelector("#save").click();
+  await flushUi();
+  assert.deepEqual(state.settings.keywords, ["mobile rule"]);
+
+  root.querySelector("#export-debug").click();
+  await flushUi();
+  assert.ok(calls.some(({ action }) => action === "export-debug-log"));
+  assert.match(root.querySelector("#status").textContent, /debug log exported/iu);
   clearUiGlobals();
 });
 
@@ -250,6 +320,10 @@ test("options page confirms broad rules and validates imports and errors", async
   root.querySelector("#rule-cancel").click();
   await flushUi();
   assert.match(root.querySelector("#status").textContent, /cancelled/u);
+
+  root.querySelector("#export-debug").click();
+  await flushUi();
+  assert.match(root.querySelector("#status").textContent, /already running/u);
   clearUiGlobals();
 });
 

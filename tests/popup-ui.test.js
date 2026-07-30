@@ -187,6 +187,57 @@ test("popup restores controls and reports structured failures", async () => {
   clearUiGlobals();
 });
 
+test("popup loads and saves rules when Firefox Android omits the history API", async () => {
+  const dom = await createDom("popup/popup.html");
+  const state = {
+    settings: structuredClone(settings),
+    stats: {
+      lastRunAt: null,
+      lastDeleted: 0,
+      totalDeleted: 0,
+      lastError: null
+    },
+    version: "0.3.0",
+    operation: null,
+    capabilities: {
+      history: false,
+      historyRead: false,
+      historyDelete: false,
+      realtime: false
+    }
+  };
+  const mock = createUiBrowser(async (request) => {
+    if (request.action === "get-state") {
+      return { ok: true, value: structuredClone(state) };
+    }
+    if (request.action === "save-settings") {
+      state.settings = structuredClone(request.settings);
+      return { ok: true, value: { settings: state.settings } };
+    }
+    throw new Error(`Unexpected action: ${request.action}`);
+  });
+  installUiGlobals(dom, mock.browserApi);
+  const root = dom.window.document;
+  initializePopup(root, mock.browserApi);
+  await flushUi();
+
+  assert.match(root.querySelector("#summary").textContent, /1 keyword/u);
+  assert.equal(root.querySelector("#history-unavailable").hidden, false);
+  assert.equal(root.querySelector("#enabled").disabled, true);
+  assert.equal(root.querySelector("#clean-now").disabled, true);
+  assert.equal(root.querySelector("#keyword").disabled, false);
+  assert.match(root.querySelector("#status").textContent, /does not allow/iu);
+
+  root.querySelector("#keyword").value = "mobile rule";
+  root.querySelector("#add-form").dispatchEvent(
+    new dom.window.Event("submit", { cancelable: true })
+  );
+  await flushUi();
+  assert.deepEqual(state.settings.keywords, ["private", "mobile rule"]);
+  assert.match(root.querySelector("#summary").textContent, /2 keyword/u);
+  clearUiGlobals();
+});
+
 test("popup module bootstraps itself in a browser document", async () => {
   const dom = await createDom("popup/popup.html");
   const mock = createUiBrowser(async () => ({
